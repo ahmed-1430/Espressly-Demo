@@ -301,8 +301,6 @@ export const products: readonly Product[] = [
 /** Products surfaced on the home page, in editorial order. */
 export const featuredProducts = products.filter((product) => product.featured);
 
-export const bestsellers = products.filter((product) => product.bestseller);
-
 export function getProduct(slug: string) {
   return products.find((product) => product.slug === slug);
 }

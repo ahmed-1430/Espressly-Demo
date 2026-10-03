@@ -27,14 +27,14 @@ export function MenuItemRow({ item, index, signature = false }: MenuItemRowProps
 
         <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
           <div className="min-w-0 flex-1">
-            <h4 className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[1.125rem] leading-snug display-type text-ink-900">
+            <h3 className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[1.125rem] leading-snug display-type text-ink-900">
               {item.name}
               {signature ? (
                 <span className="rounded-pill bg-copper-600/12 px-2 py-0.5 align-middle font-sans text-[0.5625rem] font-semibold uppercase tracking-[0.18em] text-copper-700">
                   Signature
                 </span>
               ) : null}
-            </h4>
+            </h3>
 
             <p className="mt-2 max-w-[62ch] text-[0.875rem] leading-relaxed text-text-body">
               {item.description}

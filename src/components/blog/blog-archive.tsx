@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useMemo, useState } from "react";
 import { BlogCard } from "@/components/cards/blog-card";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { blogCategories, posts } from "@/config/blog";
 import { cn } from "@/lib/cn";
 import { duration, ease, tween } from "@/lib/motion";
@@ -42,6 +43,13 @@ export function BlogArchive() {
 
   return (
     <div>
+      <SectionHeading
+        as="h2"
+        eyebrow="Six pieces"
+        title="Field notes, newest first"
+        className="mb-8 max-w-[40ch]"
+      />
+
       <div
         role="group"
         aria-label="Filter articles by category"

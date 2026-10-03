@@ -99,9 +99,12 @@ export function PageHeader({
           <Eyebrow tone="light">{eyebrow}</Eyebrow>
 
           <h1 className="max-w-[18ch] text-display-sm text-cream-100">
-            {title.map((line, index) => (
+            {title.map((line, index, all) => (
               <span key={line} className="block overflow-hidden pb-[0.08em]">
-                <SplitText text={line} delay={0.06 * index + 0.1} />
+                <SplitText
+                  text={index === all.length - 1 ? line : `${line} `}
+                  delay={0.06 * index + 0.1}
+                />
               </span>
             ))}
           </h1>

@@ -89,7 +89,8 @@ export function NewsletterForm({
           disabled={state === "loading" || state === "success"}
           onChange={(event) => {
             setEmail(event.target.value);
-            if (state === "error") setState("idle");
+            // Editing clears a previous result so the button reflects reality.
+            if (status !== "idle" && status !== "loading") setState("idle");
           }}
           className={cn(
             "min-w-0 flex-1 bg-transparent py-2 text-[0.9375rem] outline-none placeholder:text-current/40",

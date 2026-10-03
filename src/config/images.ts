@@ -394,31 +394,3 @@ export const contactImages = {
     "50% 45%",
   ),
 } as const;
-
-/** Flat lookup used by validation tooling and the asset README. */
-export const allImages = [
-  ...Object.values(heroImages),
-  ...Object.values(editorialImages),
-  ...Object.values(menuImages),
-  ...Object.values(serviceImages),
-  ...Object.values(aboutImages),
-  ...Object.values(shopImages),
-  ...Object.values(journalImages),
-  ...lifestyleImages.gallery,
-  ...Object.values(contactImages),
-  brand.logo.light,
-  brand.logo.dark,
-  brand.logo.mark,
-  brand.logo.markDark,
-] as readonly ImageAsset[];
-
-/**
- * Build a variant of an existing asset. Lets a page re-use one photograph in a
- * different crop or with a different description without duplicating config.
- */
-export function withImage(
-  base: ImageAsset,
-  overrides: Partial<Omit<ImageAsset, "src">> & { src?: string },
-): ImageAsset {
-  return { ...base, ...overrides };
-}

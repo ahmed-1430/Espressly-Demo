@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/cards/product-card";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { productCategories, products } from "@/config/products";
 import type { Product, ProductCategoryId } from "@/config/products";
 import { cn } from "@/lib/cn";
@@ -61,6 +62,13 @@ export function ShopBrowser() {
 
   return (
     <div>
+      <SectionHeading
+        as="h2"
+        eyebrow="The range"
+        title="Everything on the shelf"
+        className="mb-8 max-w-[40ch]"
+      />
+
       {/* Controls */}
       <div className="flex flex-col gap-6 border-b border-line-light pb-8 lg:flex-row lg:items-center lg:justify-between">
         <div className="hide-scrollbar rail gap-2">

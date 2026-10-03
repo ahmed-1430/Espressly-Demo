@@ -121,13 +121,3 @@ export function SectionHeading({
     </div>
   );
 }
-
-type SectionMetaProps = {
-  children: ReactNode;
-  className?: string;
-};
-
-/** Right-hand slot in a section header row — usually a link or a control. */
-export function SectionMeta({ children, className }: SectionMetaProps) {
-  return <div className={cn("flex items-center gap-4", className)}>{children}</div>;
-}

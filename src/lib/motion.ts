@@ -41,26 +41,6 @@ export function tween(
   return { duration: seconds, ease: curve as unknown as Transition["ease"], delay };
 }
 
-/* -------------------------------------------------------------------------
- * Shared variant factories
- * ---------------------------------------------------------------------- */
-
-/** A single element rising into place with a soft fade. */
-export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 26 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: tween(duration.base, ease.out),
-  },
-};
-
-/** Fades in place — for text that should not appear to travel. */
-export const fadeIn: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: tween(duration.slow, ease.out) },
-};
-
 /** Parent wrapper that staggers its children. */
 export function stagger(step = 0.08, delayChildren = 0): Variants {
   return {

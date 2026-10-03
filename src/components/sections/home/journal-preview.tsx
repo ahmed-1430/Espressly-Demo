@@ -29,10 +29,10 @@ export function JournalPreview() {
             <BlogCard post={featuredPost} variant="hero" />
           </Reveal>
 
-          <div className="flex flex-col gap-10 lg:col-span-5">
+          <div className="flex flex-col gap-12 lg:col-span-5">
             {supporting.map((post, index) => (
               <Reveal key={post.slug} delay={0.08 * (index + 1)}>
-                <BlogCard post={post} variant="hero" />
+                <BlogCard post={post} />
               </Reveal>
             ))}
           </div>

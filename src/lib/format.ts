@@ -10,17 +10,6 @@ export function formatMoney(minorUnits: number, currency = site.currency): strin
   }).format(minorUnits / 100);
 }
 
-/** Compact, human label used for grids and quick reads. */
-export function formatMoneyShort(minorUnits: number, currency = site.currency): string {
-  const whole = minorUnits % 100 === 0;
-  return new Intl.NumberFormat(site.currencyLocale, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: whole ? 0 : 2,
-    maximumFractionDigits: 2,
-  }).format(minorUnits / 100);
-}
-
 /** `2026-02-04` → `4 February 2026` without relying on locale data loading. */
 export function parseIsoDate(iso: string): Date {
   const [year, month, day] = iso.split("-").map(Number);
@@ -53,14 +42,4 @@ export function formatNumber(value: number, locale = site.locale): string {
 /** Builds an absolute URL from a site-relative path. */
 export function absoluteUrl(path: string, base = site.url): string {
   return new URL(path.startsWith("/") ? path : `/${path}`, base).toString();
-}
-
-/** Strips diacritics and punctuation for stable, readable anchor ids. */
-export function slugify(value: string): string {
-  return value
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
 }

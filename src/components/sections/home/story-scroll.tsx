@@ -43,7 +43,9 @@ export function StoryScroll() {
   }, []);
 
   return (
-    <Section tone="bright" className="overflow-hidden">
+    // No `overflow-hidden` here: it would turn this section into a scroll
+    // container and break the sticky chapter rail. Each image clips itself.
+    <Section tone="bright">
       <Container>
         <div className="grid gap-x-12 gap-y-4 lg:grid-cols-12">
           {/* Sticky rail */}

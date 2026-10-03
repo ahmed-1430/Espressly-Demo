@@ -24,8 +24,10 @@
   --color-espresso-800: #2a1d14;
   --color-espresso-700: #3b281b;
 
-  /* — Copper: the single accent, used sparingly — */
-  --color-copper-700: #8a5222;
+  /* — Copper: the single accent, used sparingly —
+     copper-700 is the darkest tone so it also clears AA as small text on
+     the sand surface. */
+  --color-copper-700: #7d4a1d;
   --color-copper-600: #a3652c;
   --color-copper-500: #bd7c39;
   --color-copper-400: #d29a5c;

@@ -48,9 +48,16 @@ export function Hero() {
             <Eyebrow tone="light">{hero.eyebrow}</Eyebrow>
 
             <h1 className="mt-6 text-display-lg text-cream-100">
-              {hero.headline.map((line, index) => (
-                <span key={line} className="block overflow-hidden pb-[0.06em]">
-                  <SplitText text={line} delay={0.08 * index + 0.12} durationSeconds={1.05} />
+              {hero.headline.map((line, index, all) => (
+                <span
+                  key={line}
+                  className="block overflow-hidden pb-[0.06em]"
+                >
+                  <SplitText
+                    text={index === all.length - 1 ? line : `${line} `}
+                    delay={0.08 * index + 0.12}
+                    durationSeconds={1.05}
+                  />
                 </span>
               ))}
             </h1>

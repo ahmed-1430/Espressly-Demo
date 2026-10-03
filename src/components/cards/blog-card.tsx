@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ImageReveal } from "@/components/motion/image-reveal";
-import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { Eyebrow } from "@/components/ui/section-heading";
 import type { BlogPost } from "@/config/blog";
 import { cn } from "@/lib/cn";
@@ -55,7 +54,10 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
     <article
       className={cn(
         "group/post flex flex-col",
-        hero && "lg:grid lg:grid-cols-12 lg:items-center lg:gap-12",
+        // The split only engages at `xl`, where the article owns the full
+        // container width. Below that it stacks, so nesting it inside a narrow
+        // column can never squeeze it.
+        hero && "xl:grid xl:grid-cols-12 xl:items-center xl:gap-10",
         className,
       )}
     >
@@ -63,7 +65,7 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
         href={href}
         tabIndex={-1}
         aria-hidden
-        className={cn("block overflow-hidden", hero ? "lg:col-span-7" : "")}
+        className={cn("block overflow-hidden", hero ? "xl:col-span-7" : "")}
       >
         <ImageReveal
           image={post.image}
@@ -72,7 +74,7 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
           ratio={hero ? "16 / 11" : "4 / 3"}
           sizes={
             hero
-              ? "(min-width: 1024px) 56vw, 92vw"
+              ? "(min-width: 1280px) 54vw, 92vw"
               : "(min-width: 1280px) 30vw, (min-width: 640px) 45vw, 92vw"
           }
           priority={priority}
@@ -80,7 +82,7 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
         />
       </Link>
 
-      <div className={cn("flex flex-1 flex-col", hero ? "lg:col-span-5" : "pt-6")}>
+      <div className={cn("flex flex-1 flex-col", hero ? "xl:col-span-5" : "pt-6")}>
         <div className="flex items-center gap-3">
           <Eyebrow ornament={false}>{post.category}</Eyebrow>
           <span aria-hidden className="h-px w-6 bg-line-light" />
@@ -93,7 +95,7 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
           className={cn(
             "mt-4 leading-[1.12] display-type text-ink-900",
             hero
-              ? "text-[1.75rem] sm:text-[2.25rem] lg:text-[2.5rem]"
+              ? "text-[1.625rem] sm:text-[2rem] xl:text-[2.125rem]"
               : "text-[1.25rem] sm:text-[1.375rem]",
           )}
         >
@@ -120,39 +122,5 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
         </div>
       </div>
     </article>
-  );
-}
-
-/** Evenly weighted grid of articles. */
-export function BlogGrid({
-  posts,
-  className,
-}: {
-  posts: readonly BlogPost[];
-  className?: string;
-}) {
-  return (
-    <Stagger
-      className={cn(
-        "grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3",
-        className,
-      )}
-      step={0.08}
-    >
-      {posts.map((post) => (
-        <StaggerItem key={post.slug} className="flex">
-          <BlogCard post={post} className="w-full" />
-        </StaggerItem>
-      ))}
-    </Stagger>
-  );
-}
-
-/** Animated wrapper for a single lead article. */
-export function BlogHeroCard({ post }: { post: BlogPost }) {
-  return (
-    <Reveal>
-      <BlogCard post={post} variant="hero" priority />
-    </Reveal>
   );
 }

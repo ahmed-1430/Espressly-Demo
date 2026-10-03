@@ -40,10 +40,12 @@ export function BrandStatement() {
           <div className="-mt-[14%] w-full max-w-[54rem] bg-espresso-900 p-7 sm:-mt-[18%] sm:p-12 lg:-mt-[22%] lg:p-16">
             <Eyebrow tone="light">{statement.eyebrow}</Eyebrow>
             <h2 className="mt-6 text-display-2xs text-cream-100">
-              {lines.map((line, index) => (
+              {lines.map((line, index, all) => (
                 <span key={line} className="block overflow-hidden pb-[0.05em]">
                   <SplitText
-                    text={index === lines.length - 1 ? line : `${line}.`}
+                    text={
+                      index === all.length - 1 ? line : `${line.replace(/\.$/, "")}. `
+                    }
                     delay={index * 0.1}
                   />
                 </span>

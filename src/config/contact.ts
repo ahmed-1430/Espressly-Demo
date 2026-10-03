@@ -17,9 +17,9 @@ export const contactCopy = {
   },
   visit: {
     kicker: "The roastery",
-    title: "18 Harbour Lane, The Old Quay",
+    title: "Two minutes from the harbour footbridge",
     body:
-      "Two minutes from the harbour. Step-free entrance on the lane side, bike racks under cover, and the roasting drum is visible through the glass — come at 09:00 on a roast day if you want to watch it work.",
+      "The roastery doubles as the café, on the lane side of the old quay. Step-free entrance, covered bike racks, and the drum is visible through the glass — come at 09:00 on a roast day if you want to watch it work.",
     directions: [
       { label: "On foot", value: "8 minutes from the harbour footbridge" },
       { label: "Bus", value: "22 and 41 stop on Quay Street, 60 m away" },

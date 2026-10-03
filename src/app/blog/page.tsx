@@ -7,7 +7,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/section-heading";
 import { journalImages } from "@/config/images";
 import { posts, recentPosts } from "@/config/blog";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, breadcrumbJsonLd, serialiseJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "The Dispatch — Brewing, Craft & Origin Notes",
@@ -47,7 +47,7 @@ export default function BlogPage() {
             <div className="lg:col-span-4">
               <Eyebrow>Latest</Eyebrow>
               <h2 className="mt-5 text-display-2xs text-ink-900">
-                Everything we have published so far
+                Every article, in order of publication
               </h2>
               <p className="mt-5 max-w-[38ch] text-[0.9375rem] leading-relaxed text-text-body">
                 One letter a month, plus new pieces whenever we have something
@@ -87,6 +87,18 @@ export default function BlogPage() {
       <section className="sr-only" aria-label="Article index">
         <p>{`${posts.length} articles published.`}</p>
       </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serialiseJsonLd(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "The Dispatch", path: "/blog" },
+            ]),
+          ),
+        }}
+      />
     </>
   );
 }

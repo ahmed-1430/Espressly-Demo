@@ -124,15 +124,18 @@ function StaggeredPromises() {
   return (
     <ul className="grid gap-10 sm:grid-cols-3 lg:col-span-8">
       {promises.map((promise, index) => (
-        <Reveal key={promise.title} delay={index * 0.08}>
-          <li className="border-t border-ink-900/15 pt-5">
-            <p className="text-[1.125rem] leading-snug display-type text-ink-900">
-              {promise.title}
-            </p>
-            <p className="mt-3 text-[0.875rem] leading-relaxed text-text-body">
-              {promise.body}
-            </p>
-          </li>
+        <Reveal
+          key={promise.title}
+          as="li"
+          delay={index * 0.08}
+          className="border-t border-ink-900/15 pt-5"
+        >
+          <p className="text-[1.125rem] leading-snug display-type text-ink-900">
+            {promise.title}
+          </p>
+          <p className="mt-3 text-[0.875rem] leading-relaxed text-text-body">
+            {promise.body}
+          </p>
         </Reveal>
       ))}
     </ul>

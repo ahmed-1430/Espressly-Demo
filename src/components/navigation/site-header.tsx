@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useState } from "react";
 import { Logo } from "@/components/brand/logo";
+import { Magnetic } from "@/components/motion/magnetic";
 import { MobileMenu } from "@/components/navigation/mobile-menu";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { useCart } from "@/components/shop/cart-provider";
@@ -125,14 +126,17 @@ export function SiteHeader() {
               </AnimatePresence>
             </button>
 
-            <ButtonLink
-              href="/what-we-offer#events"
-              size="sm"
-              className="hidden xl:inline-flex"
-              variant={condensed ? "solid" : "inverse"}
-            >
-              Book an event
-            </ButtonLink>
+            <div className="hidden xl:block">
+              <Magnetic strength={5}>
+                <ButtonLink
+                  href="/what-we-offer#events"
+                  size="sm"
+                  variant={condensed ? "solid" : "inverse"}
+                >
+                  Book an event
+                </ButtonLink>
+              </Magnetic>
+            </div>
 
             <button
               type="button"

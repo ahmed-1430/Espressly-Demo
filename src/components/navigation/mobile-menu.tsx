@@ -104,6 +104,9 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         <motion.div
           ref={panelRef}
           id={panelId}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site menu"
           className="fixed inset-0 z-[95] flex flex-col bg-espresso-950 lg:hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

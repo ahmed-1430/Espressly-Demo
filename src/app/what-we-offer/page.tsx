@@ -10,7 +10,7 @@ import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { serviceImages } from "@/config/images";
 import { serviceBands, serviceChapters, services } from "@/config/services";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, breadcrumbJsonLd, serialiseJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "What We Offer — Wholesale, Events, Workshops & Gifts",
@@ -234,6 +234,18 @@ export default function WhatWeOfferPage() {
           </div>
         </Container>
       </Section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serialiseJsonLd(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "What We Offer", path: "/what-we-offer" },
+            ]),
+          ),
+        }}
+      />
     </>
   );
 }
