@@ -39,7 +39,17 @@ export function formatNumber(value: number, locale = site.locale): string {
   return new Intl.NumberFormat(locale).format(value);
 }
 
-/** Builds an absolute URL from a site-relative path. */
+/**
+ * Builds an absolute URL from a site-relative path.
+ *
+ * `NEXT_PUBLIC_SITE_URL` is the only source of the origin, and a malformed value
+ * would otherwise throw on every request. Fall back to the configured default
+ * instead of taking the site down.
+ */
 export function absoluteUrl(path: string, base = site.url): string {
-  return new URL(path.startsWith("/") ? path : `/${path}`, base).toString();
+  try {
+    return new URL(path.startsWith("/") ? path : `/${path}`, base).toString();
+  } catch {
+    return new URL(path.startsWith("/") ? path : `/${path}`, "https://www.espressly.coffee").toString();
+  }
 }
