@@ -10,17 +10,25 @@ import { MobileMenu } from "@/components/navigation/mobile-menu";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { useCart } from "@/components/shop/cart-provider";
 import { ButtonLink } from "@/components/ui/button";
-import { primaryNav } from "@/config/navigation";
+import { hasBannerRoute, primaryNav } from "@/config/navigation";
 import { cn } from "@/lib/cn";
 import { duration, ease, tween } from "@/lib/motion";
+
+const CONDENSE_AT = 72;
 
 /**
  * Site header.
  * ---------------------------------------------------------------------------
- * Starts transparent over the dark page banner (every route opens on one) and
- * condenses into a frosted cream bar once the visitor scrolls past the fold
- * point. The transition is a single height/colour tween rather than a swap, so
- * the change feels like the page settling.
+ * Two behaviours, one component:
+ *
+ *  - Banner routes (home and the six section pages) open on a full-bleed dark
+ *    image, so the header starts transparent with cream ink and condenses into
+ *    a frosted cream bar once the visitor passes the fold point.
+ *  - Detail routes (products, articles) open on light paper, so the header
+ *    starts already solid — cream ink on a cream background would be invisible.
+ *
+ * The change is a single height/colour tween rather than a swap, so it reads as
+ * the page settling rather than a component appearing.
  */
 export function SiteHeader() {
   const pathname = usePathname();
@@ -31,11 +39,12 @@ export function SiteHeader() {
   const { count, open: openCart } = useCart();
 
   useMotionValueEvent(scrollY, "change", (value) => {
-    const next = value > 72;
+    const next = value > CONDENSE_AT;
     setCondensed((current) => (current === next ? current : next));
   });
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const solid = !hasBannerRoute(pathname) || condensed;
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
@@ -44,7 +53,7 @@ export function SiteHeader() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-[80] transition-[background-color,box-shadow,border-color] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
-          condensed
+          solid
             ? "border-b border-line-light bg-paper-50/88 backdrop-blur-xl supports-[backdrop-filter]:bg-paper-50/72"
             : "border-b border-transparent bg-transparent",
         )}
@@ -52,10 +61,10 @@ export function SiteHeader() {
         <div
           className={cn(
             "mx-auto flex w-full max-w-[var(--container-page)] items-center justify-between gap-6 px-6 transition-[height,padding] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:px-10 lg:px-14",
-            condensed ? "h-[4.25rem] lg:h-[4.75rem]" : "h-[5rem] lg:h-[6.5rem]",
+            solid ? "h-[4.25rem] lg:h-[4.75rem]" : "h-[5rem] lg:h-[6.5rem]",
           )}
         >
-          <Logo tone={condensed ? "dark" : "light"} height={condensed ? 32 : 44} priority />
+          <Logo tone={solid ? "dark" : "light"} height={solid ? 32 : 44} priority />
 
           <nav aria-label="Primary" className="hidden lg:block">
             <ul className="flex items-center gap-1">
@@ -68,7 +77,7 @@ export function SiteHeader() {
                       aria-current={active ? "page" : undefined}
                       className={cn(
                         "group relative inline-flex h-10 items-center px-3.5 text-[0.8125rem] font-medium tracking-[0.01em] transition-colors duration-400",
-                        condensed
+                        solid
                           ? active
                             ? "text-ink-900"
                             : "text-text-muted hover:text-ink-900"
@@ -97,8 +106,8 @@ export function SiteHeader() {
               type="button"
               onClick={openCart}
               className={cn(
-                "relative inline-flex size-10 items-center justify-center rounded-pill border transition-colors duration-400",
-                condensed
+                "relative inline-flex size-11 items-center justify-center rounded-pill border transition-colors duration-400 sm:size-10",
+                solid
                   ? "border-ink-900/15 text-ink-900 hover:border-copper-600 hover:text-copper-700"
                   : "border-cream-100/30 text-cream-100 hover:border-cream-100/70",
               )}
@@ -117,7 +126,7 @@ export function SiteHeader() {
                     transition={tween(duration.fast, ease.out)}
                     className={cn(
                       "absolute -right-0.5 -top-0.5 flex size-[1.15rem] items-center justify-center rounded-pill text-[0.625rem] font-semibold tabular-nums",
-                      condensed ? "bg-copper-600 text-paper-25" : "bg-copper-400 text-ink-950",
+                      solid ? "bg-copper-600 text-paper-25" : "bg-copper-400 text-ink-950",
                     )}
                   >
                     {count}
@@ -131,7 +140,7 @@ export function SiteHeader() {
                 <ButtonLink
                   href="/what-we-offer#events"
                   size="sm"
-                  variant={condensed ? "solid" : "inverse"}
+                  variant={solid ? "solid" : "inverse"}
                 >
                   Book an event
                 </ButtonLink>
@@ -144,10 +153,8 @@ export function SiteHeader() {
               aria-expanded={menuOpen}
               aria-label="Open menu"
               className={cn(
-                "inline-flex size-10 items-center justify-center rounded-pill border transition-colors duration-400 lg:hidden",
-                condensed
-                  ? "border-ink-900/15 text-ink-900"
-                  : "border-cream-100/30 text-cream-100",
+                "inline-flex size-11 items-center justify-center rounded-pill border transition-colors duration-400 lg:hidden",
+                solid ? "border-ink-900/15 text-ink-900" : "border-cream-100/30 text-cream-100",
               )}
             >
               <span className="relative block h-3 w-5">

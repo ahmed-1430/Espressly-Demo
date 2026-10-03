@@ -3,6 +3,12 @@ export type NavItem = {
   readonly href: string;
   /** Short descriptor used in the mobile drawer and footer sitemap. */
   readonly description?: string;
+  /**
+   * The route opens on a full-bleed dark banner, so the fixed header starts
+   * transparent with cream ink and condenses once the visitor scrolls.
+   * Detail routes omit this and start in the light, condensed state.
+   */
+  readonly banner?: boolean;
 };
 
 /**
@@ -11,14 +17,19 @@ export type NavItem = {
  * `shortLabel`.
  */
 export const primaryNav: readonly NavItem[] = [
-  { label: "Home", href: "/", description: "The Espressly story, in one sitting" },
-  { label: "Our Menu", href: "/menu", description: "Espresso bar, filter, cold brew and pastry" },
-  { label: "What We Offer", href: "/what-we-offer", description: "Wholesale, events, workshops and gifts" },
-  { label: "Shop", href: "/shop", description: "Coffee, gear and collections to take home" },
-  { label: "Blog", href: "/blog", description: "Field notes on coffee, brewing and craft" },
-  { label: "About Us", href: "/about", description: "Sourcing, roasting and the people behind both" },
-  { label: "Contact Us", href: "/contact", description: "Visit the roastery or talk to our team" },
+  { label: "Home", href: "/", banner: true, description: "The Espressly story, in one sitting" },
+  { label: "Our Menu", href: "/menu", banner: true, description: "Espresso bar, filter, cold brew and pastry" },
+  { label: "What We Offer", href: "/what-we-offer", banner: true, description: "Wholesale, events, workshops and gifts" },
+  { label: "Shop", href: "/shop", banner: true, description: "Coffee, gear and collections to take home" },
+  { label: "Blog", href: "/blog", banner: true, description: "Field notes on coffee, brewing and craft" },
+  { label: "About Us", href: "/about", banner: true, description: "Sourcing, roasting and the people behind both" },
+  { label: "Contact Us", href: "/contact", banner: true, description: "Visit the roastery or talk to our team" },
 ] as const;
+
+/** True when the given path opens on a dark banner (header starts transparent). */
+export function hasBannerRoute(pathname: string): boolean {
+  return primaryNav.some((item) => item.href === pathname && item.banner);
+}
 
 export const footerNav = {
   explore: primaryNav.filter((item) => item.href !== "/"),

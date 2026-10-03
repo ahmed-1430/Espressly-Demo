@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Container } from "@/components/ui/container";
@@ -98,14 +99,15 @@ export function PageHeader({
         <div className={cn("flex flex-col gap-6", centered && "items-center text-center")}>
           <Eyebrow tone="light">{eyebrow}</Eyebrow>
 
-          <h1 className="max-w-[18ch] text-display-sm text-cream-100">
+          <h1 className="max-w-[22ch] text-display-sm text-cream-100 lg:max-w-[none]">
             {title.map((line, index, all) => (
-              <span key={line} className="block overflow-hidden pb-[0.08em]">
-                <SplitText
-                  text={index === all.length - 1 ? line : `${line} `}
-                  delay={0.06 * index + 0.1}
-                />
-              </span>
+              <Fragment key={line}>
+                <span className="block overflow-hidden pb-[0.08em]">
+                  <SplitText text={line} delay={0.06 * index + 0.1} />
+                </span>
+                {/* Keeps the accessible name readable as sentences. */}
+                {index < all.length - 1 ? " " : null}
+              </Fragment>
             ))}
           </h1>
 

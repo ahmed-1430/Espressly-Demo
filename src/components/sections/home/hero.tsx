@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Magnetic } from "@/components/motion/magnetic";
 import { ParallaxImage } from "@/components/motion/parallax-image";
 import { SplitText } from "@/components/motion/split-text";
@@ -48,13 +49,17 @@ export function Hero() {
 
         <h1 className="mt-6 max-w-[22ch] text-display-lg text-cream-100 lg:max-w-[none]">
           {hero.headline.map((line, index, all) => (
-            <span key={line} className="block overflow-hidden pb-[0.06em]">
-              <SplitText
-                text={index === all.length - 1 ? line : `${line} `}
-                delay={0.08 * index + 0.12}
-                durationSeconds={1.05}
-              />
-            </span>
+            <Fragment key={line}>
+              <span className="block overflow-hidden pb-[0.06em]">
+                <SplitText
+                  text={line}
+                  delay={0.08 * index + 0.12}
+                  durationSeconds={1.05}
+                />
+              </span>
+              {/* Keeps the accessible name readable as sentences. */}
+              {index < all.length - 1 ? " " : null}
+            </Fragment>
           ))}
         </h1>
 

@@ -175,7 +175,7 @@ export function CartDrawer() {
                           <div className="inline-flex items-center rounded-pill border border-ink-900/15">
                             <button
                               type="button"
-                              className="inline-flex size-8 items-center justify-center rounded-pill text-ink-900 transition-colors hover:bg-ink-900/5"
+                              className="inline-flex size-10 items-center justify-center rounded-pill text-ink-900 transition-colors hover:bg-ink-900/5"
                               onClick={() => setQuantity(line.slug, line.quantity - 1)}
                             >
                               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className="size-3.5">
@@ -191,7 +191,7 @@ export function CartDrawer() {
                             </span>
                             <button
                               type="button"
-                              className="inline-flex size-8 items-center justify-center rounded-pill text-ink-900 transition-colors hover:bg-ink-900/5"
+                              className="inline-flex size-10 items-center justify-center rounded-pill text-ink-900 transition-colors hover:bg-ink-900/5"
                               onClick={() => setQuantity(line.slug, line.quantity + 1)}
                             >
                               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className="size-3.5">
@@ -234,7 +234,7 @@ export function CartDrawer() {
                     </Button>
                   </div>
                   <p className="mt-3 text-center text-[0.75rem] text-text-muted">
-                    Front-end demo basket — no payment is taken.
+                    Front-end demo basket â€” no payment is taken.
                   </p>
                 </footer>
               </>

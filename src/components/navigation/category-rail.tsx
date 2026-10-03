@@ -74,7 +74,7 @@ export function CategoryRail({ ids, className }: CategoryRailProps) {
                   onClick={() => handleJump(category.id)}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "relative inline-flex h-9 items-center rounded-pill px-4 text-[0.8125rem] font-medium tracking-[0.01em] transition-colors duration-400 lg:h-11 lg:px-5",
+                    "relative inline-flex h-10 shrink-0 items-center rounded-pill px-4 text-[0.8125rem] font-medium tracking-[0.01em] transition-colors duration-400 lg:h-11 lg:px-5",
                     isActive
                       ? "text-ink-900"
                       : "text-text-muted hover:text-ink-900",

@@ -82,10 +82,12 @@ export function ScrollRail({
     };
   }, [enabled]);
 
-  const { scrollYProgress } = useScroll({
-    target: outerRef,
-    offset: ["start start", "end end"],
-  });
+  // Only hand Motion a target it can actually measure. When the desktop rail is
+  // not the thing being rendered, its ref is deliberately left unattached and
+  // passing it anyway makes Motion wait for a hydration that never comes.
+  const { scrollYProgress } = useScroll(
+    enabled ? { target: outerRef, offset: ["start start", "end end"] } : {},
+  );
   const x = useTransform(scrollYProgress, [0, 1], [0, -overflow]);
   const scaleX = useTransform(scrollYProgress, [0, 1], [0.04, 1]);
 

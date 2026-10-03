@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { ImageReveal } from "@/components/motion/image-reveal";
 import { ParallaxImage } from "@/components/motion/parallax-image";
 import { Reveal } from "@/components/motion/reveal";
@@ -41,14 +42,16 @@ export function BrandStatement() {
             <Eyebrow tone="light">{statement.eyebrow}</Eyebrow>
             <h2 className="mt-6 text-display-2xs text-cream-100">
               {lines.map((line, index, all) => (
-                <span key={line} className="block overflow-hidden pb-[0.05em]">
-                  <SplitText
-                    text={
-                      index === all.length - 1 ? line : `${line.replace(/\.$/, "")}. `
-                    }
-                    delay={index * 0.1}
-                  />
-                </span>
+                <Fragment key={line}>
+                  <span className="block overflow-hidden pb-[0.05em]">
+                    <SplitText
+                      text={index === all.length - 1 ? line : `${line.replace(/\.$/, "")}.`}
+                      delay={index * 0.1}
+                    />
+                  </span>
+                  {/* Keeps the accessible name readable as sentences. */}
+                  {index < all.length - 1 ? " " : null}
+                </Fragment>
               ))}
             </h2>
           </div>
