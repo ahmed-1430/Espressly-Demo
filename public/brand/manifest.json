@@ -1,0 +1,28 @@
+{
+  "generatedFrom": "resource/expressly-logo.jpeg",
+  "artworkBounds": {
+    "left": 280,
+    "top": 256,
+    "width": 1124,
+    "height": 512
+  },
+  "split": {
+    "gapEnd": 535,
+    "gapSize": 33,
+    "markWidth": 272
+  },
+  "lockup": {
+    "colour": {
+      "width": 1124,
+      "height": 512
+    },
+    "cream": {
+      "width": 1124,
+      "height": 512
+    }
+  },
+  "mark": {
+    "width": 258,
+    "height": 240
+  }
+}
