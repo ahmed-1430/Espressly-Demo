@@ -48,7 +48,7 @@ export function SplitText({
   }
 
   return (
-    <Wrapper className={cn("inline-block", className)}>
+    <Wrapper data-reveal="" className={cn("inline-block", className)}>
       {words.map((word, index) => {
         const content = renderLine ? renderLine(word, index) : word;
         const inner = masked ? (
@@ -75,8 +75,8 @@ export function SplitText({
 
         return (
           <span
-            // eslint-disable-next-line react/no-array-index-key -- words are positional
             key={`${word}-${index}`}
+            data-reveal=""
             className={cn("inline-block", masked ? "pb-[0.12em]" : "mr-[0.26em]")}
           >
             {inner}

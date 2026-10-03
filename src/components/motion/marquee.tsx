@@ -57,7 +57,6 @@ export function Marquee({
       >
         {sequence.map((item, index) => (
           <span
-            // eslint-disable-next-line react/no-array-index-key -- intentionally positional
             key={`${item}-${index}`}
             className="flex items-center whitespace-nowrap"
           >

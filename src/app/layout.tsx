@@ -83,6 +83,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body className="min-h-dvh antialiased">
+        <noscript>
+          {/* Without JS the mount/entrance animations never run, so anything
+              they would have hidden is forced into its final state. */}
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
+        </noscript>
+
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[120] focus:rounded-pill focus:bg-ink-950 focus:px-5 focus:py-3 focus:text-[0.8125rem] focus:font-medium focus:text-cream-100"

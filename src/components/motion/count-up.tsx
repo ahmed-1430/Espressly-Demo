@@ -16,10 +16,9 @@ type CountUpProps = {
 /**
  * Counts a statistic up once, the first time it scrolls into view.
  *
- * Uses a rAF loop against a single state value, and bails out entirely under
- * reduced motion so the final figure renders immediately. The animated digits
- * are `aria-hidden`; the final value is exposed once so a screen reader never
- * hears a number ticking.
+ * A single rAF loop drives one state value; nothing is set during the effect
+ * itself, so there is no cascading render. Under reduced motion the final
+ * figure is derived during render and no animation runs at all.
  */
 export function CountUp({
   value,
@@ -30,14 +29,10 @@ export function CountUp({
   const reduce = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
-  const [display, setDisplay] = useState(() => (reduce ? value : 0));
+  const [ticked, setTicked] = useState(0);
 
   useEffect(() => {
-    if (reduce) {
-      setDisplay(value);
-      return;
-    }
-    if (!inView) return;
+    if (reduce || !inView) return;
 
     let frame = 0;
     const start = performance.now();
@@ -46,7 +41,7 @@ export function CountUp({
       const t = Math.min(1, (now - start) / durationMs);
       // expo-out
       const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-      setDisplay(Math.round(value * eased));
+      setTicked(Math.round(value * eased));
       if (t < 1) frame = requestAnimationFrame(tick);
     };
 
@@ -54,14 +49,16 @@ export function CountUp({
     return () => cancelAnimationFrame(frame);
   }, [inView, reduce, value, durationMs]);
 
-  const spoken = `${formatNumber(value, site.locale)}${suffix}`;
+  const display = reduce ? value : ticked;
 
   return (
     <span ref={ref} className={className}>
+      {/* Animated digits are hidden from assistive tech; the settled value is
+          announced once, so a screen reader never hears a number ticking. */}
       <span aria-hidden className="tabular-nums">
         {`${formatNumber(display, site.locale)}${suffix}`}
       </span>
-      <span className="sr-only">{spoken}</span>
+      <span className="sr-only">{`${formatNumber(value, site.locale)}${suffix}`}</span>
     </span>
   );
 }

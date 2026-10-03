@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef } from "react";
 import { Logo } from "@/components/brand/logo";
 import { SocialLinkList } from "@/components/brand/social-icon";
 import { useCart } from "@/components/shop/cart-provider";

@@ -50,6 +50,7 @@ export function ProductCard({
 
   return (
     <motion.article
+      data-reveal=""
       className={cn(
         "group/card relative flex flex-col",
         wide && "sm:grid sm:grid-cols-12 sm:gap-8 sm:items-center",

@@ -32,9 +32,10 @@ type SectionProps = {
   className?: string;
   /** Vertical rhythm. `tight` for stacked editorial bands. */
   spacing?: "flush" | "tight" | "default" | "loose" | "hero";
+  /** Overrides the landmark element. `section` is right for almost everything. */
   as?: "section" | "div" | "header" | "footer" | "article";
   id?: string;
-  /** Marks the region a sticky header anchors to. */
+  /** Id of the heading that labels this region. */
   labelledBy?: string;
   tone?: "light" | "bright" | "sand" | "dark" | "deeper";
 };
@@ -60,18 +61,18 @@ export function Section({
   children,
   className,
   spacing: space = "default",
-  as = "section",
+  as: Tag = "section",
   id,
   labelledBy,
   tone = "light",
 }: SectionProps) {
   return (
-    <section
+    <Tag
       id={id}
       aria-labelledby={labelledBy}
       className={cn("relative", spacing[space], tones[tone], className)}
     >
       {children}
-    </section>
+    </Tag>
   );
 }

@@ -76,6 +76,7 @@ export function ImageReveal({
   return (
     <motion.div
       ref={frame}
+      data-reveal=""
       className={cn("overflow-hidden", className)}
       initial={hidden[from]}
       whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}

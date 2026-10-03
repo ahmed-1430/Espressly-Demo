@@ -104,8 +104,6 @@ async function buildLogoAssets() {
     colour[o + 3] = alpha[p];
   }
 
-  const flat = sharp(colour, { raw: { width, height, channels: 4 } });
-
   // 3. Trim to the artwork's real bounding box so the emitted PNGs carry no
   //    dead space - header and footer can then size them from real ratios.
   const columnAlpha = new Uint32Array(width);

@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import type { Variants } from "motion/react";
 import type { ReactNode } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/cn";
 import {
   duration,
@@ -18,7 +19,7 @@ type RevealProps = {
   distance?: number;
   delay?: number;
   durationSeconds?: number;
-  as?: "div" | "li" | "section" | "article" | "span" | "p";
+  as?: "div" | "li" | "ul" | "ol" | "dl" | "section" | "article" | "span" | "p" | "h2" | "h3" | "blockquote" | "figure";
 };
 
 /**
@@ -26,6 +27,8 @@ type RevealProps = {
  *
  * Intentional constraints: it animates only `opacity` and `transform`, it runs
  * once, and it collapses to a plain render under `prefers-reduced-motion`.
+ * `data-reveal` marks the element so the no-JS fallback in the root layout can
+ * force the final state.
  */
 export function Reveal({
   children,
@@ -45,6 +48,7 @@ export function Reveal({
 
   return (
     <Component
+      data-reveal=""
       className={className}
       initial={{ opacity: 0, y: distance }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -82,6 +86,7 @@ export function Stagger({
 
   return (
     <Component
+      data-reveal=""
       className={className}
       initial="hidden"
       whileInView="visible"
@@ -100,6 +105,15 @@ type StaggerItemProps = {
   as?: "div" | "li" | "article" | "span";
 };
 
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: tween(duration.slow, ease.out),
+  },
+};
+
 export function StaggerItem({
   children,
   className,
@@ -116,14 +130,11 @@ export function StaggerItem({
   const Component = motion[as];
   return (
     <Component
+      data-reveal=""
       className={cn(className)}
       variants={{
         hidden: { opacity: 0, y: distance },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: tween(duration.slow, ease.out),
-        },
+        visible: itemVariants.visible,
       }}
     >
       {children}
