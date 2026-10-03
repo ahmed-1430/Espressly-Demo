@@ -89,11 +89,17 @@ Defined once in `src/app/globals.css` under Tailwind v4's `@theme`.
 Typography pairs **Fraunces** (variable display serif, optical sizing) with
 **Inter Tight** (UI/body grotesque), both self-hosted via `next/font`.
 
-Utilities: `eyebrow`, `display-type`, `rule-fade`, `hairline-t/b`, `link-wipe`,
-`grain`, `rail`, `hide-scrollbar`.
+Utilities: `eyebrow`, `display-type`, `grain`, `rail`, `hide-scrollbar`,
+`link-wipe`, `stamp-text`.
+
+Class names are merged with `tailwind-merge` (`src/lib/cn.ts`) so a caller's
+`className` always wins over a component's default. Without it, two competing
+utilities from the same group both reach the stylesheet and the winner is
+decided by CSS order rather than intent — which silently broke every
+absolutely-positioned parallax frame until it was added.
 
 Every text/background pairing in the palette clears WCAG AA (verified with
-Lighthouse: accessibility, best practices and SEO all score 100).
+Lighthouse: accessibility, best practices and SEO all score 100 on every route).
 
 ---
 
@@ -152,18 +158,41 @@ Layouts are ratio-locked: every photograph renders inside a fixed
 `aspect-ratio` frame with `next/image` `fill`, so a different crop or
 orientation changes composition but never spacing or CLS.
 
+`public/images/README.md` lists every slot, what consumes it, and the framing
+each one needs.
+
 ### Replacing the logo
 
 `scripts/build-logo-assets.mjs` reads `resource/expressly-logo.jpeg` and emits
 four transparent variants (full lockup + cup mark, colour + cream) into
-`public/brand/`, plus a `manifest.json` with the measured dimensions used by
-the config. Re-run it after dropping in a new master file:
+`public/brand/`, plus a `manifest.json` with the measured dimensions the config
+relies on.
 
 ```bash
-node scripts/build-logo-assets.mjs
+npm run brand:assets
 ```
 
-If the file names change, update the four paths in `src/config/images.ts`.
+The script colour-keys the flat background, un-premultiplies to avoid a pale
+halo on dark surfaces, trims to the real artwork bounds, and splits the cup
+mark out of the lockup at the widest internal gap. If the file names change,
+update the four paths in `src/config/images.ts`.
+
+---
+
+## Navigation
+
+- Banner routes (home plus the six section pages) open on a full-bleed dark
+  image, so the fixed header starts transparent with cream ink and condenses
+  into a frosted cream bar past the fold point. Detail routes (products,
+  articles) open on light paper and start already solid — cream ink on a cream
+  background would be unreadable. `NavItem.banner` and `hasBannerRoute()` in
+  `config/navigation.ts` decide this.
+- Desktop: logo, seven-item nav with a wiping active underline, bag indicator,
+  and a magnetic "Book an event" CTA at `xl`.
+- Mobile: a full-screen sheet that is a real modal — focus moves in, Tab is
+  trapped, Escape closes, background scroll locks with scrollbar compensation —
+  and recomposes rather than shrinking: indexed links, per-route descriptors
+  and a contact footer.
 
 ---
 
@@ -197,12 +226,21 @@ backend exists.
 
 ## Accessibility
 
-- Semantic landmarks, one `h1` per page, ordered heading levels.
+- Semantic landmarks, one `h1` per page, ordered heading levels, `<dl>` only
+  where definition lists are meant.
 - Skip link, visible focus rings, `:focus-visible` styling throughout.
 - Every interaction reachable by keyboard; nothing depends on hover alone.
+- Touch targets at least 40 px; the small ones that remain are inline text
+  links inside sentences, which WCAG 2.2 explicitly exempts.
 - `aria-current`, `aria-expanded`, `aria-modal`, `aria-live` used where they
-  belong; labels tied to controls; errors announced with `role="alert"`.
-- Decorative motion respects `prefers-reduced-motion` throughout.
+  belong; labels tied to controls; errors announced with `role="alert"` and
+  focus moved to the first invalid field.
+- Counters expose their settled value once, never a ticking number.
+- Ornament (footer watermark, 404 stamp) is an image or a pseudo-element, so it
+  is neither announced nor contrast-checked.
+- Decorative motion respects `prefers-reduced-motion` throughout, and a
+  `<noscript>` rule forces every animation's end state so copy is readable
+  without JavaScript.
 
 ---
 
@@ -211,11 +249,29 @@ backend exists.
 Mobile 320 / 375 / 390 / 430 · tablet 768 / 820 / 1024 ·
 desktop 1280 / 1440 / 1600 / 1920.
 
-Sections are recomposed rather than scaled down: the hero type block moves
-below the plate card, the pinned signature rail becomes a snap-scrolling swipe
-rail, the sticky story rail hides its chapter list, and grids step down
-1 → 2 → 4 columns. `overflow-x: clip` on `body` plus ratio-locked media
-guarantee no horizontal scrolling.
+Sections are recomposed rather than scaled down: the hero type block stacks
+above the bar plate, the pinned signature rail becomes a snap-scrolling swipe
+rail, the sticky story rail hides its chapter list, the shop grid steps
+1 → 2 → 4 columns, and the article lead splits only at `xl` where it owns the
+full measure. `overflow-x: clip` on `body` (which does not create a scroll
+container, so sticky still works) plus ratio-locked media guarantee no
+horizontal scrolling.
+
+Verified with a same-origin iframe harness: 73 route × width combinations from
+320 px to 1920 px, zero unclipped overflow and zero broken images.
+
+---
+
+## Verification
+
+| Check                                          | Result                            |
+| ---------------------------------------------- | --------------------------------- |
+| `npm run build`                                 | 29 routes, all prerendered        |
+| `npm run typecheck` / `npm run lint`            | clean                             |
+| Browser console, 7 section routes                | no errors, no warnings            |
+| Lighthouse a11y / best-practices / SEO, 10 URLs | 100 / 100 / 100                   |
+| Horizontal overflow, 73 route × width samples   | none                              |
+| Hash-link integrity, every route                | none broken                       |
 
 ---
 
