@@ -394,3 +394,17 @@ export const contactImages = {
     "50% 45%",
   ),
 } as const;
+
+/**
+ * Derive an art-directed variant of an existing asset.
+ *
+ * Used where one photograph serves two purposes (for example a product packshot
+ * and its hover frame) and only the crop or the description differs. Keeps a
+ * single source per file while letting each slot declare its own framing.
+ */
+export function withImage(
+  base: ImageAsset,
+  overrides: Partial<ImageAsset> = {},
+): ImageAsset {
+  return { ...base, ...overrides };
+}

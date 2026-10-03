@@ -26,13 +26,6 @@ export const ease = {
   precise: [0.22, 0.61, 0.36, 1] as const,
 } as const;
 
-export const springSoft: Transition = {
-  type: "spring",
-  stiffness: 120,
-  damping: 26,
-  mass: 0.9,
-};
-
 export function tween(
   seconds: number = duration.base,
   curve: readonly number[] = ease.out,

@@ -44,12 +44,9 @@
 
   /* — Supporting hues — */
   --color-clay-500: #b06a3a;
-  --color-matcha-600: #6f7a4f;
 
   /* — Semantic aliases consumed by utilities such as `bg-surface-dark` — */
   --color-surface-dark: var(--color-espresso-900);
-  --color-surface-dark-deep: var(--color-ink-950);
-  --color-surface-mid: var(--color-sand-200);
   --color-surface-light: var(--color-cream-100);
   --color-surface-bright: var(--color-paper-50);
 
@@ -60,8 +57,6 @@
   --color-text-muted: #6b5a4c;
   --color-text-inverse: #f6efe4;
   --color-text-inverse-muted: #bca894;
-  /* Muted ink on the espresso/ink surfaces. */
-  --color-text-inverse-dim: #9c8a79;
 
   /* — Lines — */
   --color-line-light: color-mix(in oklab, var(--color-ink-900) 12%, transparent);
@@ -84,13 +79,9 @@
   --text-display-xs--line-height: 1.02;
   --text-display-xs--letter-spacing: -0.022em;
 
-  --text-display-sm: clamp(2.75rem, 1.7rem + 4.6vw, 5.5rem);
-  --text-display-sm--line-height: 0.98;
-  --text-display-sm--letter-spacing: -0.026em;
-
-  --text-display-md: clamp(3rem, 1.35rem + 6.5vw, 7rem);
-  --text-display-md--line-height: 0.96;
-  --text-display-md--letter-spacing: -0.03em;
+  --text-display-sm: clamp(2.25rem, 1.4rem + 3.8vw, 4.75rem);
+  --text-display-sm--line-height: 1.0;
+  --text-display-sm--letter-spacing: -0.024em;
 
   /* Hero scale. Tuned so "Roasted slowly." fits a single line across the
      11-column measure at every breakpoint from 1024 px upward. */
@@ -106,8 +97,6 @@
   --radius-pill: 999px;
 
   /* — Elevation — */
-  --shadow-plate: 0 1px 0 0 color-mix(in oklab, var(--color-ink-900) 8%, transparent),
-    0 18px 48px -28px color-mix(in oklab, var(--color-ink-950) 42%, transparent);
   --shadow-lift: 0 30px 70px -34px color-mix(in oklab, var(--color-ink-950) 62%, transparent);
 
   /* — Motion — */
@@ -212,25 +201,6 @@
   font-family: var(--font-display);
   font-weight: 350;
   font-variation-settings: "SOFT" 0, "WONK" 0;
-}
-
-@utility rule-fade {
-  background-image: linear-gradient(
-    to right,
-    transparent,
-    color-mix(in oklab, currentColor 45%, transparent) 18%,
-    color-mix(in oklab, currentColor 45%, transparent) 82%,
-    transparent
-  );
-}
-
-/* Optical hairline used to separate editorial bands. */
-@utility hairline-t {
-  border-top: 1px solid var(--color-line-light);
-}
-
-@utility hairline-b {
-  border-bottom: 1px solid var(--color-line-light);
 }
 
 /* Link underline that wipes in from the left. */
