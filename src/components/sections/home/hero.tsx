@@ -1,3 +1,4 @@
+import { Magnetic } from "@/components/motion/magnetic";
 import { ParallaxImage } from "@/components/motion/parallax-image";
 import { SplitText } from "@/components/motion/split-text";
 import { ButtonLink } from "@/components/ui/button";
@@ -10,10 +11,11 @@ import { hero } from "@/config/home";
 /**
  * Opening frame.
  * ---------------------------------------------------------------------------
- * Asymmetric on purpose: the photograph carries its subject on the left, so the
- * type block sits in the negative space on the right and the "on the bar today"
- * plate anchors the opposite corner. This is the site's first structural
- * decision and everything below it stacks from the same 12-column grid.
+ * The photograph carries its subject on the left, so the composition is built
+ * around that: an oversized headline runs almost the full measure in the
+ * upper half, the supporting copy and calls to action sit under it on the left,
+ * and the "on the bar today" plate anchors the lower right. Below `lg` it
+ * recomposes into a single column with the plate last.
  */
 export function Hero() {
   return (
@@ -30,7 +32,7 @@ export function Hero() {
       {/* Layered scrims: left for the plate card, bottom for the metadata rail. */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950/92 via-espresso-950/60 to-espresso-950/40"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950/94 via-espresso-950/58 to-espresso-950/32"
       />
       <div
         aria-hidden
@@ -41,42 +43,40 @@ export function Hero() {
         className="absolute inset-0 -z-10 bg-gradient-to-b from-espresso-950/70 via-transparent to-espresso-950/30"
       />
 
-      <Container className="relative flex flex-1 flex-col justify-end pb-8 pt-32 lg:pb-10">
-        <div className="grid items-end gap-x-8 gap-y-10 lg:grid-cols-12">
-          {/* Type block — right of the frame's negative space on desktop. */}
-          <div className="order-1 lg:order-2 lg:col-span-6 lg:col-start-7">
-            <Eyebrow tone="light">{hero.eyebrow}</Eyebrow>
+      <Container className="relative flex flex-1 flex-col justify-end pb-8 pt-28 sm:pt-32 lg:pt-40">
+        <Eyebrow tone="light">{hero.eyebrow}</Eyebrow>
 
-            <h1 className="mt-6 text-display-lg text-cream-100">
-              {hero.headline.map((line, index, all) => (
-                <span
-                  key={line}
-                  className="block overflow-hidden pb-[0.06em]"
-                >
-                  <SplitText
-                    text={index === all.length - 1 ? line : `${line} `}
-                    delay={0.08 * index + 0.12}
-                    durationSeconds={1.05}
-                  />
-                </span>
-              ))}
-            </h1>
+        <h1 className="mt-6 max-w-[22ch] text-display-lg text-cream-100 lg:max-w-[none]">
+          {hero.headline.map((line, index, all) => (
+            <span key={line} className="block overflow-hidden pb-[0.06em]">
+              <SplitText
+                text={index === all.length - 1 ? line : `${line} `}
+                delay={0.08 * index + 0.12}
+                durationSeconds={1.05}
+              />
+            </span>
+          ))}
+        </h1>
 
-            <p className="mt-7 max-w-[46ch] text-lede text-cream-100/72">{hero.body}</p>
-
+        <div className="mt-14 grid gap-x-10 gap-y-10 lg:grid-cols-12 lg:items-end">
+          {/* Copy + calls to action */}
+          <div className="lg:col-span-6">
+            <p className="max-w-[46ch] text-lede text-cream-100/72">{hero.body}</p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <ButtonLink href={hero.primaryCta.href} size="lg" arrow>
-                {hero.primaryCta.label}
-              </ButtonLink>
+              <Magnetic strength={7}>
+                <ButtonLink href={hero.primaryCta.href} size="lg" arrow>
+                  {hero.primaryCta.label}
+                </ButtonLink>
+              </Magnetic>
               <ButtonLink href={hero.secondaryCta.href} size="lg" variant="inverse">
                 {hero.secondaryCta.label}
               </ButtonLink>
             </div>
           </div>
 
-          {/* Plate card — anchors the opposite corner, stacks last on mobile. */}
-          <div className="order-2 lg:order-1 lg:col-span-5 lg:col-start-1">
-            <div className="w-full max-w-[22rem] border border-cream-100/15 bg-espresso-950/45 p-2 backdrop-blur-md">
+          {/* Plate card — anchors the lower right, stacks last on small screens */}
+          <div className="lg:col-span-4 lg:col-start-9">
+            <div className="w-full max-w-[21rem] border border-cream-100/15 bg-espresso-950/50 p-2 backdrop-blur-md">
               <div className="flex gap-4">
                 <Media
                   image={hero.plate.image}
@@ -104,13 +104,13 @@ export function Hero() {
           <dl className="grid grid-cols-3 gap-x-6 gap-y-3 sm:flex sm:gap-x-12">
             {hero.rail.map((item) => (
               <div key={item.label}>
-                <dt className="eyebrow text-cream-100/45">{item.label}</dt>
+                <dt className="eyebrow text-cream-100/55">{item.label}</dt>
                 <dd className="mt-1.5 text-[0.875rem] text-cream-100/85">{item.value}</dd>
               </div>
             ))}
           </dl>
 
-          <p className="flex items-center gap-3 text-[0.6875rem] uppercase tracking-[0.24em] text-cream-100/50">
+          <p className="flex items-center gap-3 text-[0.6875rem] uppercase tracking-[0.24em] text-cream-100/55">
             {hero.scrollHint}
             <span aria-hidden className="relative block h-10 w-px overflow-hidden bg-cream-100/20">
               <span className="absolute inset-x-0 top-0 block h-4 bg-copper-400 motion-safe:animate-[scrollcue_2.4s_cubic-bezier(0.16,1,0.3,1)_infinite]" />

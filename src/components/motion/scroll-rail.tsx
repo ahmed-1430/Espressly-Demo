@@ -1,10 +1,14 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { useMediaQuery } from "@/hooks/use-media-query";
+
+/** Layout-only measurement: runs before paint on the client, no SSR warning. */
+const useIsoLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 type ScrollRailProps = {
   children: ReactNode;
@@ -49,7 +53,7 @@ export function ScrollRail({
   const trackRef = useRef<HTMLDivElement>(null);
   const [overflow, setOverflow] = useState(0);
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     if (!enabled) return;
 
     const measure = () => {
@@ -57,7 +61,10 @@ export function ScrollRail({
       if (!track) return;
       const parent = track.parentElement;
       if (!parent) return;
-      setOverflow(Math.max(0, track.scrollWidth - parent.clientWidth));
+      setOverflow((current) => {
+        const next = Math.max(0, track.scrollWidth - parent.clientWidth);
+        return current === next ? current : next;
+      });
     };
 
     measure();
@@ -73,7 +80,7 @@ export function ScrollRail({
       observer.disconnect();
       window.removeEventListener("resize", measure);
     };
-  }, [enabled, children]);
+  }, [enabled]);
 
   const { scrollYProgress } = useScroll({
     target: outerRef,

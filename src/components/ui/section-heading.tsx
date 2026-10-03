@@ -98,7 +98,7 @@ export function SectionHeading({
       <Heading
         id={id}
         className={cn(
-          "text-display-2xs",
+          "text-display-2xs text-wrap-balance",
           tone === "dark" ? "text-ink-900" : "text-cream-100",
         )}
       >
