@@ -20,6 +20,8 @@ type RevealProps = {
   delay?: number;
   durationSeconds?: number;
   as?: "div" | "li" | "ul" | "ol" | "dl" | "section" | "article" | "span" | "p" | "h2" | "h3" | "blockquote" | "figure";
+  /** Anchor target, so a wrapped block can still be deep-linked. */
+  id?: string;
 };
 
 /**
@@ -37,18 +39,24 @@ export function Reveal({
   delay = 0,
   durationSeconds = duration.base,
   as = "div",
+  id,
 }: RevealProps) {
   const reduce = useReducedMotion();
   const Component = motion[as];
 
   if (reduce) {
     const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
+    return (
+      <Tag id={id} className={className}>
+        {children}
+      </Tag>
+    );
   }
 
   return (
     <Component
       data-reveal=""
+      id={id}
       className={className}
       initial={{ opacity: 0, y: distance }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -103,6 +111,8 @@ type StaggerItemProps = {
   className?: string;
   distance?: number;
   as?: "div" | "li" | "article" | "span";
+  /** Anchor target, so a card can be deep-linked from a section rail. */
+  id?: string;
 };
 
 const itemVariants: Variants = {
@@ -119,18 +129,24 @@ export function StaggerItem({
   className,
   distance = 24,
   as = "div",
+  id,
 }: StaggerItemProps) {
   const reduce = useReducedMotion();
 
   if (reduce) {
     const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
+    return (
+      <Tag id={id} className={className}>
+        {children}
+      </Tag>
+    );
   }
 
   const Component = motion[as];
   return (
     <Component
       data-reveal=""
+      id={id}
       className={cn(className)}
       variants={{
         hidden: { opacity: 0, y: distance },

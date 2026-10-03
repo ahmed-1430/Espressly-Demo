@@ -27,10 +27,9 @@ export default function BlogPage() {
         image={journalImages.banner}
         crumbs={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }]}
         rail={[
-          { label: "Brewing", href: "/blog#top" },
-          { label: "Craft", href: "/blog#top" },
-          { label: "Origin", href: "/blog#top" },
-          { label: "Guides", href: "/blog#top" },
+          { label: "Latest writing", href: "/blog#top" },
+          { label: "Every article", href: "/blog#archive" },
+          { label: "Join the dispatch", href: "/#newsletter" },
         ]}
       />
 
@@ -41,7 +40,7 @@ export default function BlogPage() {
       </Section>
 
       {/* Recent, compact */}
-      <Section tone="sand" spacing="tight">
+      <Section id="archive" tone="sand" spacing="tight">
         <Container>
           <div className="grid gap-x-12 gap-y-10 lg:grid-cols-12">
             <div className="lg:col-span-4">

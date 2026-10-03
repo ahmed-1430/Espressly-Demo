@@ -24,13 +24,13 @@ export function FeaturedProducts() {
           </ButtonLink>
         </div>
 
-        <div className="mt-12 grid gap-x-8 gap-y-14 lg:mt-16 lg:grid-cols-2 lg:gap-y-20">
+        <div className="mt-12 grid gap-x-7 gap-y-14 lg:mt-16 lg:grid-cols-3">
           {lead ? (
-            <Reveal className="lg:col-span-2">
+            <Reveal className="lg:col-span-3">
               <ProductCard
                 product={lead}
                 variant="feature"
-                sizes="(min-width: 1280px) 60vw, (min-width: 1024px) 55vw, 92vw"
+                sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 55vw, 92vw"
                 className="gap-8"
               />
             </Reveal>
@@ -40,7 +40,7 @@ export function FeaturedProducts() {
             <ProductCard
               key={product.slug}
               product={product}
-              sizes="(min-width: 1024px) 44vw, 92vw"
+              sizes="(min-width: 1024px) 30vw, 92vw"
             />
           ))}
         </div>

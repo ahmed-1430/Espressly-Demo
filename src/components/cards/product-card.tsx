@@ -53,7 +53,7 @@ export function ProductCard({
       data-reveal=""
       className={cn(
         "group/card relative flex flex-col",
-        wide && "sm:grid sm:grid-cols-12 sm:gap-8 sm:items-center",
+        wide && "sm:grid sm:grid-cols-12 sm:items-center sm:gap-10",
         className,
       )}
       initial={reduce ? undefined : { opacity: 0, y: 28 }}
@@ -70,7 +70,12 @@ export function ProductCard({
         tabIndex={-1}
         aria-hidden
       >
-        <div className="relative aspect-[4/5] w-full sm:aspect-square lg:aspect-[4/5]">
+        <div
+          className={cn(
+            "relative w-full",
+            wide ? "aspect-[16/10] sm:aspect-[16/9]" : "aspect-[4/5]",
+          )}
+        >
           <Media
             image={product.image}
             fill

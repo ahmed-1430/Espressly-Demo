@@ -22,8 +22,9 @@ export function ServiceCard({ service, variant = "wide", className }: ServiceCar
   return (
     <StaggerItem
       as="article"
+      id={service.id}
       className={cn(
-        "group/service relative flex",
+        "group/service relative flex scroll-mt-28",
         wide
           ? "flex-col border-t border-line-light pt-8 lg:grid lg:grid-cols-12 lg:gap-10 lg:pt-10"
           : "flex-col border border-line-light bg-paper-25 p-5",

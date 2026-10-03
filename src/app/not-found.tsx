@@ -28,12 +28,13 @@ export default function NotFound() {
           Error 404
         </Eyebrow>
 
-        <p
+        {/* Ornamental stamp: a pseudo-element so the numerals stay out of the
+            accessibility tree and never register as low-contrast text. */}
+        <span
           aria-hidden
-          className="mt-8 text-display-lg leading-none display-type text-cream-100/[0.14]"
-        >
-          404
-        </p>
+          data-stamp="404"
+          className="stamp-text mt-8 block text-display-lg leading-none display-type text-cream-100/[0.16]"
+        />
 
         <h1 className="mx-auto mt-2 max-w-[20ch] text-display-2xs text-cream-100">
           This page has been drunk and forgotten

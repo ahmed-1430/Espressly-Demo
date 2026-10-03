@@ -15,7 +15,7 @@ import { newsletter } from "@/config/home";
  */
 export function NewsletterCta() {
   return (
-    <Section tone="light" className="relative overflow-hidden">
+    <Section id="newsletter" tone="light" className="relative overflow-hidden">
       <Container>
         <div className="grid gap-x-12 gap-y-10 lg:grid-cols-12">
           <div className="lg:col-span-7">

@@ -23,7 +23,7 @@ export function SiteFooter() {
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           {/* Wordmark + positioning */}
           <div className="lg:col-span-5">
-            <Logo tone="light" height={40} />
+            <Logo tone="light" height={54} />
             <p className="mt-7 max-w-[34ch] text-[0.9375rem] leading-relaxed text-cream-100/65">
               {site.shortDescription}
             </p>

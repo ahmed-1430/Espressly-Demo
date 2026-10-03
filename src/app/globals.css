@@ -284,6 +284,17 @@
   }
 }
 
+/**
+ * Large decorative numerals drawn from a pseudo-element.
+ * Keeps pure ornament out of the accessibility tree and out of text-contrast
+ * checks, while still using real CSS type (an image would not scale as well).
+ */
+@utility stamp-text {
+  &::before {
+    content: attr(data-stamp);
+  }
+}
+
 @utility hide-scrollbar {
   scrollbar-width: none;
 

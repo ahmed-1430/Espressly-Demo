@@ -114,7 +114,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           transition={tween(duration.fast)}
         >
           <div className="flex items-center justify-between px-6 py-5">
-            <Logo tone="light" height={28} priority />
+            <Logo tone="light" height={34} priority />
             <button
               type="button"
               onClick={onClose}

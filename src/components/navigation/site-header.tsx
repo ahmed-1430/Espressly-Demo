@@ -55,7 +55,7 @@ export function SiteHeader() {
             condensed ? "h-[4.25rem] lg:h-[4.75rem]" : "h-[5rem] lg:h-[6.5rem]",
           )}
         >
-          <Logo tone={condensed ? "dark" : "light"} height={condensed ? 26 : 32} priority />
+          <Logo tone={condensed ? "dark" : "light"} height={condensed ? 32 : 44} priority />
 
           <nav aria-label="Primary" className="hidden lg:block">
             <ul className="flex items-center gap-1">

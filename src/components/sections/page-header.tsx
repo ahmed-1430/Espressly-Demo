@@ -48,7 +48,7 @@ export function PageHeader({
   return (
     <header
       className={cn(
-        "relative isolate flex min-h-[78svh] flex-col justify-end overflow-hidden bg-espresso-950 pb-10 pt-32 text-cream-100 sm:pb-12 lg:min-h-[86svh] lg:pb-14",
+        "relative isolate flex min-h-[72svh] flex-col justify-end overflow-hidden bg-espresso-950 pb-10 pt-28 text-cream-100 sm:pb-12 sm:pt-32 lg:min-h-[80svh] lg:pb-14 lg:pt-36",
         className,
       )}
     >

@@ -46,11 +46,6 @@ export default function ShopPage() {
           { label: "Dispatch", value: "Within 48 hours" },
           { label: "Grinding", value: "Free, always" },
         ]}
-        rail={[
-          { label: "Coffee", href: "#coffee" },
-          { label: "Gear", href: "#gear" },
-          { label: "Collections", href: "#collections" },
-        ]}
       />
 
       <Section tone="light" spacing="default">
