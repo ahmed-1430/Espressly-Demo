@@ -27,6 +27,7 @@ export function Hero() {
       <ParallaxImage
         image={bannerImages.home}
         travel={80}
+        entrance="settle"
         priority
         quality={82}
         sizes="100vw"

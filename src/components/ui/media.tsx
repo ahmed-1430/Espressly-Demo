@@ -31,6 +31,13 @@ type MediaProps = {
  *
  * Every frame reserves its space with an explicit aspect ratio, so swapping the
  * underlying file for a different orientation crops rather than shifts layout.
+ *
+ * `ImageAsset.plate` opts a slot into the packshot treatment — contained with an
+ * inset and multiplied into the frame's own colour — which is what stops a
+ * supplier's flat-white studio background from reading as an unfilled
+ * placeholder once it is cropped into a cream card. It is declared in config
+ * rather than passed at the call site, so swapping in a real packshot needs no
+ * component changes.
  */
 export function Media({
   image,
@@ -44,6 +51,7 @@ export function Media({
   quality = 78,
   placeholderTone = "dark",
 }: MediaProps) {
+  const plate = image.plate === true;
   const style: React.CSSProperties = fill
     ? {}
     : { aspectRatio: ratio ?? `${image.width} / ${image.height}` };
@@ -53,6 +61,7 @@ export function Media({
       className={cn(
         "relative isolate overflow-hidden",
         placeholderTone === "dark" ? "bg-espresso-800" : "bg-sand-100",
+        plate && "p-[7%]",
         className,
       )}
       style={style}
@@ -65,7 +74,8 @@ export function Media({
         priority={priority}
         quality={quality}
         className={cn(
-          fit === "contain" ? "object-contain" : "object-cover",
+          fit === "contain" || plate ? "object-contain" : "object-cover",
+          plate && "mix-blend-multiply",
           imgClassName,
         )}
         style={{ objectPosition: image.focus ?? "50% 50%" }}

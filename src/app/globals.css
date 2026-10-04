@@ -252,6 +252,23 @@
     color: var(--color-paper-25);
   }
 
+  /* Parallax travel is a desktop luxury. On a phone the viewport is short and
+     the scroll distance small, while the effect still costs a scroll listener
+     and a spring per instance — six of them on the home page alone. Below `lg`
+     the travel collapses to zero, which also collapses the over-scan layer back
+     to exactly the frame, so the crop stays correct instead of merely slowing
+     down. Driven by a media query rather than a JS breakpoint so there is no
+     hydration branch to reconcile. */
+  .parallax-frame {
+    --parallax-travel: 0px;
+  }
+
+  @media (width >= 64rem) {
+    .parallax-frame {
+      --parallax-travel: var(--travel-desktop, 0px);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;

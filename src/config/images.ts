@@ -31,6 +31,18 @@ export type ImageAsset = {
   readonly height: number;
   /** CSS `object-position` hint for art-directed crops. */
   readonly focus?: string;
+  /**
+   * A cut-out product shot rather than a photograph of a scene.
+   *
+   * Retail packshots arrive on a flat white or pale studio background. Cropped
+   * flush into a cream card that white reads as an unfilled placeholder, so
+   * these are presented on the brand's own warm plate instead: the frame holds
+   * the image contained with generous inset, and the image is multiplied into
+   * the plate so the studio background disappears rather than showing as a
+   * white rectangle. A future packshot supplied as a transparent PNG works
+   * unchanged, because multiply is a no-op over the plate colour.
+   */
+  readonly plate?: boolean;
 };
 
 const asset = (
@@ -39,7 +51,8 @@ const asset = (
   width: number,
   height: number,
   focus?: string,
-): ImageAsset => ({ src, alt, width, height, focus });
+  plate?: boolean,
+): ImageAsset => ({ src, alt, width, height, focus, plate });
 
 /* -------------------------------------------------------------------------
  * Brand
@@ -293,14 +306,15 @@ export const aboutImages = {
  * Shop
  * ---------------------------------------------------------------------- */
 export const shopImages = {
-  /** Square packshots for gear. They arrive on white, so they are always
-      presented on the brand's warm paper plate rather than cropped flush. */
+  /** Square packshots for gear. They arrive on white, so `plate` presents them
+      on the brand's warm paper instead of cropping the white into the card. */
   cafetiere: asset(
     "/images/products/product-02.jpg",
     "Glass and matte black cafetière filled with roasted beans",
     800,
     800,
     "50% 50%",
+    true,
   ),
   espressoCup: asset(
     "/images/products/product-04.jpg",
@@ -308,6 +322,7 @@ export const shopImages = {
     800,
     800,
     "50% 50%",
+    true,
   ),
   kettle: asset(
     "/images/products/product-06.jpg",
@@ -315,6 +330,7 @@ export const shopImages = {
     800,
     800,
     "50% 50%",
+    true,
   ),
   mokaPot: asset(
     "/images/products/product-09.jpg",
@@ -322,6 +338,7 @@ export const shopImages = {
     800,
     800,
     "50% 50%",
+    true,
   ),
 } as const;
 

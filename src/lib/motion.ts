@@ -11,6 +11,8 @@ import type { Transition, Variants } from "motion/react";
 export const duration = {
   instant: 0.24,
   fast: 0.42,
+  /** Page-to-page crossfade. Deliberately near the threshold of feeling. */
+  route: 0.3,
   base: 0.72,
   slow: 1.05,
   reveal: 1.35,
