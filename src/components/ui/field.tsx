@@ -10,7 +10,7 @@ import type {
 import { cn } from "@/lib/cn";
 
 const fieldShell =
-  "peer w-full rounded-card border border-ink-900/15 bg-paper-25 px-4 py-3.5 text-body text-ink-900 outline-none transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] placeholder:text-text-muted/70 hover:border-ink-900/30 focus:border-copper-600 focus:ring-1 focus:ring-copper-600 disabled:cursor-not-allowed disabled:opacity-60 aria-[invalid=true]:border-clay-500";
+  "peer w-full rounded-card border border-ink-900/15 bg-paper-25 px-4 py-3.5 text-body text-ink-900 outline-none transition-colors duration-300 ease-out-expo placeholder:text-text-muted/70 hover:border-ink-900/30 focus:border-copper-600 focus:ring-1 focus:ring-copper-600 disabled:cursor-not-allowed disabled:opacity-60 aria-[invalid=true]:border-clay-500";
 
 const labelBase =
   "block text-eyebrow font-medium uppercase tracking-[0.2em] text-text-muted";

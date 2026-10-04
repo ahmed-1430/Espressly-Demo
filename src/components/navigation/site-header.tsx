@@ -55,7 +55,7 @@ export function SiteHeader() {
            declares the dark tone and inherits the lighter focus ring. */
         data-tone={solid ? "light" : "dark"}
         className={cn(
-          "fixed inset-x-0 top-0 z-header transition-[background-color,box-shadow,border-color] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "fixed inset-x-0 top-0 z-header transition-[background-color,box-shadow,border-color] duration-700 ease-out-expo",
           solid
             ? "border-b border-line-light bg-paper-50/88 backdrop-blur-xl supports-[backdrop-filter]:bg-paper-50/72"
             : "border-b border-transparent bg-transparent",
@@ -63,7 +63,7 @@ export function SiteHeader() {
       >
         <div
           className={cn(
-            "mx-auto flex w-full max-w-[var(--container-page)] items-center justify-between gap-6 px-6 transition-[height,padding] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:px-10 lg:px-14",
+            "mx-auto flex w-full max-w-[var(--container-page)] items-center justify-between gap-6 px-6 transition-[height,padding] duration-700 ease-out-expo sm:px-10 lg:px-14",
             solid ? "h-[4.25rem] lg:h-[4.75rem]" : "h-[5rem] lg:h-[6.5rem]",
           )}
         >
@@ -93,7 +93,7 @@ export function SiteHeader() {
                       <span
                         aria-hidden
                         className={cn(
-                          "absolute inset-x-3 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100",
+                          "absolute inset-x-3 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-400 ease-out-expo group-hover:scale-x-100",
                           active ? "scale-x-100" : "",
                         )}
                       />

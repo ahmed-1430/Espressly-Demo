@@ -1,5 +1,5 @@
 /**
- * Espressly — application design system
+ * Espressly Ã¢â‚¬â€ application design system
  * ---------------------------------------------------------------------------
  * Every colour, type ramp, spacing rhythm, easing curve and breakpoint used by
  * the site is declared here once. Components consume Tailwind utilities that
@@ -12,19 +12,19 @@
    1. Palette
    ======================================================================== */
 @theme {
-  /* — Roasted neutrals: the backbone of every surface — */
+  /* Ã¢â‚¬â€ Roasted neutrals: the backbone of every surface Ã¢â‚¬â€ */
   --color-ink-950: #0d0907;
   --color-ink-900: #16100c;
   --color-ink-800: #20160f;
   --color-ink-700: #2f2018;
 
-  /* — Espresso / roast: the dark band surfaces — */
+  /* Ã¢â‚¬â€ Espresso / roast: the dark band surfaces Ã¢â‚¬â€ */
   --color-espresso-950: #150e0a;
   --color-espresso-900: #1d140e;
   --color-espresso-800: #2a1d14;
   --color-espresso-700: #3b281b;
 
-  /* — Copper: the single accent, used sparingly —
+  /* Ã¢â‚¬â€ Copper: the single accent, used sparingly Ã¢â‚¬â€
      copper-700 is the darkest tone so it also clears AA as small text on
      the sand surface. */
   --color-copper-700: #7d4a1d;
@@ -33,7 +33,7 @@
   --color-copper-400: #d29a5c;
   --color-copper-300: #e3bb87;
 
-  /* — Crema → paper: the light band surfaces — */
+  /* Ã¢â‚¬â€ Crema Ã¢â€ â€™ paper: the light band surfaces Ã¢â‚¬â€ */
   --color-crema-300: #dcc09b;
   --color-crema-200: #e9d8bd;
   --color-sand-200: #e3d7c4;
@@ -42,15 +42,15 @@
   --color-paper-50: #faf6ef;
   --color-paper-25: #fdfbf7;
 
-  /* — Supporting hues — */
+  /* Ã¢â‚¬â€ Supporting hues Ã¢â‚¬â€ */
   --color-clay-500: #b06a3a;
 
-  /* — Semantic aliases consumed by utilities such as `bg-surface-dark` — */
+  /* Ã¢â‚¬â€ Semantic aliases consumed by utilities such as `bg-surface-dark` Ã¢â‚¬â€ */
   --color-surface-dark: var(--color-espresso-900);
   --color-surface-light: var(--color-cream-100);
   --color-surface-bright: var(--color-paper-50);
 
-  /* — Text —
+  /* Ã¢â‚¬â€ Text Ã¢â‚¬â€
      All values clear WCAG AA (4.5:1) against their intended surface. */
   --color-text-strong: var(--color-ink-900);
   --color-text-body: #463527;
@@ -58,22 +58,22 @@
   --color-text-inverse: #f6efe4;
   --color-text-inverse-muted: #bca894;
 
-  /* — Lines — */
+  /* Ã¢â‚¬â€ Lines Ã¢â‚¬â€ */
   --color-line-light: color-mix(in oklab, var(--color-ink-900) 12%, transparent);
   --color-line-dark: color-mix(in oklab, var(--color-cream-100) 18%, transparent);
 
-  /* — Focus —
+  /* Ã¢â‚¬â€ Focus Ã¢â‚¬â€
      One ring, two tones. `--color-focus` must clear 3:1 against every light
      surface in the palette (it is the darker copper for that reason);
      `--color-focus-dark` is the step-up used inside `[data-tone="dark"]`. */
   --color-focus: var(--color-copper-600);
   --color-focus-dark: var(--color-copper-300);
 
-  /* — Typography — */
+  /* Ã¢â‚¬â€ Typography Ã¢â‚¬â€ */
   --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
 
-  /* — Type scale —
+  /* Ã¢â‚¬â€ Type scale Ã¢â‚¬â€
      Tailwind's default font-size utilities are cleared, then re-declared as a
      single scale named by *role* rather than by size. A component reads
      `text-body` or `text-title-lg`, never `text-[0.9375rem]`, so hierarchy is
@@ -94,7 +94,7 @@
   --text-body-md: 1rem;
   --text-body-lg: 1.0625rem;
 
-  /* Headings — a 1.125 major-second progression, 18 px to 30 px */
+  /* Headings Ã¢â‚¬â€ a 1.125 major-second progression, 18 px to 30 px */
   --text-title-xs: 1.125rem;
   --text-title-sm: 1.25rem;
   --text-title-md: 1.375rem;
@@ -124,23 +124,39 @@
   --text-lede: clamp(1.0625rem, 0.98rem + 0.42vw, 1.3125rem);
   --text-lede--line-height: 1.62;
 
-  /* — Radii: Espressly stays architectural, corners are barely softened — */
+  /* Ã¢â‚¬â€ Radii: Espressly stays architectural, corners are barely softened Ã¢â‚¬â€ */
   --radius-card: 2px;
   --radius-pill: 999px;
 
-  /* — Elevation — */
+  /* Ã¢â‚¬â€ Elevation Ã¢â‚¬â€ */
   --shadow-lift: 0 30px 70px -34px color-mix(in oklab, var(--color-ink-950) 62%, transparent);
 
-  /* — Motion — */
+  /* Ã¢â‚¬â€ Motion Ã¢â‚¬â€
+     Every transition in the site uses one easing, `ease-out-expo`, so motion
+     decelerates the same way everywhere and no interaction reads as imported
+     from elsewhere. Durations form a deliberate ladder:
+
+       300ms  colour and opacity changes on text, icons and small controls
+       400ms  borders, and the header's underline, which is deliberately the
+              same rate as the label colour it sits under so the active-page
+              indicator reads as one gesture rather than two
+       500ms  card-level transforms
+       700ms  large surfaces: the header condensing, drawers, and the wipe
+              behind a primary button
+       1000ms photography Ã¢â‚¬â€ a card image scaling on hover, and the crossfade
+              beneath it at 700ms so it leads rather than trails
+
+     Scripted entrances use the matching scale in `src/lib/motion.ts`, which
+     works in seconds for Motion's API. */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
   --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  /* — Layout — */
+  /* Ã¢â‚¬â€ Layout Ã¢â‚¬â€ */
   --container-page: 90rem;
   --container-copy: 44rem;
 
-  /* — Layering —
+  /* Ã¢â‚¬â€ Layering Ã¢â‚¬â€
      One ladder for the whole site. A component picks a rung by intent and
      never needs to know what else happens to be on the page, so nothing
      reaches for an arbitrary number.
@@ -152,7 +168,7 @@
        nav      sticky sub-navigation, deliberately tucked under the header
        header   the site header
        overlay  mobile menu and cart drawer
-       top      skip link — has to beat everything, since it is the first
+       top      skip link Ã¢â‚¬â€ has to beat everything, since it is the first
                 thing a keyboard user reaches
 
      Tailwind's z-index scale is a fixed list of numbers rather than a theme
@@ -167,7 +183,7 @@
   --z-overlay: 40;
   --z-top: 50;
 
-  /* — Breakpoints — */
+  /* Ã¢â‚¬â€ Breakpoints Ã¢â‚¬â€ */
   --breakpoint-xs: 25rem;
   --breakpoint-3xl: 105rem;
 }
@@ -238,8 +254,8 @@
 
   /* A focus ring has to be there the instant focus arrives. Tailwind's
      `transition-colors` also transitions `outline-color`, so the ring would
-     otherwise fade in over the control's own duration — 400 ms on the header
-     icons — and a keyboard user tabs on before the indicator is legible.
+     otherwise fade in over the control's own duration Ã¢â‚¬â€ 400 ms on the header
+     icons Ã¢â‚¬â€ and a keyboard user tabs on before the indicator is legible.
      Focus is transient, so suppressing the tween for as long as the element is
      focused costs nothing. Marked important because a utility sits above the
      base layer and would otherwise win. */
@@ -254,7 +270,7 @@
 
   /* Parallax travel is a desktop luxury. On a phone the viewport is short and
      the scroll distance small, while the effect still costs a scroll listener
-     and a spring per instance — six of them on the home page alone. Below `lg`
+     and a spring per instance Ã¢â‚¬â€ six of them on the home page alone. Below `lg`
      the travel collapses to zero, which also collapses the over-scan layer back
      to exactly the frame, so the crop stays correct instead of merely slowing
      down. Driven by a media query rather than a JS breakpoint so there is no
@@ -288,7 +304,7 @@
    ======================================================================== */
 /* The layering ladder (see `--z-*` in section 1). Declared as utilities
    because Tailwind's z-index is a fixed list of numbers, not a theme
-   namespace. They take variants like any other — `lg:z-nav` works. */
+   namespace. They take variants like any other Ã¢â‚¬â€ `lg:z-nav` works. */
 @utility z-under {
   z-index: var(--z-under);
 }
@@ -359,7 +375,7 @@
   }
 }
 
-/* Fine film grain — keeps large flat colour fields from banding. */
+/* Fine film grain Ã¢â‚¬â€ keeps large flat colour fields from banding. */
 @utility grain {
   position: relative;
 

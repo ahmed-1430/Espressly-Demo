@@ -52,7 +52,7 @@ export function SocialLinkList({
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "inline-flex items-center justify-center rounded-pill border transition-colors duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]",
+              "inline-flex items-center justify-center rounded-pill border transition-colors duration-400 ease-out-expo",
               size === "sm" ? "size-9" : "size-10",
               tone === "dark"
                 ? "border-ink-900/15 text-ink-900 hover:border-copper-600 hover:text-copper-700"

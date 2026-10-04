@@ -49,7 +49,7 @@ export function Logo({
       )}
     >
       <span
-        className="relative block overflow-hidden transition-[filter,opacity] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        className="relative block overflow-hidden transition-[filter,opacity] duration-700 ease-out-expo"
         style={{ height: `${height}px`, width: `${(height * asset.width) / asset.height}px` }}
       >
         <Image

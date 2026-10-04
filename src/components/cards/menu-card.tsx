@@ -101,7 +101,7 @@ export function MenuCard({ item, index }: MenuCardProps) {
             image={item.image}
             fill
             sizes="(min-width: 1024px) 26rem, (min-width: 640px) 24rem, 78vw"
-            className="h-full w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04]"
+            className="h-full w-full transition-transform duration-1000 ease-out-expo hover:scale-[1.04]"
             placeholderTone="light"
           />
           <span className="absolute left-5 top-5 font-sans text-eyebrow tracking-[0.24em] text-cream-100/80 mix-blend-difference">

@@ -16,7 +16,7 @@ type CommonProps = {
 };
 
 const base =
-  "group/btn relative inline-flex select-none items-center justify-center gap-3 rounded-pill font-sans font-medium tracking-[0.02em] transition-[color,background-color,border-color,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] disabled:pointer-events-none disabled:opacity-50";
+  "group/btn relative inline-flex select-none items-center justify-center gap-3 rounded-pill font-sans font-medium tracking-[0.02em] transition-[color,background-color,border-color,opacity] duration-500 ease-out-expo disabled:pointer-events-none disabled:opacity-50";
 
 const sizes: Record<ButtonSize, string> = {
   sm: "h-10 px-5 text-meta",
@@ -40,7 +40,7 @@ function Wipe({ className }: { className?: string }) {
     <span
       aria-hidden
       className={cn(
-        "absolute inset-0 z-base origin-bottom scale-y-0 rounded-pill bg-ink-900 transition-transform duration-[650ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:scale-y-100",
+        "absolute inset-0 z-base origin-bottom scale-y-0 rounded-pill bg-ink-900 transition-transform duration-700 ease-out-expo group-hover/btn:scale-y-100",
         className,
       )}
     />
@@ -57,7 +57,7 @@ function Arrow({ className }: { className?: string }) {
       stroke="currentColor"
       strokeWidth={1.4}
       className={cn(
-        "h-[0.9em] w-[0.9em] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-x-1",
+        "h-[0.9em] w-[0.9em] transition-transform duration-500 ease-out-expo group-hover/btn:translate-x-1",
         className,
       )}
     >

@@ -117,7 +117,7 @@ export function NewsletterForm({
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={1.5}
-                className="size-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5"
+                className="size-3.5 transition-transform duration-500 ease-out-expo group-hover:translate-x-0.5"
               >
                 <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

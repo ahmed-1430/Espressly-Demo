@@ -83,7 +83,7 @@ export function ProductCard({
             priority={priority}
             quality={80}
             placeholderTone="light"
-            className="h-full w-full transition-transform duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-[1.04]"
+            className="h-full w-full transition-transform duration-1000 ease-out-expo group-hover/card:scale-[1.04]"
           />
 
           {product.hoverImage ? (
@@ -94,7 +94,7 @@ export function ProductCard({
               quality={80}
               placeholderTone="light"
               className={cn(
-                "h-full w-full opacity-0 transition-opacity duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:opacity-100",
+                "h-full w-full opacity-0 transition-opacity duration-700 ease-out-expo group-hover/card:opacity-100",
               )}
             />
           ) : null}

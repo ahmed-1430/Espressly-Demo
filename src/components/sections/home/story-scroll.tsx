@@ -80,7 +80,7 @@ export function StoryScroll() {
                               transition={tween(duration.base, ease.out)}
                             />
                           ) : (
-                            <span className="h-px w-7 bg-ink-900/20 transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-10" />
+                            <span className="h-px w-7 bg-ink-900/20 transition-[width] duration-700 ease-out-expo group-hover:w-10" />
                           )}
                         </span>
                         <span

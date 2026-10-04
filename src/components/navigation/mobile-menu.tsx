@@ -173,7 +173,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth={1.3}
-                        className="size-4 shrink-0 self-center text-cream-100/40 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
+                        className="size-4 shrink-0 self-center text-cream-100/40 transition-transform duration-500 ease-out-expo group-hover:translate-x-1"
                       >
                         <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>

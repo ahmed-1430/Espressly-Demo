@@ -97,7 +97,7 @@ export function ServiceCard({ service, variant = "wide", className }: ServiceCar
             fill="none"
             stroke="currentColor"
             strokeWidth={1.4}
-            className="size-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/service:translate-x-1"
+            className="size-3.5 transition-transform duration-500 ease-out-expo group-hover/service:translate-x-1"
           >
             <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
