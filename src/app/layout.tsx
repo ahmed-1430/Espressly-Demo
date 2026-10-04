@@ -105,13 +105,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <CartDrawer />
         </CartProvider>
 
+        {/* Several entities, so they go out as one top-level array rather than
+            concatenated documents: a <script type="application/ld+json"> holds a
+            single JSON document, and three objects joined by newlines is not one.
+            Content is config-derived only — no user input reaches this. */}
         <script
           type="application/ld+json"
-          // Static, config-derived payloads only — no user input reaches this.
           dangerouslySetInnerHTML={{
-            __html: [organisationJsonLd(), cafeJsonLd(), websiteJsonLd()]
-              .map(serialiseJsonLd)
-              .join("\n"),
+            __html: serialiseJsonLd([
+              organisationJsonLd(),
+              cafeJsonLd(),
+              websiteJsonLd(),
+            ]),
           }}
         />
       </body>

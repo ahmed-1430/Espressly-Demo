@@ -230,23 +230,24 @@ export default async function ArticlePage({ params }: Params) {
         </Container>
       </Section>
 
+      {/* Article plus breadcrumbs as one top-level array — a single
+          application/ld+json script holds a single JSON document, so the two
+          cannot simply be concatenated. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: [
-            serialiseJsonLd(
-              articleJsonLd({
-                title: post.title,
-                description: post.excerpt,
-                image: post.image.src,
-                url: absoluteUrl(`/blog/${post.slug}`),
-                datePublished: post.date,
-                author: post.author.name,
-                readingTime: post.readingTime,
-              }),
-            ),
-            serialiseJsonLd(breadcrumbJsonLd(crumbs)),
-          ].join("\n"),
+          __html: serialiseJsonLd([
+            articleJsonLd({
+              title: post.title,
+              description: post.excerpt,
+              image: post.image.src,
+              url: absoluteUrl(`/blog/${post.slug}`),
+              datePublished: post.date,
+              author: post.author.name,
+              readingTime: post.readingTime,
+            }),
+            breadcrumbJsonLd(crumbs),
+          ]),
         }}
       />
 

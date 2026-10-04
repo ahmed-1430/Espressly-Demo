@@ -18,7 +18,12 @@ export function SiteFooter() {
   const year = new Date().getUTCFullYear();
 
   return (
-    <footer className="relative overflow-hidden bg-ink-950 text-text-inverse-muted">
+    <footer
+      /* Dark band, so the focus ring steps up to the lighter copper rather than
+         the one tuned for cream. */
+      data-tone="dark"
+      className="relative overflow-hidden bg-ink-950 text-text-inverse-muted"
+    >
       <Container className="py-16 sm:py-20 lg:py-24">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           {/* Wordmark + positioning */}

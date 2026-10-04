@@ -179,6 +179,7 @@ export function SelectField({
           required={required}
           aria-invalid={error ? true : undefined}
           {...(error ? { "aria-describedby": `${fieldId}-error` } : {})}
+          {...(hint && !error ? { "aria-describedby": `${fieldId}-hint` } : {})}
           className={cn(fieldShell, "appearance-none pr-10")}
         >
           {placeholder ? <option value="">{placeholder}</option> : null}
