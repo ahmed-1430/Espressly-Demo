@@ -78,16 +78,62 @@ and the client bundle stays small.
 
 Defined once in `src/app/globals.css` under Tailwind v4's `@theme`.
 
+Typography pairs **Fraunces** (variable display serif, optical sizing) with
+**Inter Tight** (UI/body grotesque), both self-hosted via `next/font`.
+
 | Token family   | Values                                                       |
 | -------------- | ------------------------------------------------------------ |
 | Rooted neutrals| `ink-950 … ink-700` — deep roasted browns to near-black       |
 | Espresso       | `espresso-950 … espresso-700` — dark band surfaces             |
 | Copper         | `copper-700 … copper-300` — the single accent, used sparingly  |
 | Crema → paper  | `crema-300`, `sand-200/100`, `cream-100`, `paper-50/25`        |
-| Semantic       | `surface-*`, `text-*`, `line-light`, `line-dark`               |
+| Semantic       | `surface-*`, `text-*`, `line-light`, `line-dark`, `focus`, `focus-dark` |
 
-Typography pairs **Fraunces** (variable display serif, optical sizing) with
-**Inter Tight** (UI/body grotesque), both self-hosted via `next/font`.
+### Type scale
+
+Tailwind's default font-size namespace is **cleared** (`--text-*: initial`) and
+re-declared as one scale named by role, so hierarchy is legible in the markup and
+drifting back to the defaults is not expressible:
+
+```
+micro · eyebrow · caption · meta            10 → 13 px   interface
+body-sm · body · body-md · body-lg          14 → 17 px   running text
+title-xs … title-3xl                       18 → 30 px   headings
+lede                                      17 → 21 px   standfirsts
+display-2xs … display-lg                   fluid to 160 px
+```
+
+The interface and heading steps carry **size only** — line height, tracking and
+case are treatments and belong to a utility (`leading-*`, `eyebrow`), which keeps
+them visible in the class list instead of hidden inside a token.
+
+> `tailwind-merge` cannot infer that `text-display-2xs` is a size, so it treats
+> it as a colour and discards it when a `text-<colour>` follows. `src/lib/cn.ts`
+> therefore lists the twenty names explicitly, and
+> `scripts/check-type-tokens.mjs` (wired as `prebuild`) fails the build if that
+> list and the `@theme` block drift apart. Without this the whole typographic
+> hierarchy collapsed to one size.
+
+### Layering
+
+One ladder, declared once, picked by intent rather than by number:
+
+```
+under · behind · base · raised · nav · header · overlay · top
+```
+
+Tailwind's z-index is a fixed list of numbers rather than a theme namespace, so
+these are exposed through `@utility` in globals.css — they still take variants
+(`lg:z-nav`, `focus:z-top`).
+
+### Focus
+
+One ring, two tones. `copper-600` (4.4:1) on light surfaces, stepping up to
+`copper-300` (10:1) inside `[data-tone="dark"]`. Tone is declared once by
+`Section`, the hero, the page header, the mobile menu, the header and the
+footer, so no component needs to know its own surface. The outline follows each
+element's own `border-radius`, and `transition-colors` — which also transitions
+`outline-color` — is suppressed while focused so the ring never fades in.
 
 Utilities: `eyebrow`, `display-type`, `grain`, `rail`, `hide-scrollbar`,
 `link-wipe`, `stamp-text`.
@@ -96,10 +142,17 @@ Class names are merged with `tailwind-merge` (`src/lib/cn.ts`) so a caller's
 `className` always wins over a component's default. Without it, two competing
 utilities from the same group both reach the stylesheet and the winner is
 decided by CSS order rather than intent — which silently broke every
-absolutely-positioned parallax frame until it was added.
+absolutely-positioned parallax frame until it was added. See the type-scale note
+above for the one place it needs configuring.
 
 Every text/background pairing in the palette clears WCAG AA (verified with
 Lighthouse: accessibility, best practices and SEO all score 100 on every route).
+
+### Vertical rhythm
+
+`Section` owns it: `flush`, `tight` (20 → 32 px), `default` (28 → 44 px),
+`loose` (32 → 56 px) and `hero`. Sections measure 0, 80 or 112 px at a given
+viewport — there are no one-off section paddings.
 
 ---
 
@@ -121,12 +174,30 @@ duplicated across pages.
 | `Magnetic`          | Pointer-driven pull for high-emphasis buttons                 |
 | `ScrollProgress`    | Spring-driven reading-progress hairline                      |
 
-Principles: only `opacity`, `transform` and `clip-path` are animated;
-durations are 0.24–1.6 s; easings are expo-out; no bounce, no springs except a
-small scroll-progress damper. Every primitive reads `useReducedMotion()` and
-renders its final state instead of animating. Parallax and pinned rails are
-disabled below `lg` and on coarse pointers so vertical scroll is never hijacked
-on touch.
+Principles: only `opacity`, `transform` and `clip-path` are animated; no bounce,
+no springs except a small scroll-progress damper. Every primitive reads
+`useReducedMotion()` and renders its final state instead of animating — 36 call
+sites across 17 files.
+
+**Transitions** all use one easing, `ease-out-expo`, so motion decelerates
+identically everywhere. Durations form a deliberate ladder: 300 ms colour and
+opacity on text and small controls, 400 ms borders and the header underline,
+500 ms card transforms, 700 ms large surfaces, 1000 ms photography.
+
+**Route transitions** live in `src/app/template.tsx`, which remounts on every
+navigation: 300 ms fade plus 10 px of rise. Fade in only — the outgoing page
+leaves immediately, so navigation never queues.
+
+**Parallax travel collapses below `lg`** through a media query on a CSS custom
+property rather than a JS breakpoint, so there is no hydration branch. Because
+the over-scan layer and its offset derive from the same variable, a phone gets
+an exact crop rather than a cropped-and-scaled one. Pinned rails and the
+horizontal marquee are likewise disabled below `lg` and on coarse pointers, so
+vertical scroll is never hijacked on touch.
+
+`ParallaxImage` accepts `entrance="settle"` for a slow overscale settle — a
+transform rather than a curtain, so it never holds back Largest Contentful Paint
+on a `priority` image.
 
 ---
 
@@ -158,8 +229,23 @@ Layouts are ratio-locked: every photograph renders inside a fixed
 `aspect-ratio` frame with `next/image` `fill`, so a different crop or
 orientation changes composition but never spacing or CLS.
 
+Art direction is encoded in the registry rather than left to chance:
+
+- `bannerImages` holds the darkest frames in the library, because cream display
+  type sits on them. A high-key image assigned to a banner fails immediately.
+- No photograph appears twice on the same page.
+- `focus` is set wherever a crop would otherwise slice through the subject.
+- `plate: true` marks a cut-out product shot. Retail packshots arrive on flat
+  white, and cropped flush into a cream card that white reads as an unfilled
+  placeholder — so these are contained with an inset and multiplied into the
+  frame's own warm colour, which dissolves the studio background into the plate.
+  A future packshot supplied as a transparent PNG needs no change, since
+  multiply is a no-op over the plate colour.
+
 `public/images/README.md` lists every slot, what consumes it, and the framing
-each one needs.
+each one needs. `node scripts/contact-sheet.mjs` renders a labelled contact
+sheet of the whole library to `public/brand/_contact-sheet.jpg` (git-ignored) so
+the set can be judged for consistency in one look.
 
 ### Replacing the logo
 
@@ -213,8 +299,12 @@ backend exists.
 - Per-route `buildMetadata()` → unique title, description, canonical, Open Graph,
   Twitter card.
 - JSON-LD: `Organization`, `CafeOrCoffeeShop`, `WebSite`, `Menu`, `Product`,
-  `Article`, `BreadcrumbList`, `FAQPage`. `caffeJsonLd` and friends read from
+  `Article`, `BreadcrumbList`, `FAQPage`. `cafeJsonLd` and friends read from
   `config/site.ts`, so structured data never drifts from the visible content.
+- Each `<script type="application/ld+json">` holds **one** JSON document. Several
+  entities go out as a single top-level array via `serialiseJsonLd` — never as
+  concatenated documents, which are not valid JSON and cause the whole block to
+  be discarded.
 - `/schema.jsonld` serves the organisation graph for crawlers.
 - `robots.ts` and `sitemap.ts` generated from the content config.
 
@@ -257,8 +347,11 @@ full measure. `overflow-x: clip` on `body` (which does not create a scroll
 container, so sticky still works) plus ratio-locked media guarantee no
 horizontal scrolling.
 
-Verified with a same-origin iframe harness: 73 route × width combinations from
-320 px to 1920 px, zero unclipped overflow and zero broken images.
+Verified with a same-origin iframe harness: 77 route × width combinations from
+320 px to 1920 px, zero unclipped overflow and zero broken images. The only
+nodes reported as clipped are `sr-only` ones, identically at every width. Body
+copy stays within 96 characters a line at 1920 px, capped by `SectionHeading`'s
+34 / 52 / 64 ch measure scale.
 
 ---
 
@@ -267,11 +360,14 @@ Verified with a same-origin iframe harness: 73 route × width combinations from
 | Check                                          | Result                            |
 | ---------------------------------------------- | --------------------------------- |
 | `npm run build`                                 | 29 routes, all prerendered        |
+| `npm run check:type-tokens`                     | 20 tokens in sync                 |
 | `npm run typecheck` / `npm run lint`            | clean                             |
-| Browser console, 7 section routes                | no errors, no warnings            |
-| Lighthouse a11y / best-practices / SEO, 10 URLs | 100 / 100 / 100                   |
-| Horizontal overflow, 73 route × width samples   | none                              |
-| Hash-link integrity, every route                | none broken                       |
+| Browser console, 9 routes                       | no errors                         |
+| Lighthouse a11y / best-practices / SEO           | 100 / 100 / 100, zero failures    |
+| Horizontal overflow, 77 route × width samples   | none                              |
+| Broken images, 77 samples                       | none                              |
+| JSON-LD parses, 9 routes                        | all valid, correct type per route |
+| Keyboard focus, real `Tab` traversal            | ring correct on every surface     |
 
 ---
 
