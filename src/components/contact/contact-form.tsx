@@ -139,7 +139,7 @@ export function ContactForm() {
           role="status"
           aria-live="polite"
           className={cn(
-            "text-[0.8125rem]",
+            "text-meta",
             status === "error" ? "text-clay-500" : "text-text-muted",
           )}
         >
@@ -151,7 +151,7 @@ export function ContactForm() {
         </p>
       </div>
 
-      <p className="text-[0.75rem] leading-relaxed text-text-muted">
+      <p className="text-caption leading-relaxed text-text-muted">
         This form runs entirely in the browser for now — nothing is transmitted
         yet. Until it is connected to a mail service, please email{" "}
         <a href="mailto:hello@espressly.coffee" className="link-wipe">

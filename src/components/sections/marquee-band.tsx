@@ -7,7 +7,7 @@ export function MarqueeBand() {
     <div className="border-y border-line-light bg-sand-100 py-4 text-ink-900">
       <Marquee
         items={marqueeWords}
-        className="font-sans text-[0.75rem] uppercase tracking-[0.24em] text-ink-900/70"
+        className="font-sans text-caption uppercase tracking-[0.24em] text-ink-900/70"
       />
     </div>
   );
@@ -20,7 +20,7 @@ export function MarqueeBandDark() {
       <Marquee
         items={marqueeWords}
         durationSeconds={44}
-        className="font-sans text-[0.75rem] uppercase tracking-[0.24em] text-cream-100/55"
+        className="font-sans text-caption uppercase tracking-[0.24em] text-cream-100/55"
       />
     </div>
   );

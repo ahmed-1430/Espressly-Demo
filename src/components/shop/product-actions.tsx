@@ -30,10 +30,10 @@ export function ProductActions({
   return (
     <div className={className}>
       <div className="flex items-baseline justify-between gap-4">
-        <span className="text-[1.5rem] display-type tabular-nums text-ink-900">
+        <span className="text-title-lg display-type tabular-nums text-ink-900">
           {formatMoney(product.price)}
         </span>
-        <span className="text-[0.75rem] uppercase tracking-[0.16em] text-text-muted">
+        <span className="text-caption uppercase tracking-[0.16em] text-text-muted">
           Free shipping over €40
         </span>
       </div>
@@ -53,7 +53,7 @@ export function ProductActions({
           </button>
           <span
             aria-live="polite"
-            className="w-8 text-center text-[0.9375rem] tabular-nums text-ink-900"
+            className="w-8 text-center text-body tabular-nums text-ink-900"
           >
             {quantity}
           </span>
@@ -74,7 +74,7 @@ export function ProductActions({
         </Button>
       </div>
 
-      <p className="mt-3 text-[0.8125rem] text-text-muted" aria-live="polite">
+      <p className="mt-3 text-meta text-text-muted" aria-live="polite">
         {added
           ? `${quantity} × ${product.name} is in your bag.`
           : `Tell us your brewer at checkout and we will grind for it.`}

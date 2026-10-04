@@ -93,7 +93,7 @@ export function NewsletterForm({
             if (status !== "idle" && status !== "loading") setState("idle");
           }}
           className={cn(
-            "min-w-0 flex-1 bg-transparent py-2 text-[0.9375rem] outline-none placeholder:text-current/40",
+            "min-w-0 flex-1 bg-transparent py-2 text-body outline-none placeholder:text-current/40",
             light ? "text-cream-100" : "text-ink-900",
           )}
         />
@@ -102,7 +102,7 @@ export function NewsletterForm({
           type="submit"
           disabled={state === "loading" || state === "success"}
           className={cn(
-            "group relative inline-flex h-11 shrink-0 items-center justify-center overflow-hidden rounded-pill px-6 text-[0.8125rem] font-medium tracking-[0.06em] uppercase transition-colors duration-500 disabled:opacity-70",
+            "group relative inline-flex h-11 shrink-0 items-center justify-center overflow-hidden rounded-pill px-6 text-meta font-medium tracking-[0.06em] uppercase transition-colors duration-500 disabled:opacity-70",
             light
               ? "bg-cream-100 text-ink-950 hover:bg-copper-400"
               : "bg-ink-900 text-paper-50 hover:bg-copper-700",
@@ -130,7 +130,7 @@ export function NewsletterForm({
         id={`${id}-status`}
         aria-live="polite"
         className={cn(
-          "mt-3 min-h-[1.25rem] text-[0.8125rem]",
+          "mt-3 min-h-[1.25rem] text-meta",
           state === "error"
             ? "text-clay-500"
             : light

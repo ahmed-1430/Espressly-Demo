@@ -76,7 +76,7 @@ export function SiteHeader() {
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "group relative inline-flex h-10 items-center px-3.5 text-[0.8125rem] font-medium tracking-[0.01em] transition-colors duration-400",
+                        "group relative inline-flex h-10 items-center px-3.5 text-meta font-medium tracking-[0.01em] transition-colors duration-400",
                         solid
                           ? active
                             ? "text-ink-900"
@@ -125,7 +125,7 @@ export function SiteHeader() {
                     exit={{ scale: 0.5, opacity: 0 }}
                     transition={tween(duration.fast, ease.out)}
                     className={cn(
-                      "absolute -right-0.5 -top-0.5 flex size-[1.15rem] items-center justify-center rounded-pill text-[0.625rem] font-semibold tabular-nums",
+                      "absolute -right-0.5 -top-0.5 flex size-[1.15rem] items-center justify-center rounded-pill text-micro font-semibold tabular-nums",
                       solid ? "bg-copper-600 text-paper-25" : "bg-copper-400 text-ink-950",
                     )}
                   >

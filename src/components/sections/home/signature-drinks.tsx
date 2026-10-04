@@ -34,7 +34,7 @@ export function SignatureDrinks() {
             className="lg:col-span-8"
           />
           <div className="flex flex-col gap-6 lg:col-span-4 lg:items-end lg:text-right">
-            <p className="max-w-[46ch] text-[0.9375rem] leading-relaxed text-cream-100/65">
+            <p className="max-w-[46ch] text-body leading-relaxed text-cream-100/65">
               {signature.body}
             </p>
             <ButtonLink href={signature.cta.href} variant="inverse" arrow>
@@ -60,7 +60,7 @@ export function SignatureDrinks() {
         >
           <div className="max-w-[30ch]">
             <p className="eyebrow text-copper-400">Also on the board</p>
-            <p className="mt-5 text-[1.375rem] leading-snug display-type text-cream-100">
+            <p className="mt-5 text-title-md leading-snug display-type text-cream-100">
               Nineteen more, and every one of them is rewritten when the season
               turns.
             </p>

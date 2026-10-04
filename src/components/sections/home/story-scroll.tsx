@@ -85,7 +85,7 @@ export function StoryScroll() {
                         </span>
                         <span
                           className={cn(
-                            "text-[0.75rem] uppercase tracking-[0.2em] transition-colors duration-500",
+                            "text-caption uppercase tracking-[0.2em] transition-colors duration-500",
                             isActive ? "text-copper-700" : "text-text-muted",
                           )}
                         >
@@ -97,7 +97,7 @@ export function StoryScroll() {
                 })}
               </ol>
 
-              <p className="mt-8 hidden max-w-[34ch] text-[0.875rem] leading-relaxed text-text-muted lg:block">
+              <p className="mt-8 hidden max-w-[34ch] text-body-sm leading-relaxed text-text-muted lg:block">
                 Scrolling is the only interaction this section needs. Select a
                 stage above to jump straight to it.
               </p>
@@ -115,7 +115,7 @@ export function StoryScroll() {
                 className="flex min-h-[74vh] flex-col justify-center gap-6 border-t border-line-light py-14 first:border-t-0 first:pt-0 lg:py-20"
               >
                 <div className="flex items-baseline gap-4">
-                  <span className="text-[0.75rem] tabular-nums tracking-[0.2em] text-copper-700">
+                  <span className="text-caption tabular-nums tracking-[0.2em] text-copper-700">
                     {chapter.chapter}
                   </span>
                   <span aria-hidden className="h-px flex-1 bg-line-light" />
@@ -134,7 +134,7 @@ export function StoryScroll() {
 
                 <div className="flex flex-col gap-4 lg:max-w-[54ch]">
                   <h3 className="text-display-2xs text-ink-900">{chapter.title}</h3>
-                  <p className="text-[0.9375rem] leading-relaxed text-text-body sm:text-[1rem]">
+                  <p className="text-body leading-relaxed text-text-body sm:text-body-md">
                     {chapter.copy}
                   </p>
                 </div>

@@ -10,10 +10,10 @@ import type {
 import { cn } from "@/lib/cn";
 
 const fieldShell =
-  "peer w-full rounded-card border border-ink-900/15 bg-paper-25 px-4 py-3.5 text-[0.9375rem] text-ink-900 outline-none transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] placeholder:text-text-muted/70 hover:border-ink-900/30 focus:border-copper-600 focus:ring-1 focus:ring-copper-600 disabled:cursor-not-allowed disabled:opacity-60 aria-[invalid=true]:border-clay-500";
+  "peer w-full rounded-card border border-ink-900/15 bg-paper-25 px-4 py-3.5 text-body text-ink-900 outline-none transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] placeholder:text-text-muted/70 hover:border-ink-900/30 focus:border-copper-600 focus:ring-1 focus:ring-copper-600 disabled:cursor-not-allowed disabled:opacity-60 aria-[invalid=true]:border-clay-500";
 
 const labelBase =
-  "block text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-text-muted";
+  "block text-eyebrow font-medium uppercase tracking-[0.2em] text-text-muted";
 
 type FieldShellProps = {
   id: string;
@@ -47,11 +47,11 @@ function FieldShell({
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="text-[0.8125rem] text-clay-500" role="alert">
+        <p id={`${id}-error`} className="text-meta text-clay-500" role="alert">
           {error}
         </p>
       ) : hint ? (
-        <p id={`${id}-hint`} className="text-[0.8125rem] text-text-muted">
+        <p id={`${id}-hint`} className="text-meta text-text-muted">
           {hint}
         </p>
       ) : null}

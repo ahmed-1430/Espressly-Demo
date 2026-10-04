@@ -64,7 +64,7 @@ export function BlogArchive() {
               onClick={() => setFilter(option.id)}
               aria-pressed={isActive}
               className={cn(
-                "inline-flex h-10 shrink-0 items-center rounded-pill border px-5 text-[0.8125rem] font-medium transition-colors duration-400",
+                "inline-flex h-10 shrink-0 items-center rounded-pill border px-5 text-meta font-medium transition-colors duration-400",
                 isActive
                   ? "border-ink-900 bg-ink-900 text-paper-50"
                   : "border-ink-900/15 text-text-muted hover:border-ink-900/40 hover:text-ink-900",
@@ -92,7 +92,7 @@ export function BlogArchive() {
           {lead ? (
             <BlogCard post={lead} variant="hero" />
           ) : (
-            <p className="text-[0.9375rem] text-text-muted">
+            <p className="text-body text-text-muted">
               Nothing published in this category yet.
             </p>
           )}

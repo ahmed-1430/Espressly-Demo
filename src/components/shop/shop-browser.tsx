@@ -81,7 +81,7 @@ export function ShopBrowser() {
                 onClick={() => setFilter(option.id)}
                 aria-pressed={isActive}
                 className={cn(
-                  "relative inline-flex h-10 shrink-0 items-center rounded-pill border px-5 text-[0.8125rem] font-medium tracking-[0.01em] transition-colors duration-400",
+                  "relative inline-flex h-10 shrink-0 items-center rounded-pill border px-5 text-meta font-medium tracking-[0.01em] transition-colors duration-400",
                   isActive
                     ? "border-ink-900 bg-ink-900 text-paper-50"
                     : "border-ink-900/15 text-text-muted hover:border-ink-900/40 hover:text-ink-900",
@@ -96,7 +96,7 @@ export function ShopBrowser() {
         <div className="flex items-center gap-4">
           <label
             htmlFor="shop-sort"
-            className="shrink-0 text-[0.75rem] uppercase tracking-[0.18em] text-text-muted"
+            className="shrink-0 text-caption uppercase tracking-[0.18em] text-text-muted"
           >
             Sort
           </label>
@@ -104,7 +104,7 @@ export function ShopBrowser() {
             id="shop-sort"
             value={sort}
             onChange={(event) => setSort(event.target.value as SortKey)}
-            className="h-10 rounded-pill border border-ink-900/15 bg-paper-25 px-4 pr-9 text-[0.8125rem] text-ink-900 outline-none transition-colors duration-300 hover:border-ink-900/40 focus:border-copper-600"
+            className="h-10 rounded-pill border border-ink-900/15 bg-paper-25 px-4 pr-9 text-meta text-ink-900 outline-none transition-colors duration-300 hover:border-ink-900/40 focus:border-copper-600"
           >
             {sorts.map((option) => (
               <option key={option.id} value={option.id}>
@@ -116,7 +116,7 @@ export function ShopBrowser() {
       </div>
 
       {/* Category framing line */}
-      <p className="mt-8 max-w-[64ch] text-[0.9375rem] leading-relaxed text-text-body">
+      <p className="mt-8 max-w-[64ch] text-body leading-relaxed text-text-body">
         {activeCategory?.description ??
           "Ten products, none of them filler. Everything is roasted in twelve-kilo batches, ground to your brewer at no extra charge, and shipped in plastic-free packaging."}
       </p>
@@ -145,7 +145,7 @@ export function ShopBrowser() {
       </motion.div>
 
       {visible.length === 0 ? (
-        <p className="mt-16 text-center text-[0.9375rem] text-text-muted">
+        <p className="mt-16 text-center text-body text-text-muted">
           Nothing in this category yet.
         </p>
       ) : null}

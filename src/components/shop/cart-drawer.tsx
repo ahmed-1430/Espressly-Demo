@@ -94,8 +94,8 @@ export function CartDrawer() {
           >
             <header className="flex items-center justify-between border-b border-line-light px-6 py-5">
               <div className="flex items-baseline gap-3">
-                <h2 className="text-[1.375rem] display-type text-ink-900">Your bag</h2>
-                <span className="text-[0.75rem] uppercase tracking-[0.2em] text-text-muted">
+                <h2 className="text-title-md display-type text-ink-900">Your bag</h2>
+                <span className="text-caption uppercase tracking-[0.2em] text-text-muted">
                   {lines.length > 0 ? `${lines.length} ${lines.length === 1 ? "item" : "items"}` : "Empty"}
                 </span>
               </div>
@@ -122,8 +122,8 @@ export function CartDrawer() {
                   placeholderTone="light"
                 />
                 <div className="space-y-2">
-                  <p className="text-[1.125rem] display-type text-ink-900">Nothing in the bag yet</p>
-                  <p className="text-[0.875rem] text-text-muted">
+                  <p className="text-title-xs display-type text-ink-900">Nothing in the bag yet</p>
+                  <p className="text-body-sm text-text-muted">
                     Whole bean, ground to your brewer, roasted the week it is ordered.
                   </p>
                 </div>
@@ -162,11 +162,11 @@ export function CartDrawer() {
                           <Link
                             href={`/shop/${line.slug}`}
                             onClick={close}
-                            className="text-[0.9375rem] display-type text-ink-900 hover:text-copper-700"
+                            className="text-body display-type text-ink-900 hover:text-copper-700"
                           >
                             {line.name}
                           </Link>
-                          <span className="shrink-0 text-[0.875rem] text-ink-900">
+                          <span className="shrink-0 text-body-sm text-ink-900">
                             {formatMoney(line.price * line.quantity)}
                           </span>
                         </div>
@@ -185,7 +185,7 @@ export function CartDrawer() {
                             </button>
                             <span
                               aria-live="polite"
-                              className="min-w-7 text-center text-[0.8125rem] tabular-nums text-ink-900"
+                              className="min-w-7 text-center text-meta tabular-nums text-ink-900"
                             >
                               {line.quantity}
                             </span>
@@ -204,7 +204,7 @@ export function CartDrawer() {
                           <button
                             type="button"
                             onClick={() => remove(line.slug)}
-                            className="text-[0.75rem] uppercase tracking-[0.16em] text-text-muted underline decoration-line-light underline-offset-4 transition-colors hover:text-clay-500"
+                            className="text-caption uppercase tracking-[0.16em] text-text-muted underline decoration-line-light underline-offset-4 transition-colors hover:text-clay-500"
                           >
                             Remove
                             <span className="sr-only">{` ${line.name} from bag`}</span>
@@ -218,11 +218,11 @@ export function CartDrawer() {
                 <footer className="border-t border-line-light px-6 py-5">
                   <div className="flex items-baseline justify-between">
                     <span className="eyebrow text-text-muted">Subtotal</span>
-                    <span className="text-[1.375rem] display-type tabular-nums text-ink-900">
+                    <span className="text-title-md display-type tabular-nums text-ink-900">
                       {formatMoney(subtotal)}
                     </span>
                   </div>
-                  <p className="mt-2 text-[0.8125rem] text-text-muted">
+                  <p className="mt-2 text-meta text-text-muted">
                     Shipping and tax calculated at checkout. Ground to your brewer at no cost.
                   </p>
                   <div className="mt-5 flex flex-col gap-2">
@@ -233,7 +233,7 @@ export function CartDrawer() {
                       Empty the bag
                     </Button>
                   </div>
-                  <p className="mt-3 text-center text-[0.75rem] text-text-muted">
+                  <p className="mt-3 text-center text-caption text-text-muted">
                     Front-end demo basket — no payment is taken.
                   </p>
                 </footer>

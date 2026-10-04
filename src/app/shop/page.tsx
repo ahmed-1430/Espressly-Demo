@@ -125,10 +125,10 @@ function StaggeredPromises() {
           delay={index * 0.08}
           className="border-t border-ink-900/15 pt-5"
         >
-          <p className="text-[1.125rem] leading-snug display-type text-ink-900">
+          <p className="text-title-xs leading-snug display-type text-ink-900">
             {promise.title}
           </p>
-          <p className="mt-3 text-[0.875rem] leading-relaxed text-text-body">
+          <p className="mt-3 text-body-sm leading-relaxed text-text-body">
             {promise.body}
           </p>
         </Reveal>

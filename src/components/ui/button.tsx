@@ -19,9 +19,9 @@ const base =
   "group/btn relative inline-flex select-none items-center justify-center gap-3 rounded-pill font-sans font-medium tracking-[0.02em] transition-[color,background-color,border-color,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] disabled:pointer-events-none disabled:opacity-50";
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-10 px-5 text-[0.8125rem]",
-  md: "h-12 px-7 text-[0.875rem]",
-  lg: "h-14 px-9 text-[0.9375rem]",
+  sm: "h-10 px-5 text-meta",
+  md: "h-12 px-7 text-body-sm",
+  lg: "h-14 px-9 text-body",
 };
 
 const variants: Record<ButtonVariant, string> = {

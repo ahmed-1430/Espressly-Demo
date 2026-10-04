@@ -54,7 +54,7 @@ export default async function ArticlePage({ params }: Params) {
       <Section tone="light" spacing="flush" className="pt-32 pb-14 sm:pt-36 sm:pb-20">
         <Container width="copy">
           <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+            <ol className="flex flex-wrap items-center gap-x-3 gap-y-1 text-caption uppercase tracking-[0.18em] text-text-muted">
               <li>
                 <Link href="/blog" className="transition-colors hover:text-ink-900">
                   The Dispatch
@@ -77,13 +77,13 @@ export default async function ArticlePage({ params }: Params) {
             <div className="flex items-center gap-3">
               <span
                 aria-hidden
-                className="flex size-10 items-center justify-center rounded-pill bg-ink-900 font-sans text-[0.75rem] font-semibold tracking-[0.06em] text-cream-100"
+                className="flex size-10 items-center justify-center rounded-pill bg-ink-900 font-sans text-caption font-semibold tracking-[0.06em] text-cream-100"
               >
                 {post.author.initials}
               </span>
               <span className="flex flex-col">
-                <span className="text-[0.875rem] text-ink-900">{post.author.name}</span>
-                <span className="text-[0.75rem] uppercase tracking-[0.14em] text-text-muted">
+                <span className="text-body-sm text-ink-900">{post.author.name}</span>
+                <span className="text-caption uppercase tracking-[0.14em] text-text-muted">
                   {post.author.role}
                 </span>
               </span>
@@ -91,7 +91,7 @@ export default async function ArticlePage({ params }: Params) {
 
             <span aria-hidden className="h-6 w-px bg-line-light" />
 
-            <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.8125rem] text-text-muted">
+            <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-meta text-text-muted">
               <time dateTime={post.date}>{formatIsoDate(post.date)}</time>
               <span aria-hidden>·</span>
               <span>{post.readingTime}</span>
@@ -121,24 +121,24 @@ export default async function ArticlePage({ params }: Params) {
               switch (block.type) {
                 case "heading":
                   return (
-                    <Reveal key={key} as="h2" className="mt-6 text-[1.5rem] leading-snug display-type text-ink-900 sm:text-[1.75rem]">
+                    <Reveal key={key} as="h2" className="mt-6 text-title-lg leading-snug display-type text-ink-900 sm:text-title-2xl">
                       {block.text}
                     </Reveal>
                   );
                 case "paragraph":
                   return (
-                    <Reveal key={key} as="p" className="text-[1.0625rem] leading-[1.75] text-text-body">
+                    <Reveal key={key} as="p" className="text-body-lg leading-[1.75] text-text-body">
                       {block.text}
                     </Reveal>
                   );
                 case "quote":
                   return (
                     <Reveal key={key} as="blockquote" className="my-4 border-l border-copper-600 pl-6">
-                      <p className="text-[1.25rem] leading-snug display-type text-ink-900 sm:text-[1.5rem]">
+                      <p className="text-title-sm leading-snug display-type text-ink-900 sm:text-title-lg">
                         “{block.text}”
                       </p>
                       {block.attribution ? (
-                        <footer className="mt-4 text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+                        <footer className="mt-4 text-caption uppercase tracking-[0.18em] text-text-muted">
                           {block.attribution}
                         </footer>
                       ) : null}
@@ -148,7 +148,7 @@ export default async function ArticlePage({ params }: Params) {
                   return (
                     <Reveal key={key} as="ul" className="flex flex-col gap-3">
                       {block.items.map((item) => (
-                        <li key={item} className="flex items-start gap-3 text-[1rem] leading-relaxed text-text-body">
+                        <li key={item} className="flex items-start gap-3 text-body-md leading-relaxed text-text-body">
                           <span aria-hidden className="mt-3 size-1 shrink-0 rotate-45 bg-copper-600" />
                           <span>{item}</span>
                         </li>
@@ -162,7 +162,7 @@ export default async function ArticlePage({ params }: Params) {
           </div>
 
           <div className="mt-14 flex flex-wrap items-center gap-3 border-t border-line-light pt-8">
-            <span className="text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+            <span className="text-caption uppercase tracking-[0.18em] text-text-muted">
               Tagged
             </span>
             {post.tags.map((tag) => (
@@ -177,10 +177,10 @@ export default async function ArticlePage({ params }: Params) {
         <Container>
           <nav aria-label="More articles" className="grid gap-8 sm:grid-cols-2">
             <Link href={`/blog/${previous.slug}`} className="group flex flex-col gap-3">
-              <span className="text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+              <span className="text-caption uppercase tracking-[0.18em] text-text-muted">
                 ← Previous
               </span>
-              <span className="text-[1.25rem] leading-snug display-type text-ink-900 transition-colors duration-300 group-hover:text-copper-700 sm:text-[1.5rem]">
+              <span className="text-title-sm leading-snug display-type text-ink-900 transition-colors duration-300 group-hover:text-copper-700 sm:text-title-lg">
                 {previous.title}
               </span>
             </Link>
@@ -188,10 +188,10 @@ export default async function ArticlePage({ params }: Params) {
               href={`/blog/${next.slug}`}
               className="group flex flex-col gap-3 sm:items-end sm:text-right"
             >
-              <span className="text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+              <span className="text-caption uppercase tracking-[0.18em] text-text-muted">
                 Next →
               </span>
-              <span className="text-[1.25rem] leading-snug display-type text-ink-900 transition-colors duration-300 group-hover:text-copper-700 sm:text-[1.5rem]">
+              <span className="text-title-sm leading-snug display-type text-ink-900 transition-colors duration-300 group-hover:text-copper-700 sm:text-title-lg">
                 {next.title}
               </span>
             </Link>
@@ -211,7 +211,7 @@ export default async function ArticlePage({ params }: Params) {
             </div>
             <Link
               href="/blog"
-              className="shrink-0 text-[0.8125rem] uppercase tracking-[0.18em] text-ink-900"
+              className="shrink-0 text-meta uppercase tracking-[0.18em] text-ink-900"
             >
               <span className="link-wipe">All articles</span>
             </Link>

@@ -93,15 +93,15 @@ export default function WhatWeOfferPage() {
                   quality={76}
                 />
                 <div className="flex items-baseline gap-4">
-                  <span className="text-[0.75rem] tabular-nums tracking-[0.24em] text-copper-400">
+                  <span className="text-caption tabular-nums tracking-[0.24em] text-copper-400">
                     {chapter.number}
                   </span>
                   <span aria-hidden className="h-px flex-1 bg-cream-100/20" />
                 </div>
-                <h3 className="text-[1.375rem] leading-snug display-type text-cream-100 sm:text-[1.625rem]">
+                <h3 className="text-title-md leading-snug display-type text-cream-100 sm:text-title-xl">
                   {chapter.title}
                 </h3>
-                <p className="text-[0.9375rem] leading-relaxed text-cream-100/65">
+                <p className="text-body leading-relaxed text-cream-100/65">
                   {chapter.copy}
                 </p>
               </StaggerItem>
@@ -135,15 +135,15 @@ export default function WhatWeOfferPage() {
             >
               <div className="flex flex-col gap-5">
                 <p className="eyebrow text-copper-700">{band.kicker}</p>
-                <h3 className="text-[1.5rem] leading-tight display-type text-ink-900 sm:text-[1.875rem]">
+                <h3 className="text-title-lg leading-tight display-type text-ink-900 sm:text-title-3xl">
                   {band.title}
                 </h3>
-                <p className="max-w-[48ch] text-[0.9375rem] leading-relaxed text-text-body">
+                <p className="max-w-[48ch] text-body leading-relaxed text-text-body">
                   {band.copy}
                 </p>
               </div>
 
-              <ul className="grid gap-2.5 border-t border-line-light pt-6 text-[0.875rem] text-text-body">
+              <ul className="grid gap-2.5 border-t border-line-light pt-6 text-body-sm text-text-body">
                 {band.points.map((point) => (
                   <li key={point} className="flex items-start gap-3">
                     <span aria-hidden className="mt-2 size-1 shrink-0 rotate-45 bg-copper-600" />
@@ -159,7 +159,7 @@ export default function WhatWeOfferPage() {
             className="flex h-full w-[86vw] shrink-0 snap-start flex-col justify-center gap-6 bg-espresso-900 p-7 text-center sm:w-[32rem] lg:w-[38rem] lg:p-10"
           >
             <p className="eyebrow text-copper-400">Next step</p>
-            <p className="text-[1.5rem] leading-snug display-type text-cream-100 sm:text-[1.875rem]">
+            <p className="text-title-lg leading-snug display-type text-cream-100 sm:text-title-3xl">
               Tell us what you are trying to fix, and we will tell you whether
               we are the right people for it.
             </p>
@@ -188,7 +188,7 @@ export default function WhatWeOfferPage() {
                   {services
                     .find((service) => service.id === "private-events")
                     ?.includes.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-[0.875rem] text-text-body">
+                      <li key={item} className="flex items-start gap-3 text-body-sm text-text-body">
                         <svg
                           aria-hidden
                           viewBox="0 0 24 24"

@@ -148,20 +148,20 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                       aria-current={active ? "page" : undefined}
                       className="group flex items-baseline gap-4 py-4"
                     >
-                      <span className="w-6 shrink-0 text-[0.6875rem] tabular-nums text-copper-400/70">
+                      <span className="w-6 shrink-0 text-eyebrow tabular-nums text-copper-400/70">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <span className="flex-1">
                         <span
                           className={cn(
-                            "block text-[1.5rem] leading-tight display-type transition-colors duration-300",
+                            "block text-title-lg leading-tight display-type transition-colors duration-300",
                             active ? "text-copper-300" : "text-cream-100",
                           )}
                         >
                           {item.label}
                         </span>
                         {item.description ? (
-                          <span className="mt-1 block max-w-[28ch] text-[0.8125rem] leading-relaxed text-cream-100/55">
+                          <span className="mt-1 block max-w-[28ch] text-meta leading-relaxed text-cream-100/55">
                             {item.description}
                           </span>
                         ) : null}
@@ -190,7 +190,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             transition={tween(duration.slow, ease.out, 0.32)}
             className="mt-auto space-y-5 border-t border-cream-100/10 px-6 py-6"
           >
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.8125rem] text-cream-100/70">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-meta text-cream-100/70">
               <a href={`tel:${contact.phoneHref}`} className="link-wipe">
                 {contact.phone}
               </a>

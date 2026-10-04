@@ -20,7 +20,7 @@ export function Badge({ children, className, tone = "copper", size = "sm" }: Bad
     <span
       className={cn(
         "inline-flex items-center rounded-pill font-sans font-medium uppercase tracking-[0.18em] ring-1 ring-inset",
-        size === "sm" ? "px-2.5 py-1 text-[0.625rem]" : "px-3 py-1.5 text-[0.6875rem]",
+        size === "sm" ? "px-2.5 py-1 text-micro" : "px-3 py-1.5 text-eyebrow",
         tones[tone],
         className,
       )}
@@ -40,7 +40,7 @@ export function Tag({ children, className }: TagProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-pill border border-ink-900/12 px-2.5 py-1 text-[0.6875rem] uppercase tracking-[0.16em] text-text-muted",
+        "inline-flex items-center rounded-pill border border-ink-900/12 px-2.5 py-1 text-eyebrow uppercase tracking-[0.16em] text-text-muted",
         className,
       )}
     >

@@ -60,10 +60,10 @@ export default function MenuPage() {
                 <div key={highlight.id} className="border-t border-line-light pt-5">
                   <dt className="eyebrow text-copper-700">{highlight.label}</dt>
                   <dd className="mt-3 flex flex-col gap-2">
-                    <span className="text-[1.125rem] display-type text-ink-900">
+                    <span className="text-title-xs display-type text-ink-900">
                       {highlight.value}
                     </span>
-                    <span className="text-[0.8125rem] leading-relaxed text-text-muted">
+                    <span className="text-meta leading-relaxed text-text-muted">
                       {highlight.detail}
                     </span>
                   </dd>
@@ -147,7 +147,7 @@ export default function MenuPage() {
         <Container>
           <div className="flex flex-col items-center gap-5 text-center">
             <Eyebrow>Still deciding?</Eyebrow>
-            <p className="max-w-[52ch] text-[0.9375rem] leading-relaxed text-text-body">
+            <p className="max-w-[52ch] text-body leading-relaxed text-text-body">
               Order ahead from the menu page and skip the counter entirely — it
               is the fastest way to a coffee that is still hot when you reach
               the door.

@@ -31,7 +31,7 @@ export function NewsletterCta() {
           <div className="lg:col-span-5 lg:col-start-8 lg:pt-16">
             <ul className="flex flex-col gap-3">
               {newsletter.perks.map((perk) => (
-                <li key={perk} className="flex items-start gap-3 text-[0.9375rem] text-text-body">
+                <li key={perk} className="flex items-start gap-3 text-body text-text-body">
                   <svg
                     aria-hidden
                     viewBox="0 0 24 24"
@@ -65,7 +65,7 @@ export function NewsletterCta() {
             "Roasted in small batches",
           ]}
           durationSeconds={30}
-          className="font-sans text-[0.75rem] uppercase tracking-[0.24em] text-text-muted"
+          className="font-sans text-caption uppercase tracking-[0.24em] text-text-muted"
         />
       </div>
     </Section>

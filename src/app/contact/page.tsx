@@ -61,7 +61,7 @@ export default function ContactPage() {
               />
 
               <Reveal delay={0.08}>
-                <address className="mt-8 flex flex-col gap-1 text-[0.9375rem] not-italic text-text-body">
+                <address className="mt-8 flex flex-col gap-1 text-body not-italic text-text-body">
                   <span>{contact.address.street}</span>
                   <span>
                     {contact.address.locality}, {contact.address.region}
@@ -86,10 +86,10 @@ export default function ContactPage() {
                 <dl className="mt-10 grid gap-x-8 gap-y-5 border-t border-line-light pt-8 sm:grid-cols-2">
                   {contactCopy.visit.directions.map((item) => (
                     <div key={item.label} className="flex flex-col gap-1">
-                      <dt className="text-[0.6875rem] uppercase tracking-[0.2em] text-copper-700">
+                      <dt className="text-eyebrow uppercase tracking-[0.2em] text-copper-700">
                         {item.label}
                       </dt>
-                      <dd className="text-[0.875rem] leading-relaxed text-text-body">
+                      <dd className="text-body-sm leading-relaxed text-text-body">
                         {item.value}
                       </dd>
                     </div>
@@ -123,7 +123,7 @@ export default function ContactPage() {
                       <circle cx="12" cy="10" r="2.4" />
                     </svg>
                   </span>
-                  <p className="max-w-[28ch] text-[0.875rem] leading-relaxed text-cream-100/85">
+                  <p className="max-w-[28ch] text-body-sm leading-relaxed text-cream-100/85">
                     {contactCopy.visit.mapNote}
                   </p>
                   <ButtonLink
@@ -165,20 +165,20 @@ export default function ContactPage() {
                       key={row.days}
                       className="flex items-baseline justify-between gap-6 border-b border-ink-900/15 py-5"
                     >
-                      <dt className="flex items-center gap-3 text-[0.9375rem] text-ink-900">
+                      <dt className="flex items-center gap-3 text-body text-ink-900">
                         {row.days}
                         {isToday ? (
-                          <span className="rounded-pill bg-copper-600/12 px-2 py-0.5 text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-copper-700">
+                          <span className="rounded-pill bg-copper-600/12 px-2 py-0.5 text-micro font-semibold uppercase tracking-[0.16em] text-copper-700">
                             Today
                           </span>
                         ) : null}
                       </dt>
-                      <dd className="tabular-nums text-[0.9375rem] text-text-body">{row.label}</dd>
+                      <dd className="tabular-nums text-body text-text-body">{row.label}</dd>
                     </div>
                   );
                 })}
               </dl>
-              <p className="mt-5 text-[0.8125rem] text-text-muted">
+              <p className="mt-5 text-meta text-text-muted">
                 {contactCopy.hoursNote}
               </p>
             </div>
@@ -202,7 +202,7 @@ export default function ContactPage() {
 
               <div className="mt-10 border-t border-line-light pt-8">
                 <Eyebrow>Direct</Eyebrow>
-                <div className="mt-4 flex flex-col gap-2 text-[0.9375rem]">
+                <div className="mt-4 flex flex-col gap-2 text-body">
                   <a href={`mailto:${contact.email}`} className="link-wipe w-fit text-ink-900">
                     {contact.email}
                   </a>
@@ -210,7 +210,7 @@ export default function ContactPage() {
                     {contact.phone}
                   </a>
                 </div>
-                <p className="mt-3 text-[0.8125rem] text-text-muted">
+                <p className="mt-3 text-meta text-text-muted">
                   Press enquiries:{" "}
                   <a href={`mailto:${contact.pressEmail}`} className="link-wipe">
                     {contact.pressEmail}

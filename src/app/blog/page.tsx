@@ -48,7 +48,7 @@ export default function BlogPage() {
               <h2 className="mt-5 text-display-2xs text-ink-900">
                 Every article, in order of publication
               </h2>
-              <p className="mt-5 max-w-[38ch] text-[0.9375rem] leading-relaxed text-text-body">
+              <p className="mt-5 max-w-[38ch] text-body leading-relaxed text-text-body">
                 One letter a month, plus new pieces whenever we have something
                 worth arguing about.
               </p>
@@ -65,14 +65,14 @@ export default function BlogPage() {
                     className="group flex items-baseline justify-between gap-6 py-5"
                   >
                     <span className="min-w-0">
-                      <span className="block text-[0.75rem] uppercase tracking-[0.18em] text-copper-700">
+                      <span className="block text-caption uppercase tracking-[0.18em] text-copper-700">
                         {post.category}
                       </span>
-                      <span className="mt-2 block text-[1.0625rem] leading-snug display-type text-ink-900 transition-colors duration-300 group-hover:text-copper-700 sm:text-[1.25rem]">
+                      <span className="mt-2 block text-body-lg leading-snug display-type text-ink-900 transition-colors duration-300 group-hover:text-copper-700 sm:text-title-sm">
                         {post.title}
                       </span>
                     </span>
-                    <span className="shrink-0 text-[0.75rem] uppercase tracking-[0.16em] text-text-muted">
+                    <span className="shrink-0 text-caption uppercase tracking-[0.16em] text-text-muted">
                       {post.readingTime.replace(" read", "")}
                     </span>
                   </a>

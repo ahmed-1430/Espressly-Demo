@@ -108,7 +108,7 @@ export function SectionHeading({
       {body ? (
         <p
           className={cn(
-            "text-[0.9375rem] leading-relaxed sm:text-base",
+            "text-body leading-relaxed sm:text-body-md",
             bodyWidths[bodyWidth],
             tone === "dark" ? "text-text-body" : "text-text-inverse-muted",
           )}

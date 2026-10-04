@@ -52,7 +52,7 @@ export default function AboutPage() {
             </div>
 
             <div className="lg:col-span-7 lg:col-start-6">
-              <div className="flex flex-col gap-6 text-[1.0625rem] leading-relaxed text-text-body">
+              <div className="flex flex-col gap-6 text-body-lg leading-relaxed text-text-body">
                 {about.story.body.map((paragraph) => (
                   <Reveal key={paragraph.slice(0, 24)} as="p">
                     {paragraph}
@@ -62,10 +62,10 @@ export default function AboutPage() {
 
               <Reveal delay={0.1}>
                 <blockquote className="mt-12 border-l border-copper-600 pl-6">
-                  <p className="text-[1.25rem] leading-snug display-type text-ink-900 sm:text-[1.75rem]">
+                  <p className="text-title-sm leading-snug display-type text-ink-900 sm:text-title-2xl">
                     “{about.story.pullQuote}”
                   </p>
-                  <footer className="mt-5 text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+                  <footer className="mt-5 text-caption uppercase tracking-[0.18em] text-text-muted">
                     {about.story.attribution}
                   </footer>
                 </blockquote>
@@ -110,10 +110,10 @@ export default function AboutPage() {
                 as="li"
                 className="flex flex-col gap-3 border-t border-cream-100/20 pt-5"
               >
-                <span className="text-[1.25rem] display-type tabular-nums text-copper-400">
+                <span className="text-title-sm display-type tabular-nums text-copper-400">
                   {entry.year}
                 </span>
-                <span className="text-[0.875rem] leading-relaxed text-cream-100/70">
+                <span className="text-body-sm leading-relaxed text-cream-100/70">
                   {entry.event}
                 </span>
               </StaggerItem>
@@ -145,15 +145,15 @@ export default function AboutPage() {
                 className="flex flex-col gap-4 border-t border-line-light pt-7"
               >
                 <div className="flex items-baseline justify-between gap-4">
-                  <span className="text-[0.75rem] tabular-nums tracking-[0.2em] text-copper-700">
+                  <span className="text-caption tabular-nums tracking-[0.2em] text-copper-700">
                     {value.index}
                   </span>
                   <span aria-hidden className="h-px flex-1 bg-line-light" />
                 </div>
-                <h3 className="text-[1.375rem] leading-snug display-type text-ink-900 sm:text-[1.625rem]">
+                <h3 className="text-title-md leading-snug display-type text-ink-900 sm:text-title-xl">
                   {value.title}
                 </h3>
-                <p className="max-w-[44ch] text-[0.9375rem] leading-relaxed text-text-body">
+                <p className="max-w-[44ch] text-body leading-relaxed text-text-body">
                   {value.body}
                 </p>
               </StaggerItem>
@@ -179,7 +179,7 @@ export default function AboutPage() {
               <Reveal delay={0.08}>
                 <ul className="mt-9 grid gap-3 sm:grid-cols-2">
                   {about.sourcing.points.map((point) => (
-                    <li key={point} className="flex items-start gap-3 text-[0.875rem] text-text-body">
+                    <li key={point} className="flex items-start gap-3 text-body-sm text-text-body">
                       <svg
                         aria-hidden
                         viewBox="0 0 24 24"
@@ -234,7 +234,7 @@ export default function AboutPage() {
               <Reveal delay={0.08}>
                 <ul className="mt-9 grid gap-3 sm:grid-cols-2">
                   {about.roasting.points.map((point) => (
-                    <li key={point} className="flex items-start gap-3 text-[0.875rem] text-text-body">
+                    <li key={point} className="flex items-start gap-3 text-body-sm text-text-body">
                       <svg
                         aria-hidden
                         viewBox="0 0 24 24"
@@ -271,7 +271,7 @@ export default function AboutPage() {
                   {about.sustainability.points.map((point) => (
                     <li
                       key={point}
-                      className="flex items-start gap-3 text-[0.875rem] leading-relaxed text-cream-100/70"
+                      className="flex items-start gap-3 text-body-sm leading-relaxed text-cream-100/70"
                     >
                       <span aria-hidden className="mt-2 size-1 shrink-0 rotate-45 bg-copper-400" />
                       <span>{point}</span>
@@ -286,7 +286,7 @@ export default function AboutPage() {
                 <p className="text-[clamp(2.75rem,5vw,3.75rem)] leading-none display-type tabular-nums text-cream-100">
                   {about.sustainability.stat.value}
                 </p>
-                <p className="mt-4 text-[0.875rem] leading-relaxed text-cream-100/65">
+                <p className="mt-4 text-body-sm leading-relaxed text-cream-100/65">
                   {about.sustainability.stat.label}
                 </p>
               </div>
@@ -319,7 +319,7 @@ export default function AboutPage() {
               >
                 <span
                   aria-hidden
-                  className="flex size-14 items-center justify-center rounded-pill bg-ink-900 font-sans text-[0.9375rem] font-semibold tracking-[0.06em] text-cream-100"
+                  className="flex size-14 items-center justify-center rounded-pill bg-ink-900 font-sans text-body font-semibold tracking-[0.06em] text-cream-100"
                 >
                   {person.name
                     .split(" ")
@@ -327,12 +327,12 @@ export default function AboutPage() {
                     .join("")}
                 </span>
                 <div>
-                  <h3 className="text-[1.25rem] display-type text-ink-900">{person.name}</h3>
-                  <p className="mt-1 text-[0.75rem] uppercase tracking-[0.18em] text-copper-700">
+                  <h3 className="text-title-sm display-type text-ink-900">{person.name}</h3>
+                  <p className="mt-1 text-caption uppercase tracking-[0.18em] text-copper-700">
                     {person.role}
                   </p>
                 </div>
-                <p className="text-[0.875rem] leading-relaxed text-text-body">{person.bio}</p>
+                <p className="text-body-sm leading-relaxed text-text-body">{person.bio}</p>
               </StaggerItem>
             ))}
           </Stagger>
@@ -362,10 +362,10 @@ export default function AboutPage() {
                   as="li"
                   className="border-t border-ink-900/15 py-6 first:border-t-0 first:pt-0"
                 >
-                  <h3 className="text-[1.125rem] leading-snug display-type text-ink-900 sm:text-[1.3125rem]">
+                  <h3 className="text-title-xs leading-snug display-type text-ink-900 sm:text-title-md">
                     {item.question}
                   </h3>
-                  <p className="mt-3 max-w-[60ch] text-[0.9375rem] leading-relaxed text-text-body">
+                  <p className="mt-3 max-w-[60ch] text-body leading-relaxed text-text-body">
                     {item.answer}
                   </p>
                 </StaggerItem>

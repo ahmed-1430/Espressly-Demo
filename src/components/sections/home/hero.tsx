@@ -92,10 +92,10 @@ export function Hero() {
                 />
                 <div className="flex min-w-0 flex-1 flex-col justify-center gap-1.5 pr-3">
                   <p className="eyebrow text-copper-400">{hero.plate.kicker}</p>
-                  <p className="truncate text-[1.125rem] display-type text-cream-100">
+                  <p className="truncate text-title-xs display-type text-cream-100">
                     {hero.plate.name}
                   </p>
-                  <p className="text-[0.75rem] uppercase tracking-[0.14em] text-cream-100/55">
+                  <p className="text-caption uppercase tracking-[0.14em] text-cream-100/55">
                     {hero.plate.meta}
                   </p>
                 </div>
@@ -110,12 +110,12 @@ export function Hero() {
             {hero.rail.map((item) => (
               <div key={item.label}>
                 <dt className="eyebrow text-cream-100/55">{item.label}</dt>
-                <dd className="mt-1.5 text-[0.875rem] text-cream-100/85">{item.value}</dd>
+                <dd className="mt-1.5 text-body-sm text-cream-100/85">{item.value}</dd>
               </div>
             ))}
           </dl>
 
-          <p className="flex items-center gap-3 text-[0.6875rem] uppercase tracking-[0.24em] text-cream-100/55">
+          <p className="flex items-center gap-3 text-eyebrow uppercase tracking-[0.24em] text-cream-100/55">
             {hero.scrollHint}
             <span aria-hidden className="relative block h-10 w-px overflow-hidden bg-cream-100/20">
               <span className="absolute inset-x-0 top-0 block h-4 bg-copper-400 motion-safe:animate-[scrollcue_2.4s_cubic-bezier(0.16,1,0.3,1)_infinite]" />

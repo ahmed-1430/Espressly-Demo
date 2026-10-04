@@ -112,17 +112,17 @@ export function ProductCard({
           {product.origin ?? product.weight ?? "Espressly"}
         </p>
 
-        <h3 className="mt-3 text-[1.25rem] leading-tight display-type text-ink-900 sm:text-[1.375rem]">
+        <h3 className="mt-3 text-title-sm leading-tight display-type text-ink-900 sm:text-title-md">
           <Link href={`/shop/${product.slug}`} className="transition-colors duration-300 hover:text-copper-700">
             {product.name}
           </Link>
         </h3>
 
-        <p className="mt-3 text-[0.875rem] leading-relaxed text-text-body">{product.description}</p>
+        <p className="mt-3 text-body-sm leading-relaxed text-text-body">{product.description}</p>
 
         <div className="mt-5 flex items-center justify-between gap-4 border-t border-line-light pt-4">
-          <span className="text-[1rem] tabular-nums text-ink-900">{formatMoney(product.price)}</span>
-          <span className="text-[0.75rem] uppercase tracking-[0.16em] text-text-muted">
+          <span className="text-body-md tabular-nums text-ink-900">{formatMoney(product.price)}</span>
+          <span className="text-caption uppercase tracking-[0.16em] text-text-muted">
             {product.weight}
           </span>
         </div>

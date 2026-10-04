@@ -22,12 +22,12 @@ export function Testimonials() {
               as="li"
               className="flex flex-col gap-6 border-t border-line-light pt-7"
             >
-              <blockquote className="text-[1.0625rem] leading-relaxed display-type text-ink-900">
+              <blockquote className="text-body-lg leading-relaxed display-type text-ink-900">
                 “{entry.quote}”
               </blockquote>
               <footer className="mt-auto">
-                <p className="text-[0.875rem] text-ink-900">{entry.name}</p>
-                <p className="mt-1 text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+                <p className="text-body-sm text-ink-900">{entry.name}</p>
+                <p className="mt-1 text-caption uppercase tracking-[0.18em] text-text-muted">
                   {entry.role}
                 </p>
               </footer>

@@ -24,7 +24,7 @@ export function SiteFooter() {
           {/* Wordmark + positioning */}
           <div className="lg:col-span-5">
             <Logo tone="light" height={54} />
-            <p className="mt-7 max-w-[34ch] text-[0.9375rem] leading-relaxed text-cream-100/65">
+            <p className="mt-7 max-w-[34ch] text-body leading-relaxed text-cream-100/65">
               {site.shortDescription}
             </p>
             <SocialLinkList links={socialLinks} tone="light" className="mt-7" />
@@ -34,13 +34,13 @@ export function SiteFooter() {
           <div className="grid gap-10 sm:grid-cols-3 lg:col-span-7 lg:gap-8">
             <div>
               <h2 className="eyebrow text-copper-400">Find us</h2>
-              <address className="mt-5 space-y-1 text-[0.875rem] leading-relaxed not-italic text-cream-100/70">
+              <address className="mt-5 space-y-1 text-body-sm leading-relaxed not-italic text-cream-100/70">
                 <span className="block">{contact.address.street}</span>
                 <span className="block">
                   {contact.address.locality}, {contact.address.postalCode}
                 </span>
               </address>
-              <div className="mt-4 space-y-1 text-[0.875rem]">
+              <div className="mt-4 space-y-1 text-body-sm">
                 <a href={`mailto:${contact.email}`} className="link-wipe block text-cream-100/70">
                   {contact.email}
                 </a>
@@ -52,7 +52,7 @@ export function SiteFooter() {
 
             <div>
               <h2 className="eyebrow text-copper-400">Hours</h2>
-              <dl className="mt-5 space-y-2 text-[0.875rem]">
+              <dl className="mt-5 space-y-2 text-body-sm">
                 {hours.map((row) => (
                   <div key={row.days} className="flex flex-col gap-0.5">
                     <dt className="text-cream-100/60">{row.days}</dt>
@@ -64,7 +64,7 @@ export function SiteFooter() {
 
             <div>
               <h2 className="eyebrow text-copper-400">More</h2>
-              <ul className="mt-5 space-y-2 text-[0.875rem]">
+              <ul className="mt-5 space-y-2 text-body-sm">
                 {footerNav.visit.map((item) => (
                   <li key={item.href}>
                     <Link href={item.href} className="link-wipe text-cream-100/70">
@@ -84,7 +84,7 @@ export function SiteFooter() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-[0.8125rem] uppercase tracking-[0.18em] text-cream-100/55 transition-colors duration-400 hover:text-cream-100"
+                  className="text-meta uppercase tracking-[0.18em] text-cream-100/55 transition-colors duration-400 hover:text-cream-100"
                 >
                   {item.label}
                 </Link>
@@ -96,7 +96,7 @@ export function SiteFooter() {
         {/* Newsletter */}
         <div className="mt-14 grid gap-8 border-t border-cream-100/12 pt-10 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <h2 className="text-[1.5rem] display-type text-cream-100 sm:text-[1.75rem]">
+            <h2 className="text-title-lg display-type text-cream-100 sm:text-title-2xl">
               One letter a month. Four beans in it.
             </h2>
           </div>
@@ -106,7 +106,7 @@ export function SiteFooter() {
         </div>
 
         {/* Legal */}
-        <div className="mt-12 flex flex-col gap-4 border-t border-cream-100/12 pt-8 text-[0.75rem] text-cream-100/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-cream-100/12 pt-8 text-caption text-cream-100/60 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {site.legalName}. All rights reserved.
           </p>

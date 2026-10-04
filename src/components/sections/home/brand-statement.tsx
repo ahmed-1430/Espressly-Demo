@@ -73,7 +73,7 @@ export function BrandStatement() {
 
           <div className="lg:col-span-7 lg:col-start-6">
             <Reveal delay={0.06}>
-              <div className="flex flex-col gap-6 text-[1rem] leading-relaxed text-text-body sm:text-[1.0625rem]">
+              <div className="flex flex-col gap-6 text-body-md leading-relaxed text-text-body sm:text-body-lg">
                 {statement.body.map((paragraph) => (
                   <p key={paragraph.slice(0, 24)}>{paragraph}</p>
                 ))}
@@ -82,7 +82,7 @@ export function BrandStatement() {
 
             <Reveal delay={0.12}>
               <blockquote className="mt-10 border-l border-copper-600 pl-6">
-                <p className="text-[1.25rem] leading-snug display-type text-ink-900 sm:text-[1.5rem]">
+                <p className="text-title-sm leading-snug display-type text-ink-900 sm:text-title-lg">
                   “{statement.pullQuote}”
                 </p>
               </blockquote>

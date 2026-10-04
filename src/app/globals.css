@@ -66,10 +66,35 @@
   --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
 
-  /* Modular editorial type scale (1.25 ratio, fluid at the top end) */
+  /* — Type scale —
+     Tailwind's default font-size utilities are cleared, then re-declared as a
+     single scale named by *role* rather than by size. A component reads
+     `text-body` or `text-title-lg`, never `text-[0.9375rem]`, so hierarchy is
+     legible in the markup and there is no second source of type sizes.
+
+     Convention: the UI and heading steps carry size only. Line height, tracking
+     and case are treatments and belong to a utility (`leading-*`, `eyebrow`),
+     which keeps them visible in the class list instead of hidden in a token. */
+  --text-*: initial;
+
+  /* Interface / running text */
+  --text-micro: 0.625rem;
   --text-eyebrow: 0.6875rem;
-  --text-eyebrow--line-height: 1;
-  --text-eyebrow--letter-spacing: 0.32em;
+  --text-caption: 0.75rem;
+  --text-meta: 0.8125rem;
+  --text-body-sm: 0.875rem;
+  --text-body: 0.9375rem;
+  --text-body-md: 1rem;
+  --text-body-lg: 1.0625rem;
+
+  /* Headings — a 1.125 major-second progression, 18 px to 30 px */
+  --text-title-xs: 1.125rem;
+  --text-title-sm: 1.25rem;
+  --text-title-md: 1.375rem;
+  --text-title-lg: 1.5rem;
+  --text-title-xl: 1.625rem;
+  --text-title-2xl: 1.75rem;
+  --text-title-3xl: 1.875rem;
 
   --text-display-2xs: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
   --text-display-2xs--line-height: 1.04;

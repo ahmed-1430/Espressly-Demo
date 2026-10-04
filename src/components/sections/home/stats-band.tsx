@@ -23,7 +23,7 @@ export function StatsBand() {
         >
           {stats.map((stat) => (
             <StaggerItem key={stat.label} className="border-t border-ink-900/15 pt-5">
-              <dt className="text-[0.875rem] text-ink-900">{stat.label}</dt>
+              <dt className="text-body-sm text-ink-900">{stat.label}</dt>
               <dd className="mt-3 flex flex-col gap-2">
                 <span className="text-[clamp(2.25rem,4.5vw,3.25rem)] leading-none display-type tabular-nums text-ink-900">
                   {stat.value === 0 ? (
@@ -35,7 +35,7 @@ export function StatsBand() {
                     </>
                   )}
                 </span>
-                <span className="text-[0.8125rem] leading-relaxed text-text-muted">
+                <span className="text-meta leading-relaxed text-text-muted">
                   {stat.detail}
                 </span>
               </dd>

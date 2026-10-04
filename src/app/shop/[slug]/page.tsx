@@ -53,7 +53,7 @@ export default async function ProductPage({ params }: Params) {
       <Section tone="light" spacing="default" className="pt-32 sm:pt-36">
         <Container>
           <nav aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+            <ol className="flex flex-wrap items-center gap-x-3 gap-y-1 text-caption uppercase tracking-[0.18em] text-text-muted">
               <li>
                 <Link href="/shop" className="transition-colors hover:text-ink-900">
                   Shop
@@ -97,14 +97,14 @@ export default async function ProductPage({ params }: Params) {
               <div className="lg:sticky lg:top-[7rem]">
                 <div className="flex flex-wrap items-center gap-3">
                   {product.badge ? <Badge tone="copper">{product.badge}</Badge> : null}
-                  <span className="text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+                  <span className="text-caption uppercase tracking-[0.18em] text-text-muted">
                     {product.weight}
                   </span>
                 </div>
 
                 <h1 className="mt-5 text-display-xs text-ink-900">{product.name}</h1>
 
-                <p className="mt-5 text-[1rem] leading-relaxed text-text-body">
+                <p className="mt-5 text-body-md leading-relaxed text-text-body">
                   {product.description}
                 </p>
 
@@ -116,10 +116,10 @@ export default async function ProductPage({ params }: Params) {
                       key={spec.label}
                       className="flex items-baseline justify-between gap-6 border-b border-line-light py-3.5"
                     >
-                      <dt className="text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+                      <dt className="text-caption uppercase tracking-[0.18em] text-text-muted">
                         {spec.label}
                       </dt>
-                      <dd className="text-right text-[0.875rem] text-ink-900">
+                      <dd className="text-right text-body-sm text-ink-900">
                         {spec.value}
                       </dd>
                     </div>
@@ -128,7 +128,7 @@ export default async function ProductPage({ params }: Params) {
 
                 <ul className="mt-8 flex flex-col gap-3">
                   {product.details.map((detail) => (
-                    <li key={detail} className="flex items-start gap-3 text-[0.875rem] text-text-body">
+                    <li key={detail} className="flex items-start gap-3 text-body-sm text-text-body">
                       <svg
                         aria-hidden
                         viewBox="0 0 24 24"
@@ -153,10 +153,10 @@ export default async function ProductPage({ params }: Params) {
               <SectionHeading eyebrow="The story" title="Why we make it this way" />
             </div>
             <Reveal className="lg:col-span-7 lg:col-start-6">
-              <p className="text-[1.0625rem] leading-relaxed text-text-body">
+              <p className="text-body-lg leading-relaxed text-text-body">
                 {product.story}
               </p>
-              <p className="mt-6 text-[0.875rem] leading-relaxed text-text-muted">
+              <p className="mt-6 text-body-sm leading-relaxed text-text-muted">
                 Roasted on the old quay and posted within 48 hours. Tell us your
                 brewer at checkout and we will grind for it — there is no charge
                 and no guesswork.
@@ -178,7 +178,7 @@ export default async function ProductPage({ params }: Params) {
               />
               <Link
                 href="/shop"
-                className="shrink-0 text-[0.8125rem] uppercase tracking-[0.18em] text-ink-900"
+                className="shrink-0 text-meta uppercase tracking-[0.18em] text-ink-900"
               >
                 <span className="link-wipe">Back to the shop</span>
               </Link>
@@ -225,17 +225,17 @@ function MediaLink({ product }: { product: (typeof products)[number] }) {
         quality={76}
       />
       <div className="mt-4 flex items-baseline justify-between gap-4">
-        <h3 className="text-[1.0625rem] display-type text-ink-900 transition-colors duration-300 group-hover/rel:text-copper-700">
+        <h3 className="text-body-lg display-type text-ink-900 transition-colors duration-300 group-hover/rel:text-copper-700">
           {product.name}
         </h3>
-        <span className="text-[0.875rem] tabular-nums text-text-muted">
+        <span className="text-body-sm tabular-nums text-text-muted">
           {new Intl.NumberFormat("en-GB", {
             style: "currency",
             currency: site.currency,
           }).format(product.price / 100)}
         </span>
       </div>
-      <p className="mt-2 text-[0.8125rem] leading-relaxed text-text-muted">
+      <p className="mt-2 text-meta leading-relaxed text-text-muted">
         {product.description}
       </p>
     </Link>

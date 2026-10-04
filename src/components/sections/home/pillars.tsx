@@ -38,19 +38,19 @@ export function Pillars() {
                 )}
               >
                 <div className="flex items-baseline justify-between gap-4">
-                  <span className="font-sans text-[0.75rem] tabular-nums tracking-[0.2em] text-copper-700">
+                  <span className="font-sans text-caption tabular-nums tracking-[0.2em] text-copper-700">
                     {pillar.index}
                   </span>
                   <span className="h-px flex-1 bg-line-light" aria-hidden />
                 </div>
 
-                <h3 className="text-[1.375rem] leading-snug display-type text-ink-900 sm:text-[1.625rem]">
+                <h3 className="text-title-md leading-snug display-type text-ink-900 sm:text-title-xl">
                   {pillar.title}
                 </h3>
-                <p className="max-w-[44ch] text-[0.9375rem] leading-relaxed text-text-body">
+                <p className="max-w-[44ch] text-body leading-relaxed text-text-body">
                   {pillar.body}
                 </p>
-                <p className="mt-auto text-[0.75rem] uppercase tracking-[0.18em] text-text-muted">
+                <p className="mt-auto text-caption uppercase tracking-[0.18em] text-text-muted">
                   {pillar.detail}
                 </p>
               </StaggerItem>

@@ -36,14 +36,14 @@ export function CraftBand() {
                   as="li"
                   className="flex items-start gap-6 border-t border-cream-100/12 py-5"
                 >
-                  <span className="w-8 shrink-0 pt-1 font-sans text-[0.6875rem] tabular-nums tracking-[0.2em] text-copper-400">
+                  <span className="w-8 shrink-0 pt-1 font-sans text-eyebrow tabular-nums tracking-[0.2em] text-copper-400">
                     {step.index}
                   </span>
                   <div className="min-w-0">
-                    <h3 className="text-[1.0625rem] display-type text-cream-100">
+                    <h3 className="text-body-lg display-type text-cream-100">
                       {step.title}
                     </h3>
-                    <p className="mt-1.5 max-w-[46ch] text-[0.875rem] leading-relaxed text-cream-100/60">
+                    <p className="mt-1.5 max-w-[46ch] text-body-sm leading-relaxed text-cream-100/60">
                       {step.copy}
                     </p>
                   </div>
@@ -68,13 +68,13 @@ export function CraftBand() {
               <dl className="mt-6 grid grid-cols-2 gap-6">
                 <div className="border-t border-cream-100/15 pt-5">
                   <dt className="eyebrow text-copper-400">Development</dt>
-                  <dd className="mt-3 text-[1.875rem] display-type tabular-nums text-cream-100">
+                  <dd className="mt-3 text-title-3xl display-type tabular-nums text-cream-100">
                     <CountUp value={12} suffix="%" />
                   </dd>
                 </div>
                 <div className="border-t border-cream-100/15 pt-5">
                   <dt className="eyebrow text-copper-400">Cuppings per batch</dt>
-                  <dd className="mt-3 text-[1.875rem] display-type tabular-nums text-cream-100">
+                  <dd className="mt-3 text-title-3xl display-type tabular-nums text-cream-100">
                     <CountUp value={2} />
                   </dd>
                 </div>

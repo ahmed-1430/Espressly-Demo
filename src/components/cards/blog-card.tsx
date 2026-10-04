@@ -32,12 +32,12 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
           />
           <div className="flex min-w-0 flex-col justify-center gap-2">
             <p className="eyebrow text-copper-700">{post.category}</p>
-            <h3 className="text-[1.0625rem] leading-snug display-type text-ink-900 sm:text-[1.25rem]">
+            <h3 className="text-body-lg leading-snug display-type text-ink-900 sm:text-title-sm">
               <span className="transition-colors duration-300 group-hover/row:text-copper-700">
                 {post.title}
               </span>
             </h3>
-            <p className="text-[0.8125rem] text-text-muted">
+            <p className="text-meta text-text-muted">
               <time dateTime={post.date}>{post.dateLabel}</time>
               <span aria-hidden> · </span>
               {post.readingTime}
@@ -86,7 +86,7 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
         <div className="flex items-center gap-3">
           <Eyebrow ornament={false}>{post.category}</Eyebrow>
           <span aria-hidden className="h-px w-6 bg-line-light" />
-          <span className="text-[0.75rem] uppercase tracking-[0.16em] text-text-muted">
+          <span className="text-caption uppercase tracking-[0.16em] text-text-muted">
             {post.readingTime}
           </span>
         </div>
@@ -95,8 +95,8 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
           className={cn(
             "mt-4 leading-[1.12] display-type text-ink-900",
             hero
-              ? "text-[1.625rem] sm:text-[2rem] xl:text-[2.125rem]"
-              : "text-[1.25rem] sm:text-[1.375rem]",
+              ? "text-title-xl sm:text-title-2xl xl:text-title-3xl"
+              : "text-title-sm sm:text-title-md",
           )}
         >
           <Link href={href} className="transition-colors duration-300 group-hover/post:text-copper-700">
@@ -107,13 +107,13 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
         <p
           className={cn(
             "mt-4 leading-relaxed text-text-body",
-            hero ? "max-w-[52ch] text-[0.9375rem]" : "text-[0.875rem]",
+            hero ? "max-w-[52ch] text-body" : "text-body-sm",
           )}
         >
           {post.excerpt}
         </p>
 
-        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.75rem] uppercase tracking-[0.16em] text-text-muted">
+        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-caption uppercase tracking-[0.16em] text-text-muted">
           <time dateTime={post.date}>{post.dateLabel}</time>
           <span aria-hidden className="text-copper-600/60">
             ·

@@ -60,7 +60,7 @@ export default function NotFound() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-[0.8125rem] uppercase tracking-[0.18em] text-cream-100/55 transition-colors duration-400 hover:text-cream-100"
+                  className="text-meta uppercase tracking-[0.18em] text-cream-100/55 transition-colors duration-400 hover:text-cream-100"
                 >
                   {item.label}
                 </Link>

@@ -73,7 +73,7 @@ export function PageHeader({
       <Container className="relative">
         {crumbs.length > 0 ? (
           <nav aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.75rem] uppercase tracking-[0.18em] text-cream-100/55">
+            <ol className="flex flex-wrap items-center gap-x-3 gap-y-1 text-caption uppercase tracking-[0.18em] text-cream-100/55">
               {crumbs.map((crumb, index) => (
                 <li key={crumb.href} className="flex items-center gap-3">
                   {index > 0 ? (
@@ -132,7 +132,7 @@ export function PageHeader({
               {meta.map((item) => (
                 <div key={item.label}>
                   <dt className="eyebrow text-copper-400">{item.label}</dt>
-                  <dd className="mt-2 text-[1.0625rem] display-type text-cream-100">
+                  <dd className="mt-2 text-body-lg display-type text-cream-100">
                     {item.value}
                   </dd>
                 </div>
@@ -146,7 +146,7 @@ export function PageHeader({
 
       {rail && rail.length > 0 ? (
         <Container className="relative mt-12">
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-cream-100/15 pt-6 text-[0.8125rem] uppercase tracking-[0.16em] text-cream-100/60">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-cream-100/15 pt-6 text-meta uppercase tracking-[0.16em] text-cream-100/60">
             {rail.map((item) => (
               <Link
                 key={item.href}
