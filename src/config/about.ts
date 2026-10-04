@@ -1,4 +1,4 @@
-import { aboutImages } from "./images";
+import { bannerImages, aboutImages } from "./images";
 
 export const about = {
   hero: {
@@ -6,7 +6,7 @@ export const about = {
     headline: "A roastery that happens to have a café attached",
     body:
       "We started with a five-kilo roaster in a unit behind the quay and one rule: know the name of everyone who touched the coffee. Ten years on, that is still the whole business plan.",
-    image: aboutImages.banner,
+    image: bannerImages.about,
   },
   story: {
     kicker: "2016 — 2026",

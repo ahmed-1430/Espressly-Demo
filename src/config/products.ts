@@ -1,4 +1,4 @@
-import { editorialImages, lifestyleImages, menuImages, shopImages, withImage } from "./images";
+import { lifestyleImages, serviceImages, shopImages, withImage } from "./images";
 import type { ImageAsset } from "./images";
 
 export type ProductCategoryId =
@@ -43,48 +43,21 @@ const cents = (value: number) => Math.round(value * 100);
 /**
  * Placeholder art direction.
  *
- * Coffee and collection products borrow crops of the coffee itself (beans,
- * brew, pastry) rather than guest photography, so the product grid reads as a
- * range; gear uses the square packshots. Every one of these slots is a plain
- * `ImageAsset` â€” drop in real packshots and change nothing else.
+ * Coffee and collection products borrow frames of the coffee itself — a tamp, a
+ * latte, a pour, a pastry, a tasting flight — and gear uses the square
+ * packshots. Every slot is a plain `ImageAsset`, so dropping real packshots in
+ * changes nothing but this file.
  */
 const packshot = {
-  beans: withImage(editorialImages.beans, {
-    alt: "Roasted coffee beans from a single Espressly batch",
-    width: 1920,
-    height: 1100,
-    focus: "50% 55%",
+  espresso: lifestyleImages.tamp,
+  milk: lifestyleImages.latte,
+  filter: withImage(lifestyleImages.pour, {
+    alt: "Filter coffee poured over a cone into a glass server",
   }),
-  espresso: withImage(menuImages.espresso, {
-    alt: "Ground coffee tamped into a portafilter basket",
-  }),
-  milk: withImage(lifestyleImages.gallery[2], {
-    alt: "Latte poured with a tulip pattern in a ceramic cup",
-  }),
-  filter: withImage(editorialImages.pourOver, {
-    alt: "Water poured over a filter cone into a glass server",
-    width: 1600,
-    height: 1200,
-    focus: "50% 50%",
-  }),
-  cold: withImage(lifestyleImages.gallery[3], {
-    alt: "Cold brew coffee poured over a tall glass of ice",
-  }),
-  pastry: withImage(editorialImages.pastry, {
-    alt: "Laminated pastry from the morning bake beside a filter coffee",
-    width: 1200,
-    height: 1200,
-    focus: "50% 50%",
-  }),
-  tasting: withImage(lifestyleImages.gallery[5], {
-    alt: "Four tasting cups laid out for a comparison flight",
-  }),
-  gift: withImage(editorialImages.pastry, {
-    alt: "Gift selection: coffee, a ceramic cup and pastry on a tray",
-    width: 1200,
-    height: 1200,
-    focus: "40% 50%",
-  }),
+  cold: lifestyleImages.coldBrew,
+  pastry: lifestyleImages.pastry,
+  tasting: serviceImages.tasting,
+  gift: serviceImages.kitchen,
 } satisfies Record<string, ImageAsset>;
 
 export const productCategories: readonly ProductCategory[] = [
@@ -98,7 +71,7 @@ export const productCategories: readonly ProductCategory[] = [
     id: "gear",
     label: "Gear",
     description:
-      "The short, opinionated list of equipment we actually use behind the bar â€” tested daily by the people who service it.",
+      "The short, opinionated list of equipment we actually use behind the bar — tested daily by the people who service it.",
   },
   {
     id: "collections",
@@ -120,12 +93,12 @@ export const products: readonly Product[] = [
     price: cents(15),
     category: "coffee",
     badge: "Roasted weekly",
-    image: packshot.beans,
-    hoverImage: packshot.espresso,
-    origin: "Brazil Â· Ethiopia",
+    image: packshot.espresso,
+    hoverImage: packshot.milk,
+    origin: "Brazil · Ethiopia",
     roast: "Medium",
-    process: "Natural Â· Washed",
-    altitude: "1,150â€“1,900 m",
+    process: "Natural · Washed",
+    altitude: "1,150–1,900 m",
     weight: "250 g",
     details: [
       "Cocoa nib and toasted almond",
@@ -147,12 +120,12 @@ export const products: readonly Product[] = [
     price: cents(17),
     category: "coffee",
     badge: "Bar blend",
-    image: packshot.espresso,
-    hoverImage: packshot.milk,
-    origin: "Brazil Â· Colombia",
+    image: packshot.milk,
+    hoverImage: packshot.espresso,
+    origin: "Brazil · Colombia",
     roast: "Medium-dark",
-    process: "Natural Â· Washed",
-    altitude: "1,050â€“1,700 m",
+    process: "Natural · Washed",
+    altitude: "1,050–1,700 m",
     weight: "250 g",
     details: [
       "Dark chocolate and molasses",
@@ -174,7 +147,7 @@ export const products: readonly Product[] = [
     category: "coffee",
     badge: "Limited lot",
     image: packshot.filter,
-    origin: "Ethiopia Â· Guji",
+    origin: "Ethiopia · Guji",
     roast: "Light",
     process: "Washed",
     altitude: "1,950 m",
@@ -192,14 +165,14 @@ export const products: readonly Product[] = [
     name: "Cold Brew Concentrate",
     shortName: "Cold Brew",
     description:
-      "Eighteen hours at 4 Â°C, concentrated one-to-one with water or milk.",
+      "Eighteen hours at 4 °C, concentrated one-to-one with water or milk.",
     story:
       "We make the same brew we pour over ice at the bar, then bottle it undiluted so you decide the strength at home. One part concentrate to one part water over ice for a long black, or to one part whole milk for something closer to a nitro without the gas.",
     price: cents(14),
     category: "coffee",
     badge: "No sugar",
     image: packshot.cold,
-    hoverImage: packshot.beans,
+    hoverImage: packshot.filter,
     origin: "Brazil",
     roast: "Light-medium",
     process: "Washed",
@@ -227,8 +200,8 @@ export const products: readonly Product[] = [
     origin: "Four origins",
     roast: "Light to medium",
     process: "Mixed",
-    altitude: "1,100â€“2,000 m",
-    weight: "4 Ã— 100 g",
+    altitude: "1,100–2,000 m",
+    weight: "4 × 100 g",
     details: [
       "Four contrasting lots",
       "Hand-written scorecards",
@@ -268,7 +241,7 @@ export const products: readonly Product[] = [
     description:
       "A 220 ml stoneware cup thrown for us, glazed inside so latte art pours clean.",
     story:
-      "Made in a small studio forty minutes from the roastery. The wide, shallow interior is what makes a flat white pour properly â€” we stopped buying standard 8 oz cups the week we developed this one. Dishwasher and microwave safe.",
+      "Made in a small studio forty minutes from the roastery. The wide, shallow interior is what makes a flat white pour properly — we stopped buying standard 8 oz cups the week we developed this one. Dishwasher and microwave safe.",
     price: cents(26),
     category: "gear",
     image: shopImages.espressoCup,
@@ -292,7 +265,7 @@ export const products: readonly Product[] = [
     price: cents(48),
     category: "gear",
     badge: "Bar staff pick",
-    image: shopImages.frenchPress,
+    image: shopImages.cafetiere,
     origin: "Borosilicate glass",
     weight: "350 g",
     details: [
@@ -309,7 +282,7 @@ export const products: readonly Product[] = [
     description:
       "Holds temperature to within one degree, which is the whole point of pouring slowly.",
     story:
-      "Variable from 40 Â°C to 100 Â°C and accurate to within a degree, because control over temperature is the only real difference between a good pour over and a great one. A slow, deliberate flow that gives you time to read the bed.",
+      "Variable from 40 °C to 100 °C and accurate to within a degree, because control over temperature is the only real difference between a good pour over and a great one. A slow, deliberate flow that gives you time to read the bed.",
     price: cents(135),
     category: "gear",
     badge: "Bar staff pick",
@@ -317,7 +290,7 @@ export const products: readonly Product[] = [
     origin: "Stainless steel",
     weight: "1.0 l",
     details: [
-      "40â€“100 Â°C, Â±1 Â°C",
+      "40–100 °C, ±1 °C",
       "Gooseneck spout, slow flow control",
       "Hold mode for 60 minutes",
       "Two-year guarantee",

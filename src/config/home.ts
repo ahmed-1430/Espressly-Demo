@@ -1,4 +1,9 @@
-import { aboutImages, editorialImages, heroImages, lifestyleImages } from "./images";
+import {
+  aboutImages,
+  editorialImages,
+  heroImages,
+  lifestyleImages,
+} from "./images";
 import type { ImageAsset } from "./images";
 
 /* -------------------------------------------------------------------------
@@ -23,7 +28,7 @@ export const hero = {
     kicker: "On the bar today",
     name: "Harbour Espresso",
     meta: "Brazil · Colombia · Medium-dark",
-    image: heroImages.panel,
+    image: heroImages.plate,
   } satisfies { kicker: string; name: string; meta: string; image: ImageAsset },
   scrollHint: "Scroll to pour",
 } as const;
@@ -42,7 +47,10 @@ export const statement = {
   ] as const,
   pullQuote:
     "If we cannot say who grew it and when it was roasted, it does not go on the bar.",
-  band: editorialImages.beans,
+  /** Full-bleed band behind the statement plate. */
+  band: editorialImages.statement,
+  /** Supporting frame below the band — deliberately not the band again. */
+  detail: lifestyleImages.trio,
 } as const;
 
 /* -------------------------------------------------------------------------
@@ -108,8 +116,7 @@ export const storyChapters = [
     title: "Bought from washing stations we have stood in",
     copy:
       "Two partners in Guji, one in Huila, one in Cerrado Mineiro. We visit, we cup on site, and we sign before harvest so the farmer can plan a year rather than a week.",
-    image: aboutImages.origin,
-    alt: "Barista serving guests at the Espressly counter",
+    image: lifestyleImages.bar,
   },
   {
     id: "roast",
@@ -119,7 +126,6 @@ export const storyChapters = [
     copy:
       "Every lot gets its own profile. A washed Brazilian gets a long development for body; a natural Ethiopian gets a fast, bright roast so the fruit survives.",
     image: aboutImages.roasting,
-    alt: "Roasted coffee cooling in the drum after a batch",
   },
   {
     id: "ritual",
@@ -128,8 +134,7 @@ export const storyChapters = [
     title: "Milk at 60 °C, because that is where it tastes best",
     copy:
       "Lactose turns from sweet to flat just above 60 °C, so that is where we stop the steam wand. Cups are warmed, water is free, and nobody is ever rushed out of a seat.",
-    image: aboutImages.people,
-    alt: "Two guests sharing a flat white at a window seat",
+    image: lifestyleImages.pour,
   },
 ] as const;
 
@@ -141,7 +146,7 @@ export const craft = {
   headline: "Twelve hours from green to cup",
   body:
     "A roast day at Espressly is unglamorous and repeatable. Here is what happens between the crate arriving and the bag going out.",
-  image: editorialImages.pourOver,
+  image: editorialImages.craft,
   steps: [
     { index: "01", title: "Charge", copy: "Beans into a pre-heated drum at 196 °C. The roast starts before the timer does." },
     { index: "02", title: "Turning point", copy: "4:10 — moisture gone, browning begins, the colour shifts from straw to tan." },
@@ -166,7 +171,7 @@ export const stats = [
 export const gallery = {
   eyebrow: "In the room",
   headline: "What it looks like in here",
-  images: lifestyleImages.gallery,
+  images: Object.values(lifestyleImages),
 } as const;
 
 /* -------------------------------------------------------------------------

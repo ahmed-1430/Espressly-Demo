@@ -31,7 +31,7 @@ export const services: readonly Service[] = [
       "Free filter refills in your own cup",
       "Dairy alternatives at no extra charge",
     ],
-    image: serviceImages.atelier,
+    image: serviceImages.tasting,
     stat: { value: "12 kg", label: "per batch" },
   },
   {
@@ -49,7 +49,7 @@ export const services: readonly Service[] = [
       "Seasonal tarts that change weekly",
       "Gluten-free option available daily",
     ],
-    image: serviceImages.bakery,
+    image: serviceImages.kitchen,
     stat: { value: "02×", label: "bake service" },
   },
   {
@@ -67,7 +67,7 @@ export const services: readonly Service[] = [
       "Machine installation and calibration",
       "Staff training on site",
     ],
-    image: aboutImages.origin,
+    image: serviceImages.bar,
   },
   {
     id: "private-events",
@@ -102,7 +102,7 @@ export const services: readonly Service[] = [
       "Crockery, milk and glassware",
       "Dietary requirements handled in advance",
     ],
-    image: lifestyleImages.gallery[6],
+    image: aboutImages.origin,
     stat: { value: "90 min", label: "setup window" },
   },
   {
@@ -120,7 +120,7 @@ export const services: readonly Service[] = [
       "Take-home bag of what you roasted",
       "Monthly public dates plus private slots",
     ],
-    image: aboutImages.roasting,
+    image: lifestyleImages.bar,
   },
 ] as const;
 
@@ -132,7 +132,7 @@ export const serviceChapters = [
     title: "Sourcing in season",
     copy:
       "We buy four lots a year from washing stations we have visited, priced well above the commodity market so the farmer can plan. Contracts are signed before harvest, not after it.",
-    image: serviceImages.atelier,
+    image: serviceImages.tasting,
   },
   {
     id: "roasting",
@@ -140,7 +140,7 @@ export const serviceChapters = [
     title: "Roasting to the bean",
     copy:
       "Every lot gets its own curve. A natural Ethiopian gets a fast, bright roast; a washed Brazilian gets a longer development to build body. We cup each batch twice before it leaves.",
-    image: serviceImages.bakery,
+    image: aboutImages.roasting,
   },
   {
     id: "ritual",
@@ -148,7 +148,7 @@ export const serviceChapters = [
     title: "The ritual at the bar",
     copy:
       "Milk is textured to 60 °C because that is where lactose stops turning sweet and starts turning flat. Cups are warmed. Filter water is free and refilled without asking.",
-    image: serviceImages.events,
+    image: lifestyleImages.pour,
   },
 ] as const;
 

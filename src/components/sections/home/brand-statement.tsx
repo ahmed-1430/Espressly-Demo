@@ -62,7 +62,7 @@ export function BrandStatement() {
         <div className="grid gap-x-10 gap-y-10 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
             <ImageReveal
-              image={statement.band}
+              image={statement.detail}
               from="left"
               ratio="3 / 4"
               sizes="(min-width: 1024px) 30vw, 92vw"

@@ -8,7 +8,7 @@ import { PageHeader } from "@/components/sections/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { serviceImages } from "@/config/images";
+import { bannerImages, serviceImages } from "@/config/images";
 import { serviceBands, serviceChapters, services } from "@/config/services";
 import { buildMetadata, breadcrumbJsonLd, serialiseJsonLd } from "@/lib/seo";
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Espressly supplies hotels, restaurants and offices with a coffee programme rather than a bag of beans, and runs private tastings, mobile catering bars and barista workshops.",
   path: "/what-we-offer",
-  image: { src: serviceImages.banner.src, alt: serviceImages.banner.alt },
+  image: { src: bannerImages.services.src, alt: bannerImages.services.alt },
 });
 
 export default function WhatWeOfferPage() {
@@ -27,7 +27,7 @@ export default function WhatWeOfferPage() {
         eyebrow="What we offer"
         title={["Six ways to", "work with Espressly."]}
         body="The café is one of them, not the whole of it. We also roast for other kitchens, travel with a bar, teach the craft and assemble gifts by hand."
-        image={serviceImages.banner}
+        image={bannerImages.services}
         crumbs={[
           { label: "Home", href: "/" },
           { label: "What We Offer", href: "/what-we-offer" },
@@ -55,7 +55,7 @@ export default function WhatWeOfferPage() {
       {/* Sticky chapters — how a wholesale programme actually runs */}
       <Section tone="dark" className="relative isolate overflow-hidden">
         <ParallaxImage
-          image={serviceImages.atelier}
+          image={serviceImages.bar}
           ratio="21 / 9"
           travel={70}
           sizes="100vw"

@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 import { useCart } from "@/components/shop/cart-provider";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Media } from "@/components/ui/media";
-import { shopImages } from "@/config/images";
+import { lifestyleImages } from "@/config/images";
 import { formatMoney } from "@/lib/format";
 import { duration, ease, tween } from "@/lib/motion";
 
@@ -115,10 +115,10 @@ export function CartDrawer() {
             {lines.length === 0 ? (
               <div className="flex flex-1 flex-col items-center justify-center gap-5 px-8 text-center">
                 <Media
-                  image={shopImages.banner}
+                  image={lifestyleImages.pastry}
                   ratio="1 / 1"
-                  className="size-28 rounded-pill opacity-90"
-                  sizes="112px"
+                  className="size-20 rounded-card"
+                  sizes="80px"
                   placeholderTone="light"
                 />
                 <div className="space-y-2">
@@ -234,7 +234,7 @@ export function CartDrawer() {
                     </Button>
                   </div>
                   <p className="mt-3 text-center text-[0.75rem] text-text-muted">
-                    Front-end demo basket â€” no payment is taken.
+                    Front-end demo basket — no payment is taken.
                   </p>
                 </footer>
               </>

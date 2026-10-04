@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/sections/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, SectionHeading } from "@/components/ui/section-heading";
-import { menuImages } from "@/config/images";
+import { bannerImages, menuImages } from "@/config/images";
 import { menuCategories, menuHighlights } from "@/config/menu";
 import { buildMetadata, menuJsonLd, serialiseJsonLd } from "@/lib/seo";
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "The full Espressly board: espresso and milk drinks, rotating single-origin filter, eighteen-hour cold brew, whole-leaf tea and a laminated pastry case baked twice a day.",
   path: "/menu",
-  image: { src: menuImages.banner.src, alt: menuImages.banner.alt },
+  image: { src: bannerImages.menu.src, alt: bannerImages.menu.alt },
 });
 
 const categoryIds = menuCategories.map((category) => category.id);
@@ -33,7 +33,7 @@ export default function MenuPage() {
         eyebrow="Our menu"
         title={["Short by design.", "Rewritten every season."]}
         body="Nineteen drinks and five things from the oven. Everything else on the board is a question about what is best that week, not a fixed line item."
-        image={menuImages.banner}
+        image={bannerImages.menu}
         crumbs={[{ label: "Home", href: "/" }, { label: "Our Menu", href: "/menu" }]}
         meta={[
           { label: "Items", value: `${itemCount} on the board` },
@@ -99,7 +99,7 @@ export default function MenuPage() {
                   <Reveal delay={0.1} className="mt-8 hidden lg:block">
                     <ImageReveal
                       image={
-                        category.items.find((item) => item.image)?.image ?? menuImages.banner
+                        category.items.find((item) => item.image)?.image ?? menuImages.counter
                       }
                       from="left"
                       ratio="4 / 3"

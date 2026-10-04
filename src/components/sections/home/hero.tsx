@@ -6,7 +6,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Media } from "@/components/ui/media";
 import { Eyebrow } from "@/components/ui/section-heading";
-import { heroImages } from "@/config/images";
+import { bannerImages } from "@/config/images";
 import { hero } from "@/config/home";
 
 /**
@@ -22,7 +22,7 @@ export function Hero() {
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-espresso-950 text-cream-100">
       <ParallaxImage
-        image={heroImages.primary}
+        image={bannerImages.home}
         travel={80}
         priority
         quality={82}

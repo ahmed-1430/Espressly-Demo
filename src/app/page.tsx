@@ -10,7 +10,7 @@ import { StatsBand } from "@/components/sections/home/stats-band";
 import { StoryScroll } from "@/components/sections/home/story-scroll";
 import { Testimonials } from "@/components/sections/home/testimonials";
 import { MarqueeBand } from "@/components/sections/marquee-band";
-import { heroImages } from "@/config/images";
+import { bannerImages } from "@/config/images";
 import { contact, site } from "@/config/site";
 import { buildMetadata, serialiseJsonLd } from "@/lib/seo";
 
@@ -19,7 +19,7 @@ export const metadata = buildMetadata({
   description: site.description,
   path: "/",
   image: {
-    src: heroImages.primary.src,
+    src: bannerImages.home.src,
     alt: "Espressly — freshly pulled espresso and roasted beans",
   },
 });

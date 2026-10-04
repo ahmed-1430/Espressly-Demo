@@ -5,7 +5,7 @@ import { ShopBrowser } from "@/components/shop/shop-browser";
 import { Container, Section } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { shopImages } from "@/config/images";
+import { bannerImages } from "@/config/images";
 import { buildMetadata, serialiseJsonLd } from "@/lib/seo";
 import { products } from "@/config/products";
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Roasted-to-order coffee, the brewing gear we actually use behind the bar, and hand-assembled gift collections. Ground to your brewer at no extra charge.",
   path: "/shop",
-  image: { src: shopImages.banner.src, alt: shopImages.banner.alt },
+  image: { src: bannerImages.shop.src, alt: bannerImages.shop.alt },
 });
 
 const promises = [
@@ -39,7 +39,7 @@ export default function ShopPage() {
         eyebrow="Shop"
         title={["Take the roastery", "home with you."]}
         body="Whole bean or ground to your brewer, roasted the week it is ordered and posted in plastic-free packaging. The gear list is short and opinionated — everything on it gets used daily behind the bar."
-        image={shopImages.banner}
+        image={bannerImages.shop}
         crumbs={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }]}
         meta={[
           { label: "Products", value: `${products.length} in the range` },

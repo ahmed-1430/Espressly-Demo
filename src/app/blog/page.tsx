@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/sections/page-header";
 import { Container, Section } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/section-heading";
-import { journalImages } from "@/config/images";
+import { bannerImages } from "@/config/images";
 import { posts, recentPosts } from "@/config/blog";
 import { buildMetadata, breadcrumbJsonLd, serialiseJsonLd } from "@/lib/seo";
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Field notes from the Espressly roastery: how to taste coffee like a professional, what actually happens between bean and cup, and how to pick the right brew for your morning.",
   path: "/blog",
-  image: { src: journalImages.banner.src, alt: journalImages.banner.alt },
+  image: { src: bannerImages.blog.src, alt: bannerImages.blog.alt },
 });
 
 export default function BlogPage() {
@@ -24,7 +24,7 @@ export default function BlogPage() {
         eyebrow="The dispatch"
         title={["Field notes on", "coffee and craft."]}
         body="Six pieces on tasting, roasting, grinding and choosing a brewer. Written by the people who do the work, edited to be read rather than skimmed."
-        image={journalImages.banner}
+        image={bannerImages.blog}
         crumbs={[{ label: "Home", href: "/" }, { label: "Blog", href: "/blog" }]}
         rail={[
           { label: "Latest writing", href: "/blog#top" },

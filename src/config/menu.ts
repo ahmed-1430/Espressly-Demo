@@ -66,7 +66,7 @@ export const menuCategories: readonly MenuCategory[] = [
         notes: ["Double ristretto", "150 ml"],
         price: cents(4.2),
         signature: true,
-        image: menuImages.latte,
+        image: menuImages.milk,
       },
       {
         id: "macchiato",

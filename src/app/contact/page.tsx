@@ -7,7 +7,7 @@ import { SocialLinkList } from "@/components/brand/social-icon";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { Eyebrow, SectionHeading } from "@/components/ui/section-heading";
-import { contactImages } from "@/config/images";
+import { bannerImages } from "@/config/images";
 import { contactCopy } from "@/config/contact";
 import { contact, hours } from "@/config/site";
 import { socialLinks } from "@/config/navigation";
@@ -18,7 +18,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Find the Espressly roastery on the old quay, check opening hours, or send the team a message about wholesale, events, workshops and catering.",
   path: "/contact",
-  image: { src: contactImages.banner.src, alt: contactImages.banner.alt },
+  image: { src: bannerImages.contact.src, alt: bannerImages.contact.alt },
 });
 
 export default function ContactPage() {
@@ -33,7 +33,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title={["Come and find us,", "or just say hello."]}
         body={contactCopy.hero.body}
-        image={contactImages.banner}
+        image={bannerImages.contact}
         crumbs={[{ label: "Home", href: "/" }, { label: "Contact Us", href: "/contact" }]}
         meta={[
           { label: "Roastery", value: contact.address.locality },
@@ -102,7 +102,7 @@ export default function ContactPage() {
             <div className="lg:col-span-6 lg:col-start-7">
               <div className="relative overflow-hidden bg-sand-100">
                 <ImageReveal
-                  image={contactImages.banner}
+                  image={bannerImages.contact}
                   from="right"
                   ratio="4 / 3"
                   sizes="(min-width: 1024px) 48vw, 92vw"

@@ -33,3 +33,5 @@ yarn-error.log*
 # os
 Thumbs.db
 desktop.ini
+# design review artifacts
+/public/brand/_contact-sheet.jpg

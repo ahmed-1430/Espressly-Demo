@@ -11,6 +11,14 @@
  *   1. Drop the new file into the matching `public/images/<folder>/` slot.
  *   2. Update `src` (and `alt` if the subject changed) below.
  *   3. Optionally tune `focus` (object-position) to reframe the crop.
+ *
+ * Art direction rules encoded here:
+ *   - `banners` are the darkest frames in the library, because cream type sits
+ *     on top of them. Never assign a high-key image to a banner slot.
+ *   - No photograph appears twice on the same page. Where a section needs a
+ *     supporting frame it draws from `lifestyle` rather than reusing the
+ *     banner.
+ *   - `focus` is set wherever a crop would otherwise slice through the subject.
  */
 
 export type ImageAsset = {
@@ -64,65 +72,113 @@ export const brand = {
 } as const;
 
 /* -------------------------------------------------------------------------
- * Hero
+ * Decorative — never content, never announced
  * ---------------------------------------------------------------------- */
-export const heroImages = {
-  /** Full-bleed opening frame. 16:9, dark, generous negative space. */
-  primary: asset(
+export const decorativeImages = {
+  /** Warm paper with a faint bean engraving. Used as a very light wash. */
+  paper: asset(
+    "/images/decorative/paper-beans.jpg",
+    "",
+    1920,
+    860,
+  ),
+} as const;
+
+/* -------------------------------------------------------------------------
+ * Banners — full-bleed frames that carry cream display type
+ * ---------------------------------------------------------------------- */
+export const bannerImages = {
+  /** Home hero. Subject sits left, the right third is empty slate. */
+  home: asset(
     "/images/hero/hero-espresso-pour.jpg",
     "Freshly pulled espresso beside a wooden scoop of roasted beans on dark slate",
     1920,
     1100,
-    "58% 50%",
+    "62% 52%",
   ),
-  /** Split-panel companion frame. */
-  panel: asset(
-    "/images/hero/hero-cafe-bar.jpg",
-    "Barista pulling a shot behind the espresso machine at the Espressly bar",
-    1920,
-    1100,
-    "60% 45%",
+  /** /menu — a dim room before service. */
+  menu: asset(
+    "/images/menu/menu-heading.jpg",
+    "Café interior in low light, empty tables set for morning service",
+    2560,
+    1000,
+    "50% 60%",
   ),
-  /** Supporting frame used behind the signature-menu band. */
-  tertiary: asset(
-    "/images/hero/hero-latte-art.jpg",
-    "Milk being poured into a cup to build a rosetta latte pattern",
-    1920,
+  /** /what-we-offer — the machine is the product. */
+  services: asset(
+    "/images/services/service-heading.jpg",
+    "Espresso machine group head mid-extraction, chrome catching the bar light",
+    2560,
+    1000,
+    "50% 45%",
+  ),
+  /** /shop — the retail range. */
+  shop: asset(
+    "/images/products/shop-heading.jpg",
+    "Coffee gear, a grinder and a wooden counter set up for retail",
+    2560,
+    1000,
+    "50% 50%",
+  ),
+  /** /blog — warm, but with enough shadow for cream type. */
+  blog: asset(
+    "/images/lifestyle/lifestyle-06.jpg",
+    "A guest laughing over a coffee at a shared table in a warm café",
     1100,
+    1065,
+    "55% 40%",
+  ),
+  /** /about — the roastery bench. */
+  about: asset(
+    "/images/about/about-heading.jpg",
+    "The Espressly roastery bench under low light during a roast day",
+    2560,
+    1000,
+    "50% 50%",
+  ),
+  /** /contact — the counter you actually walk up to. */
+  contact: asset(
+    "/images/contact/contact-heading.jpg",
+    "The Espressly service counter with the machine and stacked cups behind it",
+    2560,
+    1000,
     "50% 50%",
   ),
 } as const;
 
 /* -------------------------------------------------------------------------
- * Editorial / full-bleed bands
+ * Home hero supporting frames
+ * ---------------------------------------------------------------------- */
+export const heroImages = {
+  /** Small "on the bar today" plate inside the hero. */
+  plate: asset(
+    "/images/hero/hero-cafe-bar.jpg",
+    "Barista pulling a shot behind the espresso machine at the Espressly bar",
+    1920,
+    1100,
+    "62% 45%",
+  ),
+} as const;
+
+/* -------------------------------------------------------------------------
+ * Editorial — full-bleed bands and statement frames
  * ---------------------------------------------------------------------- */
 export const editorialImages = {
-  beans: asset(
-    "/images/editorial/editorial-beans.jpg",
-    "Roasted coffee beans spread across a dark worktop",
-    1920,
-    860,
-    "50% 50%",
-  ),
-  pourOver: asset(
+  /** Brand statement band: slow, dark, contemplative. */
+  statement: asset(
     "/images/editorial/editorial-pour-over.jpg",
-    "Water poured over a filter cone into a glass server",
+    "Water poured in a thin spiral over a filter cone into a glass server",
     2560,
     1333,
-    "50% 50%",
+    "50% 55%",
   ),
-  pastry: asset(
-    "/images/editorial/editorial-pastry.jpg",
-    "Freshly baked laminated pastry on a tray beside a cup of coffee",
+  /** Craft band: the finished cup, backlit. */
+  craft: asset(
+    "/images/hero/hero-latte-art.jpg",
+    "A heart drawn in a fresh espresso, seen from directly above",
     1920,
-    1004,
-    "50% 50%",
-  ),
-  texture: asset(
-    "/images/editorial/editorial-texture.jpg",
-    "Faint line drawing of coffee beans on warm paper",
-    1920,
-    200,
+    1100,
+    "50% 45%",
   ),
 } as const;
 
@@ -130,47 +186,41 @@ export const editorialImages = {
  * Menu
  * ---------------------------------------------------------------------- */
 export const menuImages = {
-  banner: asset(
-    "/images/menu/menu-hero.jpg",
-    "Overhead view of the Espressly counter with cups, grinder and tamping mat",
-    1920,
-    910,
-    "50% 50%",
-  ),
-  heading: asset(
-    "/images/menu/menu-heading.jpg",
-    "Warmly lit coffee bar interior with hanging pendant lights",
-    2560,
-    1000,
-    "50% 40%",
-  ),
   espresso: asset(
     "/images/lifestyle/lifestyle-02.jpg",
-    "Barista tamping espresso into a portafilter",
+    "Ground coffee tamped level into a portafilter basket",
     1100,
     1065,
     "50% 50%",
   ),
-  latte: asset(
+  milk: asset(
     "/images/lifestyle/lifestyle-03.jpg",
-    "Latte with a poured tulip pattern in a ceramic cup",
+    "Steamed milk poured into a finished latte to build the rosetta",
     1100,
     1065,
     "50% 50%",
   ),
   coldBrew: asset(
     "/images/lifestyle/lifestyle-04.jpg",
-    "Cold brew coffee poured over ice in a tall glass",
+    "Cold brew coffee poured over a tall glass of ice",
     1100,
     1065,
     "50% 50%",
   ),
   pastry: asset(
     "/images/lifestyle/lifestyle-05.jpg",
-    "Almond croissant broken open on a ceramic plate",
+    "A laminated pastry served beside a filter coffee on a wooden table",
     1100,
     1065,
     "50% 50%",
+  ),
+  /** Spare frame for the closing band. */
+  counter: asset(
+    "/images/about/about-origin.jpg",
+    "Guests being served at the Espressly counter",
+    2560,
+    1600,
+    "50% 40%",
   ),
 } as const;
 
@@ -178,32 +228,36 @@ export const menuImages = {
  * What we offer
  * ---------------------------------------------------------------------- */
 export const serviceImages = {
-  banner: asset(
-    "/images/services/service-heading.jpg",
-    "Long communal table in a warm café interior lit by low evening light",
-    2560,
-    1000,
-    "50% 45%",
-  ),
-  atelier: asset(
+  /** Tasting comparison — the coffee programme chapter. */
+  tasting: asset(
     "/images/services/service-wide-a.jpg",
-    "Spoons of ground coffee lined up for a tasting comparison",
+    "Spoons of ground coffee laid out for a side-by-side tasting",
     800,
     800,
     "50% 50%",
   ),
-  bakery: asset(
+  /** Kitchen — laminated by hand before four. */
+  kitchen: asset(
     "/images/services/service-wide-b.jpg",
-    "Baker shaping dough on a floured wooden bench",
+    "A pastry and a cup served together on a wooden board",
     800,
     800,
     "50% 50%",
   ),
+  /** Private events — a room with people in it. */
   events: asset(
     "/images/services/service-wide-c.jpg",
-    "Guests gathered around a long table during an evening tasting",
+    "Guests gathered around a table during an evening tasting",
     800,
     800,
+    "50% 50%",
+  ),
+  /** Wholesale and catering — the bar at work. */
+  bar: asset(
+    "/images/lifestyle/lifestyle-08.jpg",
+    "Two filter coffees and an espresso set out on a marble counter",
+    1100,
+    1065,
     "50% 50%",
   ),
 } as const;
@@ -212,30 +266,23 @@ export const serviceImages = {
  * About
  * ---------------------------------------------------------------------- */
 export const aboutImages = {
-  banner: asset(
-    "/images/about/about-heading.jpg",
-    "Green coffee beans and a notebook on a roastery bench",
-    2560,
-    1000,
-    "50% 45%",
-  ),
   origin: asset(
     "/images/about/about-origin.jpg",
-    "Barista serving guests at the Espressly counter",
+    "Guests being served at the Espressly counter",
     2560,
     1600,
-    "50% 45%",
+    "50% 40%",
   ),
   roasting: asset(
     "/images/about/about-roasting.jpg",
-    "Roasted coffee cooling in the drum after a batch",
+    "A roaster working a batch at the Espressly drum",
     800,
     545,
     "50% 50%",
   ),
   people: asset(
     "/images/about/about-barista.jpg",
-    "Two guests sharing a flat white at a window seat",
+    "Two guests sharing a coffee at a window seat",
     800,
     545,
     "50% 50%",
@@ -246,15 +293,9 @@ export const aboutImages = {
  * Shop
  * ---------------------------------------------------------------------- */
 export const shopImages = {
-  banner: asset(
-    "/images/products/shop-heading.jpg",
-    "Retail coffee bags, brew gear and a grinder arranged on a shop counter",
-    2560,
-    1000,
-    "50% 45%",
-  ),
-  /** Square packshots for product cards and the detail gallery. */
-  frenchPress: asset(
+  /** Square packshots for gear. They arrive on white, so they are always
+      presented on the brand's warm paper plate rather than cropped flush. */
+  cafetiere: asset(
     "/images/products/product-02.jpg",
     "Glass and matte black cafetière filled with roasted beans",
     800,
@@ -263,7 +304,7 @@ export const shopImages = {
   ),
   espressoCup: asset(
     "/images/products/product-04.jpg",
-    "Green ceramic espresso cup with a removable brew basket",
+    "Green ceramic espresso cup with its brew basket alongside",
     800,
     800,
     "50% 50%",
@@ -288,117 +329,103 @@ export const shopImages = {
  * Journal
  * ---------------------------------------------------------------------- */
 export const journalImages = {
-  banner: asset(
-    "/images/blog/blog-heading.jpg",
-    "Stacked journals and a notebook beside a cup on a linen cloth",
-    1920,
-    750,
-    "50% 50%",
-  ),
   brewing: asset(
     "/images/blog/article-01.jpg",
-    "Steam rising from a glass carafe as coffee is poured",
+    "Steam lifting off a glass carafe as filter coffee is poured",
     1300,
     1050,
     "50% 50%",
   ),
   origin: asset(
     "/images/blog/article-02.jpg",
-    "Coffee cherries being sorted by hand at origin",
+    "Two colleagues comparing cups over a laptop at the bar",
     1300,
     1050,
-    "50% 50%",
+    "50% 45%",
   ),
   latte: asset(
     "/images/blog/article-03.jpg",
-    "Hands holding two cups of latte art at a café table",
+    "Hands raising two finished lattes across a café table",
     1300,
     1050,
     "50% 50%",
   ),
+  /** Spare frame for the archive's closing block. */
+  notes: asset(
+    "/images/lifestyle/lifestyle-07.jpg",
+    "A barista checking the grind setting mid-service",
+    1100,
+    1065,
+    "50% 45%",
+  ),
 } as const;
 
 /* -------------------------------------------------------------------------
- * Lifestyle / gallery
+ * Lifestyle — the supporting library
  * ---------------------------------------------------------------------- */
 export const lifestyleImages = {
-  gallery: [
-    asset(
-      "/images/lifestyle/lifestyle-01.jpg",
-      "Hands pouring steamed milk into a cup at the bar",
-      1100,
-      1065,
-      "50% 50%",
-    ),
-    asset(
-      "/images/lifestyle/lifestyle-02.jpg",
-      "Coffee being tamped into a portafilter basket",
-      1100,
-      1065,
-      "50% 50%",
-    ),
-    asset(
-      "/images/lifestyle/lifestyle-03.jpg",
-      "Milk poured into a finished latte with a tulip pattern",
-      1100,
-      1065,
-      "50% 50%",
-    ),
-    asset(
-      "/images/lifestyle/lifestyle-04.jpg",
-      "Cold brew coffee poured over a tall glass of ice",
-      1100,
-      1065,
-      "50% 50%",
-    ),
-    asset(
-      "/images/lifestyle/lifestyle-05.jpg",
-      "A pastry served alongside a filter coffee on a wooden table",
-      1100,
-      1065,
-      "50% 50%",
-    ),
-    asset(
-      "/images/lifestyle/lifestyle-06.jpg",
-      "Guests talking over coffee in a sunlit corner",
-      1100,
-      1065,
-      "50% 50%",
-    ),
-    asset(
-      "/images/lifestyle/lifestyle-07.jpg",
-      "A barista checking the grind setting on an espresso grinder",
-      1100,
-      1065,
-      "50% 50%",
-    ),
-    asset(
-      "/images/lifestyle/lifestyle-08.jpg",
-      "Two filter coffees and an espresso set on a marble counter",
-      1100,
-      1065,
-      "50% 50%",
-    ),
-  ],
-} as const;
-
-/* -------------------------------------------------------------------------
- * Contact
- * ---------------------------------------------------------------------- */
-export const contactImages = {
-  banner: asset(
-    "/images/contact/contact-heading.jpg",
-    "Espressly counter with a brass espresso machine and stacked cups",
-    2560,
-    1000,
+  pour: asset(
+    "/images/lifestyle/lifestyle-01.jpg",
+    "Milk poured from a jug into a cup at the bar",
+    1100,
+    1065,
+    "50% 50%",
+  ),
+  tamp: asset(
+    "/images/lifestyle/lifestyle-02.jpg",
+    "Ground coffee tamped level into a portafilter basket",
+    1100,
+    1065,
+    "50% 50%",
+  ),
+  latte: asset(
+    "/images/lifestyle/lifestyle-03.jpg",
+    "Steamed milk poured into a finished latte to build the rosetta",
+    1100,
+    1065,
+    "50% 50%",
+  ),
+  coldBrew: asset(
+    "/images/lifestyle/lifestyle-04.jpg",
+    "Cold brew coffee poured over a tall glass of ice",
+    1100,
+    1065,
+    "50% 50%",
+  ),
+  pastry: asset(
+    "/images/lifestyle/lifestyle-05.jpg",
+    "A laminated pastry served beside a filter coffee on a wooden table",
+    1100,
+    1065,
+    "50% 50%",
+  ),
+  room: asset(
+    "/images/lifestyle/lifestyle-06.jpg",
+    "A guest laughing over a coffee at a shared table",
+    1100,
+    1065,
+    "50% 50%",
+  ),
+  bar: asset(
+    "/images/lifestyle/lifestyle-07.jpg",
+    "A barista checking the grind setting mid-service",
+    1100,
+    1065,
     "50% 45%",
+  ),
+  trio: asset(
+    "/images/lifestyle/lifestyle-08.jpg",
+    "Two filter coffees and an espresso set out on a marble counter",
+    1100,
+    1065,
+    "50% 50%",
   ),
 } as const;
 
 /**
  * Derive an art-directed variant of an existing asset.
  *
- * Used where one photograph serves two purposes (for example a product packshot
+ * Used where one photograph serves two purposes (for example a product frame
  * and its hover frame) and only the crop or the description differs. Keeps a
  * single source per file while letting each slot declare its own framing.
  */

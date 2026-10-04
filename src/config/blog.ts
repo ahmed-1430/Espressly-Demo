@@ -1,4 +1,4 @@
-import { journalImages, lifestyleImages } from "./images";
+import { journalImages } from "./images";
 import type { ImageAsset } from "./images";
 
 export type BlogAuthor = {
@@ -164,7 +164,7 @@ export const posts: readonly BlogPost[] = [
     date: "2026-01-08",
     dateLabel: "8 January 2026",
     readingTime: "9 min read",
-    image: lifestyleImages.gallery[1],
+    image: journalImages.notes,
     tags: ["Roasting", "Cupping"],
     body: [
       {
@@ -296,7 +296,7 @@ export const posts: readonly BlogPost[] = [
     date: "2025-11-19",
     dateLabel: "19 November 2025",
     readingTime: "7 min read",
-    image: lifestyleImages.gallery[3],
+    image: journalImages.brewing,
     tags: ["Guides", "Brewing"],
     body: [
       {
