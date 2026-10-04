@@ -48,6 +48,7 @@ export function PageHeader({
 
   return (
     <header
+      data-tone="dark"
       className={cn(
         "relative isolate flex min-h-[72svh] flex-col justify-end overflow-hidden bg-espresso-950 pb-10 pt-28 text-cream-100 sm:pb-12 sm:pt-32 lg:min-h-[80svh] lg:pb-14 lg:pt-36",
         className,
@@ -58,16 +59,16 @@ export function PageHeader({
         travel={90}
         priority
         sizes="100vw"
-        className="absolute inset-0 -z-10 h-full w-full"
+        className="absolute inset-0 z-behind h-full w-full"
         quality={80}
       />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-espresso-950 via-espresso-950/72 to-espresso-950/45"
+        className="absolute inset-0 z-behind bg-gradient-to-t from-espresso-950 via-espresso-950/72 to-espresso-950/45"
       />
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-espresso-950/85 to-transparent"
+        className="absolute inset-x-0 top-0 z-behind h-40 bg-gradient-to-b from-espresso-950/85 to-transparent"
       />
 
       <Container className="relative">

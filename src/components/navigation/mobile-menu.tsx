@@ -107,7 +107,8 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
-          className="fixed inset-0 z-[95] flex flex-col bg-espresso-950 lg:hidden"
+          className="fixed inset-0 z-overlay flex flex-col bg-espresso-950 lg:hidden"
+          data-tone="dark"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

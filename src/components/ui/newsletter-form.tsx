@@ -108,7 +108,7 @@ export function NewsletterForm({
               : "bg-ink-900 text-paper-50 hover:bg-copper-700",
           )}
         >
-          <span className="relative z-10 inline-flex items-center gap-2">
+          <span className="relative z-raised inline-flex items-center gap-2">
             {state === "loading" ? "Joining…" : state === "success" ? "Joined" : "Join"}
             {state !== "success" ? (
               <svg

@@ -20,28 +20,31 @@ import { hero } from "@/config/home";
  */
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-espresso-950 text-cream-100">
+    <section
+      data-tone="dark"
+      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-espresso-950 text-cream-100"
+    >
       <ParallaxImage
         image={bannerImages.home}
         travel={80}
         priority
         quality={82}
         sizes="100vw"
-        className="absolute inset-0 -z-20 h-full w-full"
+        className="absolute inset-0 z-under h-full w-full"
       />
 
       {/* Layered scrims: left for the plate card, bottom for the metadata rail. */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950/94 via-espresso-950/58 to-espresso-950/32"
+        className="absolute inset-0 z-behind bg-gradient-to-r from-espresso-950/94 via-espresso-950/58 to-espresso-950/32"
       />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-espresso-950 via-espresso-950/55 to-espresso-950/45"
+        className="absolute inset-0 z-behind bg-gradient-to-t from-espresso-950 via-espresso-950/55 to-espresso-950/45"
       />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-espresso-950/70 via-transparent to-espresso-950/30"
+        className="absolute inset-0 z-behind bg-gradient-to-b from-espresso-950/70 via-transparent to-espresso-950/30"
       />
 
       <Container className="relative flex flex-1 flex-col justify-end pb-8 pt-28 sm:pt-32 lg:pt-40">

@@ -70,6 +70,9 @@ export function Section({
     <Tag
       id={id}
       aria-labelledby={labelledBy}
+      /* Exposed so the focus ring can step up to a lighter copper on the dark
+         band without any descendant needing to know its own surface. */
+      data-tone={tone}
       className={cn("relative", spacing[space], tones[tone], className)}
     >
       {children}

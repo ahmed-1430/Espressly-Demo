@@ -51,8 +51,11 @@ export function SiteHeader() {
   return (
     <>
       <header
+        /* While transparent the header sits on a dark banner photograph, so it
+           declares the dark tone and inherits the lighter focus ring. */
+        data-tone={solid ? "light" : "dark"}
         className={cn(
-          "fixed inset-x-0 top-0 z-[80] transition-[background-color,box-shadow,border-color] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "fixed inset-x-0 top-0 z-header transition-[background-color,box-shadow,border-color] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
           solid
             ? "border-b border-line-light bg-paper-50/88 backdrop-blur-xl supports-[backdrop-filter]:bg-paper-50/72"
             : "border-b border-transparent bg-transparent",

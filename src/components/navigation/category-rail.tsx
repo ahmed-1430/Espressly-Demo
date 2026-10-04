@@ -58,7 +58,7 @@ export function CategoryRail({ ids, className }: CategoryRailProps) {
       aria-label="Menu categories"
       className={cn(
         "border-b border-line-light bg-paper-50/92 backdrop-blur-xl supports-[backdrop-filter]:bg-paper-50/78",
-        "lg:sticky lg:top-[var(--rail-top)] lg:z-40",
+        "lg:sticky lg:top-[var(--rail-top)] lg:z-nav",
         className,
       )}
       style={{ "--rail-top": "4.75rem" } as React.CSSProperties}
@@ -83,14 +83,14 @@ export function CategoryRail({ ids, className }: CategoryRailProps) {
                   {isActive && !reduce ? (
                     <motion.span
                       layoutId="category-pill"
-                      className="absolute inset-0 -z-10 rounded-pill bg-sand-200"
+                      className="absolute inset-0 z-behind rounded-pill bg-sand-200"
                       transition={tween(duration.base, ease.out)}
                     />
                   ) : null}
                   {isActive && reduce ? (
-                    <span className="absolute inset-0 -z-10 rounded-pill bg-sand-200" />
+                    <span className="absolute inset-0 z-behind rounded-pill bg-sand-200" />
                   ) : null}
-                  <span className="relative z-10">{category.label}</span>
+                  <span className="relative z-raised">{category.label}</span>
                 </button>
               </li>
             );

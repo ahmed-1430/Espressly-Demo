@@ -62,6 +62,13 @@
   --color-line-light: color-mix(in oklab, var(--color-ink-900) 12%, transparent);
   --color-line-dark: color-mix(in oklab, var(--color-cream-100) 18%, transparent);
 
+  /* — Focus —
+     One ring, two tones. `--color-focus` must clear 3:1 against every light
+     surface in the palette (it is the darker copper for that reason);
+     `--color-focus-dark` is the step-up used inside `[data-tone="dark"]`. */
+  --color-focus: var(--color-copper-600);
+  --color-focus-dark: var(--color-copper-300);
+
   /* — Typography — */
   --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
@@ -133,6 +140,33 @@
   --container-page: 90rem;
   --container-copy: 44rem;
 
+  /* — Layering —
+     One ladder for the whole site. A component picks a rung by intent and
+     never needs to know what else happens to be on the page, so nothing
+     reaches for an arbitrary number.
+
+       under    full-bleed photography, behind its section's content
+       behind   paints behind sibling content: dimming gradients, chip fills
+       base     ordinary flow
+       raised   cards, chips and labels sitting over a sibling's surface
+       nav      sticky sub-navigation, deliberately tucked under the header
+       header   the site header
+       overlay  mobile menu and cart drawer
+       top      skip link — has to beat everything, since it is the first
+                thing a keyboard user reaches
+
+     Tailwind's z-index scale is a fixed list of numbers rather than a theme
+     namespace, so the utilities that expose these rungs are declared in
+     section 3 rather than generated. */
+  --z-under: -20;
+  --z-behind: -10;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-nav: 20;
+  --z-header: 30;
+  --z-overlay: 40;
+  --z-top: 50;
+
   /* — Breakpoints — */
   --breakpoint-xs: 25rem;
   --breakpoint-3xl: 105rem;
@@ -184,11 +218,33 @@
     text-wrap: pretty;
   }
 
-  /* Visible, on-brand focus ring for every interactive element. */
+  /* Visible, on-brand focus ring for every interactive element.
+     Copper-600 clears 3:1 against the light band; the outline is left to
+     follow each element's own border-radius so a pill button keeps a pill
+     ring instead of snapping square while focused. */
   :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
-    outline: 2px solid var(--color-copper-500);
+    outline: 2px solid var(--color-focus);
     outline-offset: 3px;
-    border-radius: 1px;
+  }
+
+  /* On the dark band the same copper falls to 2.9:1, so the ring steps up to
+     copper-300 (10:1 against espresso-900). Tone is declared once by
+     <Section> and by the header, so this adapts with no per-component
+     knowledge and no inline styles. */
+  [data-tone="dark"] :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible,
+  [data-tone="deeper"] :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+    outline-color: var(--color-focus-dark);
+  }
+
+  /* A focus ring has to be there the instant focus arrives. Tailwind's
+     `transition-colors` also transitions `outline-color`, so the ring would
+     otherwise fade in over the control's own duration — 400 ms on the header
+     icons — and a keyboard user tabs on before the indicator is legible.
+     Focus is transient, so suppressing the tween for as long as the element is
+     focused costs nothing. Marked important because a utility sits above the
+     base layer and would otherwise win. */
+  :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+    transition-property: color, background-color, border-color, fill, stroke !important;
   }
 
   ::selection {
@@ -213,6 +269,41 @@
 /* ===========================================================================
    3. Utilities
    ======================================================================== */
+/* The layering ladder (see `--z-*` in section 1). Declared as utilities
+   because Tailwind's z-index is a fixed list of numbers, not a theme
+   namespace. They take variants like any other — `lg:z-nav` works. */
+@utility z-under {
+  z-index: var(--z-under);
+}
+
+@utility z-behind {
+  z-index: var(--z-behind);
+}
+
+@utility z-base {
+  z-index: var(--z-base);
+}
+
+@utility z-raised {
+  z-index: var(--z-raised);
+}
+
+@utility z-nav {
+  z-index: var(--z-nav);
+}
+
+@utility z-header {
+  z-index: var(--z-header);
+}
+
+@utility z-overlay {
+  z-index: var(--z-overlay);
+}
+
+@utility z-top {
+  z-index: var(--z-top);
+}
+
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: var(--text-eyebrow);

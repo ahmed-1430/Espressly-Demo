@@ -40,7 +40,7 @@ function Wipe({ className }: { className?: string }) {
     <span
       aria-hidden
       className={cn(
-        "absolute inset-0 -z-0 origin-bottom scale-y-0 rounded-pill bg-ink-900 transition-transform duration-[650ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:scale-y-100",
+        "absolute inset-0 z-base origin-bottom scale-y-0 rounded-pill bg-ink-900 transition-transform duration-[650ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:scale-y-100",
         className,
       )}
     />
@@ -100,7 +100,7 @@ export function ButtonLink({
       {wipe && variant !== "link" ? <Wipe /> : null}
       <span
         className={cn(
-          "relative z-10 inline-flex items-center gap-3",
+          "relative z-raised inline-flex items-center gap-3",
           wipe && variant === "outline" && "group-hover/btn:text-cream-100",
         )}
       >
@@ -143,7 +143,7 @@ export function Button({
       {wipe && variant !== "link" ? <Wipe /> : null}
       <span
         className={cn(
-          "relative z-10 inline-flex items-center gap-3",
+          "relative z-raised inline-flex items-center gap-3",
           wipe && variant === "outline" && "group-hover/btn:text-cream-100",
         )}
       >

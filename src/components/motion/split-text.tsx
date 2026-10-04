@@ -35,6 +35,12 @@ type SplitTextProps = {
  *
  * Under reduced motion the string is returned verbatim with no transforms,
  * no clips and no extra markup.
+ *
+ * No `will-change-transform` on the word boxes, deliberately. Motion promotes
+ * each element for the length of its own animation and releases it after, so a
+ * permanent hint would leave every word on the page as its own compositor layer
+ * for the lifetime of the document — a headline-heavy page would hold well over
+ * a hundred of them. Plain translate/opacity is already composited.
  */
 export function SplitText({
   text,
@@ -67,7 +73,7 @@ export function SplitText({
                 )}
               >
                 <motion.span
-                  className="block will-change-transform"
+                  className="block"
                   initial={{ y: "112%" }}
                   animate={{ y: 0 }}
                   transition={tween(durationSeconds, ease.out, delay + index * step)}
@@ -77,7 +83,7 @@ export function SplitText({
               </span>
             ) : (
               <motion.span
-                className="block will-change-transform"
+                className="block"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={tween(durationSeconds, ease.out, delay + index * step)}

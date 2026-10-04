@@ -71,7 +71,7 @@ export function CartDrawer() {
   return (
     <AnimatePresence>
       {isOpen ? (
-        <div className="fixed inset-0 z-[90]" role="dialog" aria-modal="true" aria-label="Your bag">
+        <div className="fixed inset-0 z-overlay" role="dialog" aria-modal="true" aria-label="Your bag">
           <motion.button
             type="button"
             tabIndex={-1}
