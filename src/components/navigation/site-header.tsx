@@ -63,14 +63,16 @@ export function SiteHeader() {
       >
         <div
           className={cn(
-            "mx-auto flex w-full max-w-[var(--container-page)] items-center justify-between gap-6 px-6 transition-[height,padding] duration-700 ease-out-expo sm:px-10 lg:px-14",
-            solid ? "h-[4.25rem] lg:h-[4.75rem]" : "h-[5rem] lg:h-[6.5rem]",
+            "mx-auto flex w-full max-w-[var(--container-grid)] items-center justify-between gap-6 px-6 transition-[height] duration-700 ease-out-expo sm:px-8",
+            /* 100px is the reference's own bar height; the condensed state
+               drops to 76px so the page settles into it on scroll. */
+            solid ? "h-[76px]" : "h-[100px]",
           )}
         >
-          <Logo tone={solid ? "dark" : "light"} height={solid ? 32 : 44} priority />
+          <Logo tone={solid ? "dark" : "light"} height={solid ? 32 : 40} priority />
 
-          <nav aria-label="Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-1">
+          <nav aria-label="Primary" className="hidden h-full self-stretch lg:block">
+            <ul className="flex h-full items-stretch">
               {primaryNav.map((item) => {
                 const active = isActive(item.href);
                 return (
@@ -79,7 +81,9 @@ export function SiteHeader() {
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "group relative inline-flex h-10 items-center px-3.5 text-meta font-medium tracking-[0.01em] transition-colors duration-400",
+                        /* Reference nav: 15px, uppercase, 400 weight, 23px line-height, 23px
+                         horizontal padding. */
+                        "group relative inline-flex h-full items-center px-[23px] text-[15px] font-normal uppercase leading-[23px] tracking-[0.02em] transition-colors duration-400",
                         solid
                           ? active
                             ? "text-ink-900"
@@ -93,7 +97,7 @@ export function SiteHeader() {
                       <span
                         aria-hidden
                         className={cn(
-                          "absolute inset-x-3 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-400 ease-out-expo group-hover:scale-x-100",
+                          "absolute inset-x-[23px] bottom-0 h-px origin-left scale-x-0 bg-current transition-transform duration-400 ease-out-expo group-hover:scale-x-100",
                           active ? "scale-x-100" : "",
                         )}
                       />

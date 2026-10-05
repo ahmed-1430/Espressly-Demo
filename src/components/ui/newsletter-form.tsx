@@ -102,7 +102,7 @@ export function NewsletterForm({
           type="submit"
           disabled={state === "loading" || state === "success"}
           className={cn(
-            "group relative inline-flex h-11 shrink-0 items-center justify-center overflow-hidden rounded-pill px-6 text-meta font-medium tracking-[0.06em] uppercase transition-colors duration-500 disabled:opacity-70",
+            "group relative inline-flex h-11 shrink-0 items-center justify-center overflow-hidden px-6 text-[12px] font-semibold uppercase tracking-[0.15em] transition-colors duration-300 disabled:opacity-70",
             light
               ? "bg-cream-100 text-ink-950 hover:bg-copper-400"
               : "bg-ink-900 text-paper-50 hover:bg-copper-700",
