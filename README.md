@@ -236,11 +236,15 @@ Art direction is encoded in the registry rather than left to chance:
 - No photograph appears twice on the same page.
 - `focus` is set wherever a crop would otherwise slice through the subject.
 - `plate: true` marks a cut-out product shot. Retail packshots arrive on flat
-  white, and cropped flush into a cream card that white reads as an unfilled
-  placeholder — so these are contained with an inset and multiplied into the
-  frame's own warm colour, which dissolves the studio background into the plate.
-  A future packshot supplied as a transparent PNG needs no change, since
-  multiply is a no-op over the plate colour.
+  white, and cropped into a cream card that white reads as an unfilled
+  placeholder — so these are multiplied into the frame's own warm paper, which
+  dissolves the studio background. The frame still crops rather than containing
+  the image, because a square packshot contained inside a 4:5 frame floats small
+  in a mostly empty rectangle that looks like a missing image; cropping only
+  trims outer margin, which is white anyway. `Media` forces the plate light
+  rather than trusting `placeholderTone`, since multiplying onto a dark surface
+  would render the packshot black. A future packshot supplied as a transparent
+  PNG needs no change.
 
 `public/images/README.md` lists every slot, what consumes it, and the framing
 each one needs. `node scripts/contact-sheet.mjs` renders a labelled contact

@@ -32,12 +32,21 @@ type MediaProps = {
  * Every frame reserves its space with an explicit aspect ratio, so swapping the
  * underlying file for a different orientation crops rather than shifts layout.
  *
- * `ImageAsset.plate` opts a slot into the packshot treatment — contained with an
- * inset and multiplied into the frame's own colour — which is what stops a
- * supplier's flat-white studio background from reading as an unfilled
- * placeholder once it is cropped into a cream card. It is declared in config
- * rather than passed at the call site, so swapping in a real packshot needs no
- * component changes.
+ * `ImageAsset.plate` opts a slot into the packshot treatment: the image is
+ * multiplied into the frame's own paper colour, so a supplier's flat-white
+ * studio background disappears instead of reading as an unfilled rectangle
+ * once it is cropped into a cream card. Declared in config rather than passed at
+ * the call site, so swapping in a real packshot needs no component changes.
+ *
+ * Two deliberate choices, both of which came out of looking at the result:
+ *
+ *  - The frame still crops (`cover`) rather than containing with an inset. A
+ *    square packshot contained inside a 4:5 frame floats small in a mostly empty
+ *    cream rectangle, which reads as a missing image. Cropping only trims the
+ *    outer margin, which is white anyway once it is multiplied out.
+ *  - The plate is forced light. Multiplying onto a dark surface would render the
+ *    whole packshot black, so this must not depend on the caller passing
+ *    `placeholderTone="light"`.
  */
 export function Media({
   image,
@@ -60,8 +69,7 @@ export function Media({
     <div
       className={cn(
         "relative isolate overflow-hidden",
-        placeholderTone === "dark" ? "bg-espresso-800" : "bg-sand-100",
-        plate && "p-[7%]",
+        plate ? "bg-sand-100" : placeholderTone === "dark" ? "bg-espresso-800" : "bg-sand-100",
         className,
       )}
       style={style}
@@ -74,7 +82,7 @@ export function Media({
         priority={priority}
         quality={quality}
         className={cn(
-          fit === "contain" || plate ? "object-contain" : "object-cover",
+          fit === "contain" ? "object-contain" : "object-cover",
           plate && "mix-blend-multiply",
           imgClassName,
         )}
