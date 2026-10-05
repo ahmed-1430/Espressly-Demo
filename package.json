@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/check-type-tokens.mjs",
+    "prebuild": "node scripts/check-type-tokens.mjs && node scripts/check-layering.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check:type-tokens": "node scripts/check-type-tokens.mjs",
+    "check:layering": "node scripts/check-layering.mjs",
     "brand:assets": "node scripts/build-logo-assets.mjs"
   },
   "dependencies": {
