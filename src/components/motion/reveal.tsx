@@ -19,7 +19,7 @@ type RevealProps = {
   distance?: number;
   delay?: number;
   durationSeconds?: number;
-  as?: "div" | "li" | "ul" | "ol" | "dl" | "section" | "article" | "span" | "p" | "h2" | "h3" | "blockquote" | "figure";
+  as?: "div" | "li" | "ul" | "ol" | "dl" | "section" | "article" | "span" | "p" | "h1" | "h2" | "h3" | "h4" | "blockquote" | "figure";
   /** Anchor target, so a wrapped block can still be deep-linked. */
   id?: string;
 };
