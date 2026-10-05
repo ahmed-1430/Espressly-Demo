@@ -169,6 +169,35 @@
   --spacing-section: 130px;
   --spacing-section-tight: 85px;
 
+  /* — Layering —
+     One ladder for the whole site. A component picks a rung by intent and
+     never needs to know what else happens to be on the page, so nothing
+     reaches for an arbitrary number.
+
+       under    full-bleed photography, behind its section's content
+       behind   paints behind sibling content: dimming gradients, chip fills
+       base     ordinary flow
+       raised   cards, chips and labels sitting over a sibling's surface
+       nav      sticky sub-navigation, deliberately tucked under the header
+       header   the site header
+       overlay  mobile menu and cart drawer
+       top      skip link — has to beat everything, since it is the first
+                thing a keyboard user reaches
+
+     Tailwind's z-index is a fixed list of numbers rather than a theme
+     namespace, so the utilities that expose these rungs are declared as
+     `@utility` in section 3 rather than generated. The two halves must both
+     exist: without these values the utilities resolve to an empty var and
+     every fixed element silently loses its stacking order. */
+  --z-under: -20;
+  --z-behind: -10;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-nav: 20;
+  --z-header: 30;
+  --z-overlay: 40;
+  --z-top: 50;
+
   /* — Breakpoints — */
   --breakpoint-xs: 25rem;
   --breakpoint-3xl: 105rem;
