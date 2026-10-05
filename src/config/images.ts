@@ -98,6 +98,63 @@ export const decorativeImages = {
 } as const;
 
 /* -------------------------------------------------------------------------
+ * Hero slides
+ * ----------------------------------------------------------------------
+ * The reference opens the site on a fullscreen slider carrying three to four
+ * slides, each a large photograph with an uppercase display heading, a short
+ * line of copy and a call to action. These are the Espressly equivalent:
+ * three slides, all replaceable from this one file.
+ *
+ * Art direction: the reference runs its hero fullscreen with type centred over
+ * the image, so each frame needs a calm centre and its subject away from the
+ * middle. Dark frames are preferred because white display type sits on them.
+ */
+export const heroSlides = [
+  {
+    id: "art-of-coffee",
+    title: "The Art of Coffee",
+    description:
+      "Sourced in season, roasted in small batches and brewed to the bean rather than to the machine.",
+    image: asset(
+      "/images/hero/hero-espresso-pour.jpg",
+      "Freshly pulled espresso beside a wooden scoop of roasted beans on dark slate",
+      1920,
+      1100,
+      "58% 50%",
+    ),
+    cta: { label: "Explore the menu", href: "/menu" },
+  },
+  {
+    id: "brewed-with-intention",
+    title: "Brewed with Intention",
+    description:
+      "Twelve kilos at a time, rested four days, and tasted twice before it is allowed near a cup.",
+    image: asset(
+      "/images/editorial/editorial-pour-over.jpg",
+      "Water poured in a thin spiral over a filter cone into a glass server",
+      2560,
+      1333,
+      "50% 52%",
+    ),
+    cta: { label: "See the coffee", href: "/shop" },
+  },
+  {
+    id: "daily-ritual",
+    title: "Your Daily Ritual",
+    description:
+      "A quiet room on the old quay, a short menu, and nobody ever rushed out of a seat.",
+    image: asset(
+      "/images/hero/hero-cafe-bar.jpg",
+      "Barista pulling a shot behind the espresso machine at the Espressly bar",
+      1920,
+      1100,
+      "55% 45%",
+    ),
+    cta: { label: "Find us", href: "/contact" },
+  },
+] as const;
+
+/* -------------------------------------------------------------------------
  * Banners — full-bleed frames that carry cream display type
  * ---------------------------------------------------------------------- */
 export const bannerImages = {

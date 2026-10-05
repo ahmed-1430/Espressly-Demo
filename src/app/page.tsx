@@ -1,7 +1,7 @@
 import { BrandStatement } from "@/components/sections/home/brand-statement";
 import { CraftBand } from "@/components/sections/home/craft-band";
 import { FeaturedProducts } from "@/components/sections/home/featured-products";
-import { Hero } from "@/components/sections/home/hero";
+import { HeroSlider } from "@/components/sections/home/hero-slider";
 import { JournalPreview } from "@/components/sections/home/journal-preview";
 import { NewsletterCta } from "@/components/sections/home/newsletter-cta";
 import { Pillars } from "@/components/sections/home/pillars";
@@ -28,7 +28,7 @@ export const metadata = buildMetadata({
  * Home.
  * ---------------------------------------------------------------------------
  * Composition order, and why:
- *   1. Hero            — orientation and a single, confident first impression.
+ *   1. HeroSlider      — orientation and a single, confident first impression.
  *   2. Marquee         — brand promises, a breath between statement and proof.
  *   3. Statement       — who we are, argued rather than listed.
  *   4. Signature rail  — the product, shown as an object of desire.
@@ -61,7 +61,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Hero />
+      <HeroSlider />
       <MarqueeBand />
       <BrandStatement />
       <SignatureDrinks />
