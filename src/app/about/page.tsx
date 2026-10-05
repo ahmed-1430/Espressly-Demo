@@ -62,7 +62,7 @@ export default function AboutPage() {
 
               <Reveal delay={0.1}>
                 <blockquote className="mt-12 border-l border-copper-600 pl-6">
-                  <p className="text-title-sm leading-snug display-type text-ink-900 sm:text-title-2xl">
+                  <p className="text-title-sm leading-snug display-type text-ink-900 sm:text-title-xl">
                     “{about.story.pullQuote}”
                   </p>
                   <footer className="mt-5 text-caption uppercase tracking-[0.18em] text-text-muted">

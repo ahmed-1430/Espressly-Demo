@@ -4,14 +4,19 @@ import { cn } from "@/lib/cn";
 type ContainerProps = {
   children: ReactNode;
   className?: string;
-  /** `wide` matches the header gutter, `copy` caps measure for prose. */
-  width?: "wide" | "narrow" | "copy" | "full";
+  width?: "grid" | "wide" | "narrow" | "copy" | "full";
   as?: ElementType;
 };
 
+/**
+ * `grid` is the reference's own 1100px measure — the width its section titles,
+ * offer rows and editorial columns are composed on. `wide` is the outer frame
+ * at 1300px, which full-bleed bands align to. `copy` caps prose.
+ */
 const widths = {
-  wide: "mx-auto w-full max-w-[var(--container-page)] px-6 sm:px-10 lg:px-14",
-  narrow: "mx-auto w-full max-w-[64rem] px-6 sm:px-10 lg:px-14",
+  grid: "mx-auto w-full max-w-[var(--container-grid)] px-6 sm:px-8",
+  wide: "mx-auto w-full max-w-[var(--container-page)] px-6 sm:px-10",
+  narrow: "mx-auto w-full max-w-[64rem] px-6 sm:px-8",
   copy: "mx-auto w-full max-w-[var(--container-copy)] px-6 sm:px-8",
   full: "w-full",
 } as const;
@@ -20,7 +25,7 @@ const widths = {
 export function Container({
   children,
   className,
-  width = "wide",
+  width = "grid",
   as,
 }: ContainerProps) {
   const Tag = (as ?? "div") as ElementType;
@@ -40,12 +45,17 @@ type SectionProps = {
   tone?: "light" | "bright" | "sand" | "dark" | "deeper";
 };
 
+/**
+ * The reference's own rhythm: 130px top and bottom on a standard band, 85px
+ * on a tighter one. Everything on the site measures against these, so sections
+ * only ever read as 0, 85 or 130 px of air.
+ */
 const spacing = {
   flush: "",
-  tight: "py-14 sm:py-20",
-  default: "py-18 sm:py-28 lg:py-36",
-  loose: "py-22 sm:py-32 lg:py-44",
-  hero: "pt-28 pb-16 sm:pt-32 lg:pt-40",
+  tight: "py-[50px] sm:py-[70px] lg:py-[var(--spacing-section-tight)]",
+  default: "py-[60px] sm:py-[95px] lg:py-[var(--spacing-section)]",
+  loose: "py-[70px] sm:py-[110px] lg:py-[150px]",
+  hero: "pt-32 pb-16 sm:pt-36 lg:pt-40",
 } as const;
 
 const tones = {

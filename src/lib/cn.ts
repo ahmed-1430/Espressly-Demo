@@ -30,8 +30,6 @@ const TYPE_SCALE = [
   "title-md",
   "title-lg",
   "title-xl",
-  "title-2xl",
-  "title-3xl",
   "lede",
   "display-2xs",
   "display-xs",

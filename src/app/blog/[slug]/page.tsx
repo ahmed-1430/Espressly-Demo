@@ -121,7 +121,7 @@ export default async function ArticlePage({ params }: Params) {
               switch (block.type) {
                 case "heading":
                   return (
-                    <Reveal key={key} as="h2" className="mt-6 text-title-lg leading-snug display-type text-ink-900 sm:text-title-2xl">
+                    <Reveal key={key} as="h2" className="mt-6 text-title-lg leading-snug display-type text-ink-900 sm:text-title-xl">
                       {block.text}
                     </Reveal>
                   );

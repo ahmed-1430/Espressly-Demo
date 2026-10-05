@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter_Tight } from "next/font/google";
+import { Marcellus, Open_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 import { SiteHeader } from "@/components/navigation/site-header";
@@ -19,24 +19,29 @@ import {
 /**
  * Typography
  * ---------------------------------------------------------------------------
- * Fraunces — a variable serif with optical sizing, used for every display
- * setting. Its slightly wonky terminals give the brand an editorial voice
- * without resorting to a high-contrast fashion serif.
- * Inter Tight — a tight, modern grotesque for UI, navigation and body copy.
- * Both are self-hosted by `next/font`, so there is no third-party request and
- * no flash of unstyled text.
+ * Marcellus — the display face. A Trajan-derived roman with flat, even
+ * proportions and no contrast in the strokes, which is what lets an all-caps
+ * setting at 45px with 2px of tracking stay legible rather than turning
+ * spindly. Used for every heading and for nothing else.
+ * Open Sans — a humanist grotesque at weight 300, matching the reference's
+ * light body setting. Light at 15px is what makes long paragraphs recede
+ * behind the display type.
+ *
+ * Both are open-licensed Google fonts, self-hosted by `next/font`, so there is
+ * no third-party request and no flash of unstyled text.
  */
-const display = Fraunces({
+const display = Marcellus({
   subsets: ["latin"],
   display: "swap",
-  axes: ["opsz", "SOFT", "WONK"],
-  variable: "--font-fraunces",
+  weight: "400",
+  variable: "--font-marcellus",
 });
 
-const sans = Inter_Tight({
+const sans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter-tight",
+  weight: ["300", "400", "600"],
+  variable: "--font-open-sans",
 });
 
 export const metadata: Metadata = {

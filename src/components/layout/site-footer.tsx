@@ -101,7 +101,7 @@ export function SiteFooter() {
         {/* Newsletter */}
         <div className="mt-14 grid gap-8 border-t border-cream-100/12 pt-10 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <h2 className="text-title-lg display-type text-cream-100 sm:text-title-2xl">
+            <h2 className="text-title-lg display-type text-cream-100 sm:text-title-xl">
               One letter a month. Four beans in it.
             </h2>
           </div>

@@ -42,7 +42,7 @@ export function ServiceCard({ service, variant = "wide", className }: ServiceCar
         <h3
           className={cn(
             "mt-5 leading-tight display-type text-ink-900",
-            wide ? "text-title-2xl sm:text-title-3xl" : "text-title-md",
+            wide ? "text-title-xl sm:text-title-xl" : "text-title-md",
           )}
         >
           {service.title}

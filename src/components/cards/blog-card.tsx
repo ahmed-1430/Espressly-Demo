@@ -95,7 +95,7 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
           className={cn(
             "mt-4 leading-[1.12] display-type text-ink-900",
             hero
-              ? "text-title-xl sm:text-title-2xl xl:text-title-3xl"
+              ? "text-title-xl sm:text-title-xl xl:text-title-xl"
               : "text-title-sm sm:text-title-md",
           )}
         >

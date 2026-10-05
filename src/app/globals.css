@@ -1,9 +1,14 @@
 /**
- * Espressly Ã¢â‚¬â€ application design system
+ * Espressly — application design system
  * ---------------------------------------------------------------------------
  * Every colour, type ramp, spacing rhythm, easing curve and breakpoint used by
  * the site is declared here once. Components consume Tailwind utilities that
  * resolve to these tokens, so a brand change is a single-file edit.
+ *
+ * Measured against the reference layout specification:
+ *   grid 1100px · section padding 130px · body 15/26 weight 300
+ *   h2 45px/2px uppercase · h3 35px/1.75px · lede 16px/1px
+ *   nav 15px uppercase in a 100px bar · buttons 12px/.15em
  */
 
 @import "tailwindcss";
@@ -12,80 +17,78 @@
    1. Palette
    ======================================================================== */
 @theme {
-  /* Ã¢â‚¬â€ Roasted neutrals: the backbone of every surface Ã¢â‚¬â€ */
+  /* — Roasted neutrals: the backbone of every surface — */
   --color-ink-950: #0d0907;
   --color-ink-900: #16100c;
   --color-ink-800: #20160f;
   --color-ink-700: #2f2018;
 
-  /* Ã¢â‚¬â€ Espresso / roast: the dark band surfaces Ã¢â‚¬â€ */
-  --color-espresso-950: #150e0a;
-  --color-espresso-900: #1d140e;
-  --color-espresso-800: #2a1d14;
-  --color-espresso-700: #3b281b;
+  /* — Espresso / roast: the dark band surfaces — */
+  --color-espresso-950: #121212;
+  --color-espresso-900: #181818;
+  --color-espresso-800: #242424;
+  --color-espresso-700: #333333;
 
-  /* Ã¢â‚¬â€ Copper: the single accent, used sparingly Ã¢â‚¬â€
-     copper-700 is the darkest tone so it also clears AA as small text on
-     the sand surface. */
-  --color-copper-700: #7d4a1d;
-  --color-copper-600: #a3652c;
-  --color-copper-500: #bd7c39;
-  --color-copper-400: #d29a5c;
-  --color-copper-300: #e3bb87;
+  /* — Copper: the single accent.
+     The reference sets its accent at #be9c79; the ramp is kept a shade darker
+     at the low end so small text still clears AA on the light band. */
+  --color-copper-700: #8a6f52;
+  --color-copper-600: #a3815f;
+  --color-copper-500: #be9c79;
+  --color-copper-400: #d0b494;
+  --color-copper-300: #e0cab0;
 
-  /* Ã¢â‚¬â€ Crema Ã¢â€ â€™ paper: the light band surfaces Ã¢â‚¬â€ */
+  /* — Crema → paper: the light band surfaces — */
   --color-crema-300: #dcc09b;
   --color-crema-200: #e9d8bd;
-  --color-sand-200: #e3d7c4;
-  --color-sand-100: #ece3d4;
-  --color-cream-100: #f3ece1;
-  --color-paper-50: #faf6ef;
-  --color-paper-25: #fdfbf7;
+  --color-sand-200: #e8e2da;
+  --color-sand-100: #f2efea;
+  --color-cream-100: #f6f4f1;
+  --color-paper-50: #faf9f7;
+  --color-paper-25: #ffffff;
 
-  /* Ã¢â‚¬â€ Supporting hues Ã¢â‚¬â€ */
+  /* — Supporting hues — */
   --color-clay-500: #b06a3a;
 
-  /* Ã¢â‚¬â€ Semantic aliases consumed by utilities such as `bg-surface-dark` Ã¢â‚¬â€ */
+  /* — Semantic aliases consumed by utilities such as `bg-surface-dark` — */
   --color-surface-dark: var(--color-espresso-900);
   --color-surface-light: var(--color-cream-100);
   --color-surface-bright: var(--color-paper-50);
 
-  /* Ã¢â‚¬â€ Text Ã¢â‚¬â€
-     All values clear WCAG AA (4.5:1) against their intended surface. */
-  --color-text-strong: var(--color-ink-900);
-  --color-text-body: #463527;
-  --color-text-muted: #6b5a4c;
-  --color-text-inverse: #f6efe4;
-  --color-text-inverse-muted: #bca894;
+  /* — Text —
+     The reference body colour is #656565 on white. On this slightly warmer
+     white it measures 5.7:1, and headings at #262626 measure 12.6:1, so both
+     clear AA comfortably. */
+  --color-text-strong: #262626;
+  --color-text-body: #656565;
+  --color-text-muted: #808080;
+  --color-text-inverse: #ffffff;
+  --color-text-inverse-muted: #b9b3ac;
 
-  /* Ã¢â‚¬â€ Lines Ã¢â‚¬â€ */
-  --color-line-light: color-mix(in oklab, var(--color-ink-900) 12%, transparent);
-  --color-line-dark: color-mix(in oklab, var(--color-cream-100) 18%, transparent);
+  /* — Lines — */
+  --color-line-light: color-mix(in oklab, #262626 12%, transparent);
+  --color-line-dark: color-mix(in oklab, #ffffff 18%, transparent);
 
-  /* Ã¢â‚¬â€ Focus Ã¢â‚¬â€
+  /* — Focus —
      One ring, two tones. `--color-focus` must clear 3:1 against every light
-     surface in the palette (it is the darker copper for that reason);
-     `--color-focus-dark` is the step-up used inside `[data-tone="dark"]`. */
-  --color-focus: var(--color-copper-600);
+     surface in the palette; `--color-focus-dark` is the step-up used inside
+     `[data-tone="dark"]`. */
+  --color-focus: #8a6f52;
   --color-focus-dark: var(--color-copper-300);
 
-  /* Ã¢â‚¬â€ Typography Ã¢â‚¬â€ */
-  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
-  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  /* — Typography —
+     Marcellus is the reference display face and Open Sans its body face.
+     Both are open-licensed Google fonts, self-hosted through `next/font`, so
+     there is no third-party request and no flash of unstyled text. */
+  --font-display: var(--font-marcellus), "Trajan Pro", Georgia, serif;
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
 
-  /* Ã¢â‚¬â€ Type scale Ã¢â‚¬â€
-     Tailwind's default font-size utilities are cleared, then re-declared as a
-     single scale named by *role* rather than by size. A component reads
-     `text-body` or `text-title-lg`, never `text-[0.9375rem]`, so hierarchy is
-     legible in the markup and there is no second source of type sizes.
-
-     Convention: the UI and heading steps carry size only. Line height, tracking
-     and case are treatments and belong to a utility (`leading-*`, `eyebrow`),
-     which keeps them visible in the class list instead of hidden in a token. */
+  /* Type scale, named by role. The reference is a small scale: 15px body,
+     16px lede, 20px subheads, 35px h3, 45px h2 — with generous letter-spacing
+     on the display sizes and uppercase throughout the heading set. */
   --text-*: initial;
 
-  /* Interface / running text */
-  --text-micro: 0.625rem;
+  --text-micro: 0.6875rem;
   --text-eyebrow: 0.6875rem;
   --text-caption: 0.75rem;
   --text-meta: 0.8125rem;
@@ -94,44 +97,45 @@
   --text-body-md: 1rem;
   --text-body-lg: 1.0625rem;
 
-  /* Headings Ã¢â‚¬â€ a 1.125 major-second progression, 18 px to 30 px */
   --text-title-xs: 1.125rem;
   --text-title-sm: 1.25rem;
-  --text-title-md: 1.375rem;
-  --text-title-lg: 1.5rem;
-  --text-title-xl: 1.625rem;
-  --text-title-2xl: 1.75rem;
-  --text-title-3xl: 1.875rem;
+  --text-title-md: 1.5rem;
+  --text-title-lg: 1.875rem;
+  --text-title-xl: 2.1875rem;
 
-  --text-display-2xs: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
-  --text-display-2xs--line-height: 1.04;
-  --text-display-2xs--letter-spacing: -0.02em;
+  /* h3 — 35px / 1.75px tracking, per the reference */
+  --text-display-2xs: 2.1875rem;
+  --text-display-2xs--line-height: 1.28;
+  --text-display-2xs--letter-spacing: 0.109em;
 
-  --text-display-xs: clamp(2.25rem, 1.5rem + 3.4vw, 4rem);
-  --text-display-xs--line-height: 1.02;
-  --text-display-xs--letter-spacing: -0.022em;
+  /* h2 — 45px / 2px tracking, per the reference */
+  --text-display-xs: 2.8125rem;
+  --text-display-xs--line-height: 1.22;
+  --text-display-xs--letter-spacing: 0.044em;
 
-  --text-display-sm: clamp(2.25rem, 1.4rem + 3.8vw, 4.75rem);
-  --text-display-sm--line-height: 1.0;
-  --text-display-sm--letter-spacing: -0.024em;
+  /* Hero display. Held to the h2 ratio so the hero and the section titles read
+     as one scale rather than two unrelated ones. */
+  --text-display-sm: clamp(2.5rem, 1.4rem + 4.6vw, 4.5rem);
+  --text-display-sm--line-height: 1.1;
+  --text-display-sm--letter-spacing: 0.05em;
 
-  /* Hero scale. Tuned so "Roasted slowly." fits a single line across the
-     11-column measure at every breakpoint from 1024 px upward. */
-  --text-display-lg: clamp(3.125rem, 1rem + 8.4vw, 10rem);
-  --text-display-lg--line-height: 0.92;
-  --text-display-lg--letter-spacing: -0.032em;
+  --text-display-lg: clamp(2.75rem, 1.2rem + 6.6vw, 6.5rem);
+  --text-display-lg--line-height: 1.06;
+  --text-display-lg--letter-spacing: 0.055em;
 
-  --text-lede: clamp(1.0625rem, 0.98rem + 0.42vw, 1.3125rem);
-  --text-lede--line-height: 1.62;
+  /* Lede — the reference sets its intro line at 16px / 1px, uppercase. */
+  --text-lede: 1rem;
+  --text-lede--line-height: 1.55;
+  --text-lede--letter-spacing: 0.0625em;
 
-  /* Ã¢â‚¬â€ Radii: Espressly stays architectural, corners are barely softened Ã¢â‚¬â€ */
+  /* — Radii: Espressly stays architectural, corners are barely softened — */
   --radius-card: 2px;
   --radius-pill: 999px;
 
-  /* Ã¢â‚¬â€ Elevation Ã¢â‚¬â€ */
-  --shadow-lift: 0 30px 70px -34px color-mix(in oklab, var(--color-ink-950) 62%, transparent);
+  /* — Elevation — */
+  --shadow-lift: 0 30px 70px -34px color-mix(in oklab, #262626 62%, transparent);
 
-  /* Ã¢â‚¬â€ Motion Ã¢â‚¬â€
+  /* — Motion —
      Every transition in the site uses one easing, `ease-out-expo`, so motion
      decelerates the same way everywhere and no interaction reads as imported
      from elsewhere. Durations form a deliberate ladder:
@@ -143,7 +147,7 @@
        500ms  card-level transforms
        700ms  large surfaces: the header condensing, drawers, and the wipe
               behind a primary button
-       1000ms photography Ã¢â‚¬â€ a card image scaling on hover, and the crossfade
+       1000ms photography — a card image scaling on hover, and the crossfade
               beneath it at 700ms so it leads rather than trails
 
      Scripted entrances use the matching scale in `src/lib/motion.ts`, which
@@ -152,38 +156,20 @@
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
   --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  /* Ã¢â‚¬â€ Layout Ã¢â‚¬â€ */
-  --container-page: 90rem;
+  /* — Layout —
+     The reference runs a 1100px content grid inside a wider frame. Both are
+     kept so section edges align and the grid can be reproduced exactly. */
+  --container-page: 1300px;
+  --container-grid: 1100px;
   --container-copy: 44rem;
 
-  /* Ã¢â‚¬â€ Layering Ã¢â‚¬â€
-     One ladder for the whole site. A component picks a rung by intent and
-     never needs to know what else happens to be on the page, so nothing
-     reaches for an arbitrary number.
+  /* — Spacing —
+     Section rhythm is the reference's own: 130px top and bottom, with the
+     intermediate steps used by tighter bands. */
+  --spacing-section: 130px;
+  --spacing-section-tight: 85px;
 
-       under    full-bleed photography, behind its section's content
-       behind   paints behind sibling content: dimming gradients, chip fills
-       base     ordinary flow
-       raised   cards, chips and labels sitting over a sibling's surface
-       nav      sticky sub-navigation, deliberately tucked under the header
-       header   the site header
-       overlay  mobile menu and cart drawer
-       top      skip link Ã¢â‚¬â€ has to beat everything, since it is the first
-                thing a keyboard user reaches
-
-     Tailwind's z-index scale is a fixed list of numbers rather than a theme
-     namespace, so the utilities that expose these rungs are declared in
-     section 3 rather than generated. */
-  --z-under: -20;
-  --z-behind: -10;
-  --z-base: 0;
-  --z-raised: 10;
-  --z-nav: 20;
-  --z-header: 30;
-  --z-overlay: 40;
-  --z-top: 50;
-
-  /* Ã¢â‚¬â€ Breakpoints Ã¢â‚¬â€ */
+  /* — Breakpoints — */
   --breakpoint-xs: 25rem;
   --breakpoint-3xl: 105rem;
 }
@@ -209,6 +195,9 @@
     background-color: var(--color-paper-50);
     color: var(--color-text-body);
     font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 26px;
+    font-weight: 300;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -216,6 +205,7 @@
     overflow-x: clip;
   }
 
+  /* The reference sets every heading in one serif, weight 400, uppercase. */
   h1,
   h2,
   h3,
@@ -225,9 +215,9 @@
     font-family: var(--font-display);
     color: var(--color-text-strong);
     font-weight: 400;
-    /* Deliberately NOT balanced by default: art-directed headlines supply
-       their own line breaks, and `balance` would re-flow them. Short titles
-       opt in via the `balance` class in section-heading.tsx. */
+    text-transform: uppercase;
+    letter-spacing: 0.044em;
+    line-height: 1.22;
   }
 
   p {
@@ -235,18 +225,16 @@
   }
 
   /* Visible, on-brand focus ring for every interactive element.
-     Copper-600 clears 3:1 against the light band; the outline is left to
-     follow each element's own border-radius so a pill button keeps a pill
-     ring instead of snapping square while focused. */
+     The outline is left to follow each element's own border-radius so a pill
+     button keeps a pill ring instead of snapping square while focused. */
   :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 3px;
   }
 
-  /* On the dark band the same copper falls to 2.9:1, so the ring steps up to
-     copper-300 (10:1 against espresso-900). Tone is declared once by
-     <Section> and by the header, so this adapts with no per-component
-     knowledge and no inline styles. */
+  /* On the dark band the same copper falls below 3:1, so the ring steps up to
+     copper-300. Tone is declared once by <Section> and by the header, so this
+     adapts with no per-component knowledge and no inline styles. */
   [data-tone="dark"] :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible,
   [data-tone="deeper"] :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
     outline-color: var(--color-focus-dark);
@@ -254,8 +242,8 @@
 
   /* A focus ring has to be there the instant focus arrives. Tailwind's
      `transition-colors` also transitions `outline-color`, so the ring would
-     otherwise fade in over the control's own duration Ã¢â‚¬â€ 400 ms on the header
-     icons Ã¢â‚¬â€ and a keyboard user tabs on before the indicator is legible.
+     otherwise fade in over the control's own duration — 400 ms on the header
+     icons — and a keyboard user tabs on before the indicator is legible.
      Focus is transient, so suppressing the tween for as long as the element is
      focused costs nothing. Marked important because a utility sits above the
      base layer and would otherwise win. */
@@ -270,11 +258,10 @@
 
   /* Parallax travel is a desktop luxury. On a phone the viewport is short and
      the scroll distance small, while the effect still costs a scroll listener
-     and a spring per instance Ã¢â‚¬â€ six of them on the home page alone. Below `lg`
-     the travel collapses to zero, which also collapses the over-scan layer back
-     to exactly the frame, so the crop stays correct instead of merely slowing
-     down. Driven by a media query rather than a JS breakpoint so there is no
-     hydration branch to reconcile. */
+     and a spring per instance. Below `lg` the travel collapses to zero, which
+     also collapses the over-scan layer back to exactly the frame, so the crop
+     stays correct instead of merely slowing down. Driven by a media query
+     rather than a JS breakpoint so there is no hydration branch to reconcile. */
   .parallax-frame {
     --parallax-travel: 0px;
   }
@@ -304,7 +291,7 @@
    ======================================================================== */
 /* The layering ladder (see `--z-*` in section 1). Declared as utilities
    because Tailwind's z-index is a fixed list of numbers, not a theme
-   namespace. They take variants like any other Ã¢â‚¬â€ `lg:z-nav` works. */
+   namespace. They take variants like any other — `lg:z-nav` works. */
 @utility z-under {
   z-index: var(--z-under);
 }
@@ -343,13 +330,12 @@
   line-height: 1;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 @utility display-type {
   font-family: var(--font-display);
-  font-weight: 350;
-  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 400;
 }
 
 /* Link underline that wipes in from the left. */
@@ -375,7 +361,7 @@
   }
 }
 
-/* Fine film grain Ã¢â‚¬â€ keeps large flat colour fields from banding. */
+/* Fine film grain — keeps large flat colour fields from banding. */
 @utility grain {
   position: relative;
 

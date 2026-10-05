@@ -68,13 +68,13 @@ export function CraftBand() {
               <dl className="mt-6 grid grid-cols-2 gap-6">
                 <div className="border-t border-cream-100/15 pt-5">
                   <dt className="eyebrow text-copper-400">Development</dt>
-                  <dd className="mt-3 text-title-3xl display-type tabular-nums text-cream-100">
+                  <dd className="mt-3 text-title-xl display-type tabular-nums text-cream-100">
                     <CountUp value={12} suffix="%" />
                   </dd>
                 </div>
                 <div className="border-t border-cream-100/15 pt-5">
                   <dt className="eyebrow text-copper-400">Cuppings per batch</dt>
-                  <dd className="mt-3 text-title-3xl display-type tabular-nums text-cream-100">
+                  <dd className="mt-3 text-title-xl display-type tabular-nums text-cream-100">
                     <CountUp value={2} />
                   </dd>
                 </div>

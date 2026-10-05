@@ -135,7 +135,7 @@ export default function WhatWeOfferPage() {
             >
               <div className="flex flex-col gap-5">
                 <p className="eyebrow text-copper-700">{band.kicker}</p>
-                <h3 className="text-title-lg leading-tight display-type text-ink-900 sm:text-title-3xl">
+                <h3 className="text-title-lg leading-tight display-type text-ink-900 sm:text-title-xl">
                   {band.title}
                 </h3>
                 <p className="max-w-[48ch] text-body leading-relaxed text-text-body">
@@ -159,7 +159,7 @@ export default function WhatWeOfferPage() {
             className="flex h-full w-[86vw] shrink-0 snap-start flex-col justify-center gap-6 bg-espresso-900 p-7 text-center sm:w-[32rem] lg:w-[38rem] lg:p-10"
           >
             <p className="eyebrow text-copper-400">Next step</p>
-            <p className="text-title-lg leading-snug display-type text-cream-100 sm:text-title-3xl">
+            <p className="text-title-lg leading-snug display-type text-cream-100 sm:text-title-xl">
               Tell us what you are trying to fix, and we will tell you whether
               we are the right people for it.
             </p>
