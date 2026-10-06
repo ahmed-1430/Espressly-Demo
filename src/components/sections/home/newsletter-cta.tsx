@@ -1,44 +1,52 @@
 import { Marquee } from "@/components/motion/marquee";
 import { Reveal } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
 import { Container, Section } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/section-heading";
 import { NewsletterForm } from "@/components/ui/newsletter-form";
 import { newsletter } from "@/config/home";
 
 /**
  * Newsletter CTA.
  *
- * Oversized display headline, a short list of what the letter contains, and a
- * single field. Deliberately not a full-height band — it should feel like the
- * quiet close to the page rather than another section to scroll through.
+ * The page's one hot surface: an ember band that closes the argument with a
+ * single field. Deliberately not full-height — it should feel like the quiet
+ * close of the page rather than another section to scroll through.
  */
 export function NewsletterCta() {
   return (
-    <Section id="newsletter" tone="light" className="relative overflow-hidden">
-      <Container>
-        <div className="grid gap-x-12 gap-y-10 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <Eyebrow>{newsletter.eyebrow}</Eyebrow>
-            <h2 className="mt-6 text-display-sm text-ink-900">
-              <span className="block overflow-hidden pb-[0.06em]">
-                <SplitText text={newsletter.headline} />
-              </span>
-            </h2>
-            <p className="mt-6 max-w-[46ch] text-lede text-text-body">{newsletter.body}</p>
-          </div>
+    <Section
+      id="newsletter"
+      tone="ember"
+      spacing="tight"
+      className="grain relative overflow-hidden"
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-[7vw] left-1/2 -z-behind -translate-x-1/2 select-none whitespace-nowrap font-display text-[18vw] leading-none tracking-[-0.04em] text-ink-950/[0.06]"
+      >
+        Stay close
+      </span>
 
-          <div className="lg:col-span-5 lg:col-start-8 lg:pt-16">
-            <ul className="flex flex-col gap-3">
+      <Container className="relative">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-7">
+            <p className="label text-ink-950/60">{newsletter.eyebrow}</p>
+            <h2 className="mt-5 text-display-sm text-ink-950">
+              Four beans, <em className="italic">one letter</em> a month
+            </h2>
+            <p className="mt-6 max-w-[44ch] text-body-md leading-relaxed text-ink-950/70">
+              {newsletter.body}
+            </p>
+
+            <ul className="mt-8 flex flex-col gap-2.5">
               {newsletter.perks.map((perk) => (
-                <li key={perk} className="flex items-start gap-3 text-body text-text-body">
+                <li key={perk} className="flex items-start gap-3 text-body-sm text-ink-950/80">
                   <svg
                     aria-hidden
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth={1.6}
-                    className="mt-1 size-3.5 shrink-0 text-copper-600"
+                    className="mt-1 size-3.5 shrink-0"
                   >
                     <path d="m4 12.5 5 5L20 6.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -46,17 +54,20 @@ export function NewsletterCta() {
                 </li>
               ))}
             </ul>
+          </div>
 
+          <div className="lg:col-span-4 lg:col-start-9 lg:pt-10">
             <Reveal delay={0.1}>
-              <div className="mt-8">
-                <NewsletterForm />
-              </div>
+              <NewsletterForm tone="dark" />
             </Reveal>
+            <p className="mt-5 max-w-[32ch] font-mono text-[0.5625rem] uppercase leading-relaxed tracking-[0.12em] text-ink-950/50">
+              No offers, no daily send. Unsubscribe in one click.
+            </p>
           </div>
         </div>
       </Container>
 
-      <div className="mt-16 border-t border-line-light py-5 text-text-muted sm:mt-20">
+      <div className="relative mt-14 border-t border-ink-950/15 py-5">
         <Marquee
           items={[
             "Ground to order",
@@ -65,7 +76,8 @@ export function NewsletterCta() {
             "Roasted in small batches",
           ]}
           durationSeconds={30}
-          className="font-sans text-caption uppercase tracking-[0.24em] text-text-muted"
+          separator={<span aria-hidden className="text-ink-950/40">✳</span>}
+          className="font-display text-title-xs italic text-ink-950/70 sm:text-title-sm"
         />
       </div>
     </Section>

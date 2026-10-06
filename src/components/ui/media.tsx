@@ -68,7 +68,11 @@ export function Media({
   return (
     <div
       className={cn(
-        "relative isolate overflow-hidden",
+        /* `fill` is used inside frames that already own their height. An
+           absolutely-positioned root fills that frame without feeding a
+           percentage height back into it — which is what made an aspect-ratio
+           frame compute double height while its image was still decoding. */
+        fill ? "absolute inset-0 isolate overflow-hidden" : "relative isolate overflow-hidden",
         plate ? "bg-sand-100" : placeholderTone === "dark" ? "bg-espresso-800" : "bg-sand-100",
         className,
       )}

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ImageReveal } from "@/components/motion/image-reveal";
-import { Eyebrow } from "@/components/ui/section-heading";
 import type { BlogPost } from "@/config/blog";
 import { cn } from "@/lib/cn";
 
@@ -20,24 +19,24 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
       <article className={cn("group/row", className)}>
         <Link
           href={href}
-          className="grid grid-cols-[6rem_1fr] gap-5 py-6 sm:grid-cols-[8rem_1fr] sm:gap-7"
+          className="grid grid-cols-[5.5rem_1fr] items-center gap-5 border-b border-line-light py-5 sm:grid-cols-[7.5rem_1fr] sm:gap-7"
         >
           <ImageReveal
             image={post.image}
             from="left"
             scale={1.02}
             ratio="1 / 1"
-            sizes="128px"
+            sizes="120px"
             className="aspect-square w-full"
           />
           <div className="flex min-w-0 flex-col justify-center gap-2">
-            <p className="eyebrow text-copper-700">{post.category}</p>
-            <h3 className="text-body-lg leading-snug display-type text-ink-900 sm:text-title-sm">
-              <span className="transition-colors duration-300 group-hover/row:text-copper-700">
+            <p className="label text-copper-600">{post.category}</p>
+            <h3 className="font-display text-title-xs leading-tight text-ink-900 sm:text-title-sm">
+              <span className="transition-colors duration-300 group-hover/row:text-copper-600">
                 {post.title}
               </span>
             </h3>
-            <p className="text-meta text-text-muted">
+            <p className="font-mono text-[0.5625rem] uppercase tracking-[0.12em] text-text-muted">
               <time dateTime={post.date}>{post.dateLabel}</time>
               <span aria-hidden> · </span>
               {post.readingTime}
@@ -54,9 +53,6 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
     <article
       className={cn(
         "group/post flex flex-col",
-        // The split only engages at `xl`, where the article owns the full
-        // container width. Below that it stacks, so nesting it inside a narrow
-        // column can never squeeze it.
         hero && "xl:grid xl:grid-cols-12 xl:items-center xl:gap-10",
         className,
       )}
@@ -82,43 +78,54 @@ export function BlogCard({ post, variant = "tile", className, priority = false }
         />
       </Link>
 
-      <div className={cn("flex flex-1 flex-col", hero ? "xl:col-span-5" : "pt-6")}>
+      <div className={cn("flex flex-1 flex-col", hero ? "xl:col-span-5" : "pt-5")}>
         <div className="flex items-center gap-3">
-          <Eyebrow ornament={false}>{post.category}</Eyebrow>
-          <span aria-hidden className="h-px w-6 bg-line-light" />
-          <span className="text-caption uppercase tracking-[0.16em] text-text-muted">
+          <p className="label text-copper-600">{post.category}</p>
+          <span aria-hidden className="h-px w-5 bg-line-light" />
+          <span className="font-mono text-[0.5625rem] uppercase tracking-[0.12em] text-text-muted">
             {post.readingTime}
           </span>
         </div>
 
         <h3
           className={cn(
-            "mt-4 leading-[1.12] display-type text-ink-900",
-            hero
-              ? "text-title-xl sm:text-title-xl xl:text-title-xl"
-              : "text-title-sm sm:text-title-md",
+            "mt-3 font-display leading-[1.06] text-ink-900",
+            hero ? "text-title-xl sm:text-display-2xs" : "text-title-sm sm:text-title-md",
           )}
         >
-          <Link href={href} className="transition-colors duration-300 group-hover/post:text-copper-700">
+          <Link href={href} className="transition-colors duration-300 group-hover/post:text-copper-600">
             {post.title}
           </Link>
         </h3>
 
         <p
           className={cn(
-            "mt-4 leading-relaxed text-text-body",
-            hero ? "max-w-[52ch] text-body" : "text-body-sm",
+            "mt-3 leading-relaxed text-text-body",
+            hero ? "max-w-[48ch] text-body-md" : "text-body-sm",
           )}
         >
           {post.excerpt}
         </p>
 
-        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-caption uppercase tracking-[0.16em] text-text-muted">
-          <time dateTime={post.date}>{post.dateLabel}</time>
-          <span aria-hidden className="text-copper-600/60">
-            ·
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-x-5 gap-y-2 border-t border-line-light pt-4">
+          <p className="font-mono text-[0.5625rem] uppercase tracking-[0.12em] text-text-muted">
+            <time dateTime={post.date}>{post.dateLabel}</time>
+            <span aria-hidden> · </span>
+            {post.author.name}
+          </p>
+          <span className="inline-flex items-center gap-1.5 font-mono text-[0.5625rem] uppercase tracking-[0.12em] text-ink-900">
+            Read
+            <svg
+              aria-hidden
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              className="size-3 transition-transform duration-500 ease-out-expo group-hover/post:-translate-y-0.5 group-hover/post:translate-x-0.5"
+            >
+              <path d="M7 17 17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </span>
-          <span>{post.author.name}</span>
         </div>
       </div>
     </article>

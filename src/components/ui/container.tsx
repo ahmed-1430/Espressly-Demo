@@ -9,15 +9,22 @@ type ContainerProps = {
 };
 
 /**
- * `grid` is the reference's own 1100px measure — the width its section titles,
- * offer rows and editorial columns are composed on. `wide` is the outer frame
- * at 1300px, which full-bleed bands align to. `copy` caps prose.
+ * Page gutter.
+ *
+ * A real editorial measure rather than a fraction of the viewport: content is
+ * capped at 1440px and centred, with a gutter that steps 20 → 32 → 48px. That
+ * keeps the composition deliberate on a 27-inch display instead of letting a
+ * paragraph stretch to 240 characters, and it gives every band one shared
+ * left and right edge.
+ *
+ * `wide` exists for full-width editorial rails that need a little more room.
+ * `copy` and `narrow` are for genuinely narrower measures.
  */
 const widths = {
-  grid: "mx-auto w-full max-w-[var(--container-grid)] px-6 sm:px-8",
-  wide: "mx-auto w-full max-w-[var(--container-page)] px-6 sm:px-10",
-  narrow: "mx-auto w-full max-w-[64rem] px-6 sm:px-8",
-  copy: "mx-auto w-full max-w-[var(--container-copy)] px-6 sm:px-8",
+  grid: "mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12",
+  wide: "mx-auto w-full max-w-[1680px] px-5 sm:px-8 lg:px-12",
+  narrow: "mx-auto w-full max-w-[68rem] px-5 sm:px-8",
+  copy: "mx-auto w-full max-w-[var(--container-copy)] px-5 sm:px-8",
   full: "w-full",
 } as const;
 
@@ -42,19 +49,19 @@ type SectionProps = {
   id?: string;
   /** Id of the heading that labels this region. */
   labelledBy?: string;
-  tone?: "light" | "bright" | "sand" | "dark" | "deeper";
+  tone?: "light" | "bright" | "sand" | "dark" | "deeper" | "ember";
 };
 
 /**
- * The reference's own rhythm: 130px top and bottom on a standard band, 85px
- * on a tighter one. Everything on the site measures against these, so sections
- * only ever read as 0, 85 or 130 px of air.
+ * Section rhythm: 128px top and bottom on a standard band, 88px on a tighter
+ * one. Everything measures against these, so sections only ever read as 0, 88
+ * or 128 px of air.
  */
 const spacing = {
   flush: "",
-  tight: "py-[50px] sm:py-[70px] lg:py-[var(--spacing-section-tight)]",
-  default: "py-[60px] sm:py-[95px] lg:py-[var(--spacing-section)]",
-  loose: "py-[70px] sm:py-[110px] lg:py-[150px]",
+  tight: "py-[56px] sm:py-[72px] lg:py-[var(--spacing-section-tight)]",
+  default: "py-[64px] sm:py-[96px] lg:py-[var(--spacing-section)]",
+  loose: "py-[72px] sm:py-[112px] lg:py-[152px]",
   hero: "pt-32 pb-16 sm:pt-36 lg:pt-40",
 } as const;
 
@@ -64,6 +71,7 @@ const tones = {
   sand: "bg-sand-200 text-text-body",
   dark: "bg-espresso-900 text-text-inverse-muted",
   deeper: "bg-ink-950 text-text-inverse-muted",
+  ember: "bg-copper-500 text-ink-950",
 } as const;
 
 /** Section wrapper: owns the vertical rhythm and the tonal palette. */
@@ -80,8 +88,6 @@ export function Section({
     <Tag
       id={id}
       aria-labelledby={labelledBy}
-      /* Exposed so the focus ring can step up to a lighter copper on the dark
-         band without any descendant needing to know its own surface. */
       data-tone={tone}
       className={cn("relative", spacing[space], tones[tone], className)}
     >

@@ -1,36 +1,37 @@
 import type { ReactNode } from "react";
+import { Reveal } from "@/components/motion/reveal";
 import { cn } from "@/lib/cn";
 
 type EyebrowProps = {
   children: ReactNode;
   className?: string;
-  /** Draws the leading hairline + diamond. */
+  /** Draws the leading rule and ember tick. */
   ornament?: boolean;
   tone?: "dark" | "light";
 };
 
-/** Small uppercase label with an optional hairline ornament. */
+/** Instrument label with an optional rule + ember tick. */
 export function Eyebrow({ children, className, ornament = true, tone = "dark" }: EyebrowProps) {
   return (
     <p
       className={cn(
-        "eyebrow flex items-center gap-3",
-        tone === "dark" ? "text-copper-700" : "text-copper-300",
+        "label flex items-center gap-3",
+        tone === "dark" ? "text-copper-600" : "text-copper-400",
         className,
       )}
     >
       {ornament ? (
-        <span aria-hidden className="flex items-center gap-2">
+        <span aria-hidden className="flex items-center gap-1.5">
           <span
             className={cn(
-              "h-px w-8",
-              tone === "dark" ? "bg-copper-700/50" : "bg-copper-300/50",
+              "h-px w-7",
+              tone === "dark" ? "bg-copper-600/45" : "bg-copper-400/45",
             )}
           />
           <span
             className={cn(
-              "size-1 rotate-45",
-              tone === "dark" ? "bg-copper-600" : "bg-copper-400",
+              "size-1",
+              tone === "dark" ? "bg-copper-500" : "bg-copper-400",
             )}
           />
         </span>
@@ -58,13 +59,14 @@ type SectionHeadingProps = {
 
 const bodyWidths = {
   narrow: "max-w-[34ch]",
-  medium: "max-w-[52ch]",
-  wide: "max-w-[64ch]",
+  medium: "max-w-[48ch]",
+  wide: "max-w-[62ch]",
 } as const;
 
 /**
- * The section header used everywhere. Deliberately restrained: an eyebrow, one
- * display heading, and at most one paragraph — never a stack of decorations.
+ * The section header used everywhere: an instrument label, one large editorial
+ * heading, and at most one paragraph. No ornaments, no decoration — the type
+ * carries the hierarchy.
  */
 export function SectionHeading({
   eyebrow,
@@ -82,15 +84,16 @@ export function SectionHeading({
   const centered = align === "center";
 
   return (
-    <div
+    <Reveal
       className={cn(
-        "flex flex-col gap-5",
+        "flex flex-col",
         centered && "items-center text-center",
         className,
       )}
+      distance={18}
     >
       {eyebrow ? (
-        <Eyebrow tone={tone} ornament={centered}>
+        <Eyebrow tone={tone} ornament={!centered}>
           {eyebrow}
         </Eyebrow>
       ) : null}
@@ -98,7 +101,7 @@ export function SectionHeading({
       <Heading
         id={id}
         className={cn(
-          "text-display-2xs text-wrap-balance",
+          "mt-5 text-display-2xs",
           tone === "dark" ? "text-ink-900" : "text-cream-100",
         )}
       >
@@ -108,7 +111,7 @@ export function SectionHeading({
       {body ? (
         <p
           className={cn(
-            "text-body leading-relaxed sm:text-body-md",
+            "mt-6 text-body-md leading-relaxed",
             bodyWidths[bodyWidth],
             tone === "dark" ? "text-text-body" : "text-text-inverse-muted",
           )}
@@ -118,6 +121,6 @@ export function SectionHeading({
       ) : null}
 
       {children}
-    </div>
+    </Reveal>
   );
 }

@@ -29,8 +29,10 @@ type PageHeaderProps = {
 /**
  * Shared opening frame for every inner page.
  *
- * Always dark and always full-bleed so the transparent header reads correctly
- * on arrival, then hands over to the light editorial bands below.
+ * Light, typographic and asymmetric: breadcrumb, a large display title with
+ * the lede and metadata in the right column, then a full-bleed photograph with
+ * a caption rule beneath. The header is always paper, so the fixed navigation
+ * never has to guess which surface it is sitting on.
  */
 export function PageHeader({
   eyebrow,
@@ -48,46 +50,29 @@ export function PageHeader({
 
   return (
     <header
-      data-tone="dark"
+      data-tone="light"
       className={cn(
-        "relative isolate flex min-h-[72svh] flex-col justify-end overflow-hidden bg-espresso-950 pb-10 pt-28 text-cream-100 sm:pb-12 sm:pt-32 lg:min-h-[80svh] lg:pb-14 lg:pt-36",
+        "grain relative isolate overflow-hidden bg-paper-50 pb-10 pt-24 sm:pt-28 lg:pb-12 lg:pt-32",
         className,
       )}
     >
-      <ParallaxImage
-        image={image}
-        travel={90}
-        priority
-        sizes="100vw"
-        className="absolute inset-0 z-behind h-full w-full"
-        quality={80}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 z-behind bg-gradient-to-t from-espresso-950 via-espresso-950/72 to-espresso-950/45"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 z-behind h-40 bg-gradient-to-b from-espresso-950/85 to-transparent"
-      />
-
       <Container className="relative">
         {crumbs.length > 0 ? (
-          <nav aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-x-3 gap-y-1 text-caption uppercase tracking-[0.18em] text-cream-100/55">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-text-muted">
               {crumbs.map((crumb, index) => (
-                <li key={crumb.href} className="flex items-center gap-3">
+                <li key={crumb.href} className="flex items-center gap-2.5">
                   {index > 0 ? (
-                    <span aria-hidden className="text-copper-400/60">
+                    <span aria-hidden className="text-copper-500">
                       /
                     </span>
                   ) : null}
                   {index === crumbs.length - 1 ? (
-                    <span aria-current="page" className="text-cream-100/85">
+                    <span aria-current="page" className="text-ink-900">
                       {crumb.label}
                     </span>
                   ) : (
-                    <Link href={crumb.href} className="transition-colors hover:text-cream-100">
+                    <Link href={crumb.href} className="transition-colors duration-300 hover:text-ink-900">
                       {crumb.label}
                     </Link>
                   )}
@@ -97,64 +82,99 @@ export function PageHeader({
           </nav>
         ) : null}
 
-        <div className={cn("flex flex-col gap-6", centered && "items-center text-center")}>
-          <Eyebrow tone="light">{eyebrow}</Eyebrow>
+        <div
+          className={cn(
+            "mt-8 grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10",
+            centered && "text-center",
+          )}
+        >
+          <div className={cn("lg:col-span-8", centered && "lg:col-span-12")}>
+            <Eyebrow>{eyebrow}</Eyebrow>
 
-          <h1 className="max-w-[22ch] text-display-sm text-cream-100 lg:max-w-[none]">
-            {title.map((line, index, all) => (
-              <Fragment key={line}>
-                <span className="block overflow-hidden pb-[0.08em]">
-                  <SplitText text={line} delay={0.06 * index + 0.1} />
-                </span>
-                {/* Keeps the accessible name readable as sentences. */}
-                {index < all.length - 1 ? " " : null}
-              </Fragment>
-            ))}
-          </h1>
-
-          {body ? (
-            <p
-              className={cn(
-                "max-w-[54ch] text-lede text-cream-100/72",
-                centered && "mx-auto",
-              )}
-            >
-              {body}
-            </p>
-          ) : null}
-
-          {meta && meta.length > 0 ? (
-            <dl
-              className={cn(
-                "mt-2 flex flex-wrap gap-x-10 gap-y-5",
-                centered && "justify-center",
-              )}
-            >
-              {meta.map((item) => (
-                <div key={item.label}>
-                  <dt className="eyebrow text-copper-400">{item.label}</dt>
-                  <dd className="mt-2 text-body-lg display-type text-cream-100">
-                    {item.value}
-                  </dd>
-                </div>
+            <h1 className="mt-5 max-w-[18ch] text-display-sm text-ink-900 lg:max-w-[none]">
+              {title.map((line, index, all) => (
+                <Fragment key={line}>
+                  <span className="block overflow-hidden pb-[0.06em]">
+                    <SplitText text={line} delay={0.05 * index + 0.08} />
+                  </span>
+                  {index < all.length - 1 ? " " : null}
+                </Fragment>
               ))}
-            </dl>
-          ) : null}
+            </h1>
+          </div>
 
-          {children}
+          <div className={cn("lg:col-span-4", centered && "mx-auto max-w-[52ch]")}>
+            {body ? (
+              <p className="max-w-[44ch] text-body-md leading-relaxed text-text-body">
+                {body}
+              </p>
+            ) : null}
+
+            {meta && meta.length > 0 ? (
+              <dl className="mt-7 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-line-light pt-5">
+                {meta.map((item) => (
+                  <div key={item.label}>
+                    <dt className="label text-text-muted">{item.label}</dt>
+                    <dd className="mt-1.5 font-display text-title-xs text-ink-900">
+                      {item.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+
+            {children}
+          </div>
+        </div>
+      </Container>
+
+      <Container className="relative mt-10 sm:mt-12">
+        <div className="relative overflow-hidden border border-ink-900/10">
+          <ParallaxImage
+            image={image}
+            ratio="16 / 9"
+            travel={70}
+            priority
+            sizes="(min-width: 1440px) 1344px, 100vw"
+            className="w-full"
+            quality={82}
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 border border-cream-100/10"
+          />
+        </div>
+
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-line-light pt-3">
+          <p className="font-mono text-[0.5625rem] uppercase tracking-[0.14em] text-text-muted">
+            Espressly — the old quay, Dublin
+          </p>
+          <p className="font-mono text-[0.5625rem] uppercase tracking-[0.14em] text-text-muted">
+            Roasting since 2016
+          </p>
         </div>
       </Container>
 
       {rail && rail.length > 0 ? (
-        <Container className="relative mt-12">
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-cream-100/15 pt-6 text-meta uppercase tracking-[0.16em] text-cream-100/60">
+        <Container className="relative mt-8">
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-line-light pt-5">
             {rail.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="link-wipe transition-colors hover:text-cream-100"
+                className="group/rail inline-flex items-center gap-1.5 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-text-muted transition-colors duration-300 hover:text-ink-900"
               >
-                {item.label}
+                <span className="link-wipe">{item.label}</span>
+                <svg
+                  aria-hidden
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                  className="size-3 transition-transform duration-500 ease-out-expo group-hover/rail:-translate-y-0.5 group-hover/rail:translate-x-0.5"
+                >
+                  <path d="M7 17 17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </Link>
             ))}
           </div>

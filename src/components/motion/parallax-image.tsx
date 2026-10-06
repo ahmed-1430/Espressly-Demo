@@ -1,13 +1,7 @@
 "use client";
 
-import {
-  motion,
-  useMotionTemplate,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "motion/react";
+import { motion, useMotionTemplate, useScroll, useSpring, useTransform } from "motion/react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useRef } from "react";
 import type { CSSProperties } from "react";
 import type { ImageAsset } from "@/config/images";

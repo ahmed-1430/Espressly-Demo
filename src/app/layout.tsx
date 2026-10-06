@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Marcellus, Open_Sans } from "next/font/google";
+import { IBM_Plex_Mono, Instrument_Serif, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
+
 import "./globals.css";
-import { SiteHeader } from "@/components/navigation/site-header";
+
 import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/navigation/site-header";
 import { CartDrawer } from "@/components/shop/cart-drawer";
 import { CartProvider } from "@/components/shop/cart-provider";
 import { brand } from "@/config/images";
@@ -17,62 +19,104 @@ import {
 } from "@/lib/seo";
 
 /**
- * Typography
+ * Espressly typography
  * ---------------------------------------------------------------------------
- * Marcellus — the display face. A Trajan-derived roman with flat, even
- * proportions and no contrast in the strokes, which is what lets an all-caps
- * setting at 45px with 2px of tracking stay legible rather than turning
- * spindly. Used for every heading and for nothing else.
- * Open Sans — a humanist grotesque at weight 300, matching the reference's
- * light body setting. Light at 15px is what makes long paragraphs recede
- * behind the display type.
+ * Instrument Serif:
+ * High-contrast editorial display face. Used sentence-case at large sizes for
+ * the brand voice, and in italic for emphasis inside a line.
  *
- * Both are open-licensed Google fonts, self-hosted by `next/font`, so there is
- * no third-party request and no flash of unstyled text.
+ * Manrope:
+ * Geometric humanist sans for body copy, controls and interface text.
+ *
+ * IBM Plex Mono:
+ * Instrument labels, indices and metadata — the roastery's panel lettering.
+ *
+ * Fonts are loaded through next/font so they are self-hosted by Next.js,
+ * avoiding third-party font requests and reducing layout instability.
  */
-const display = Marcellus({
+
+const display = Instrument_Serif({
   subsets: ["latin"],
   display: "swap",
   weight: "400",
-  variable: "--font-marcellus",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
+  preload: true,
 });
 
-const sans = Open_Sans({
+const sans = Manrope({
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "600"],
-  variable: "--font-open-sans",
+  variable: "--font-manrope",
+  preload: true,
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  preload: true,
 });
 
 export const metadata: Metadata = {
   ...siteMetadata,
+
   applicationName: site.name,
-  authors: [{ name: site.legalName }],
+
+  authors: [
+    {
+      name: site.legalName,
+    },
+  ],
+
   creator: site.legalName,
   publisher: site.legalName,
+
   keywords: [
     "specialty coffee",
     "coffee roastery",
     "espresso",
-    "single origin",
+    "single origin coffee",
     "filter coffee",
     "coffee subscription",
+    "artisan coffee",
     "café",
   ],
+
   alternates: {
     canonical: site.url,
   },
+
   icons: {
     icon: [
-      { url: brand.logo.mark.src, type: "image/png", sizes: "258x240" },
-      { url: brand.logo.markDark.src, type: "image/png", sizes: "258x240" },
+      {
+        url: brand.logo.mark.src,
+        type: "image/png",
+        sizes: "258x240",
+      },
+      {
+        url: brand.logo.markDark.src,
+        type: "image/png",
+        sizes: "258x240",
+      },
     ],
-    apple: [{ url: brand.logo.mark.src, sizes: "258x240" }],
+    apple: [
+      {
+        url: brand.logo.mark.src,
+        sizes: "258x240",
+      },
+    ],
   },
+
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
   },
 };
 
@@ -84,44 +128,86 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: ReactNode;
+}>) {
+  const jsonLd = serialiseJsonLd([
+    organisationJsonLd(),
+    cafeJsonLd(),
+    websiteJsonLd(),
+  ]);
+
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body className="min-h-dvh antialiased">
+    <html
+      lang="en"
+      className={`${display.variable} ${sans.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-dvh bg-paper-50 font-sans text-ink-900 antialiased">
+        {/* Progressive enhancement:
+            reveal content normally when JavaScript is unavailable. */}
         <noscript>
-          {/* Without JS the mount/entrance animations never run, so anything
-              they would have hidden is forced into its final state. */}
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
+          <style>{`
+            [data-reveal] {
+              opacity: 1 !important;
+              transform: none !important;
+              clip-path: none !important;
+              visibility: visible !important;
+            }
+          `}</style>
         </noscript>
 
+        {/* Keyboard accessibility */}
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-top focus:rounded-pill focus:bg-ink-950 focus:px-5 focus:py-3 focus:text-meta focus:font-medium focus:text-cream-100"
+          className="
+            sr-only
+            fixed
+            left-4
+            top-4
+            z-top
+            rounded-pill
+            bg-ink-950
+            px-5
+            py-3
+            text-meta
+            font-semibold
+            text-cream-100
+            outline-none
+            ring-offset-2
+            transition-transform
+            focus:not-sr-only
+            focus-visible:ring-2
+            focus-visible:ring-copper-500
+            focus-visible:ring-offset-ink-950
+          "
         >
           Skip to content
         </a>
 
         <CartProvider>
           <SiteHeader />
-          <main id="main" className="relative">
+
+          <main
+            id="main"
+            className="relative min-h-px outline-none"
+            tabIndex={-1}
+          >
             {children}
           </main>
+
           <SiteFooter />
+
           <CartDrawer />
         </CartProvider>
 
-        {/* Several entities, so they go out as one top-level array rather than
-            concatenated documents: a <script type="application/ld+json"> holds a
-            single JSON document, and three objects joined by newlines is not one.
-            Content is config-derived only — no user input reaches this. */}
+        {/* Structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: serialiseJsonLd([
-              organisationJsonLd(),
-              cafeJsonLd(),
-              websiteJsonLd(),
-            ]),
+            __html: jsonLd,
           }}
         />
       </body>

@@ -35,6 +35,7 @@ const TYPE_SCALE = [
   "display-xs",
   "display-sm",
   "display-lg",
+  "display-xl",
 ] as const;
 
 const twMerge = extendTailwindMerge({

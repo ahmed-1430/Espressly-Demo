@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useEffect, useState } from "react";
 import { menuCategoryNav } from "@/config/menu";
 import { cn } from "@/lib/cn";
@@ -63,8 +64,8 @@ export function CategoryRail({ ids, className }: CategoryRailProps) {
       )}
       style={{ "--rail-top": "4.75rem" } as React.CSSProperties}
     >
-      <div className="mx-auto w-full max-w-[var(--container-page)] px-6 sm:px-10 lg:px-14">
-        <ul className="hide-scrollbar rail snap-x snap-mandatory gap-1 py-3 lg:flex lg:justify-center lg:overflow-visible lg:py-0">
+      <div className="mx-auto w-11/12">
+        <ul className="hide-scrollbar rail min-w-0 snap-x snap-mandatory gap-1 py-3 lg:flex lg:justify-center lg:overflow-visible lg:py-0">
           {menuCategoryNav.map((category) => {
             const isActive = active === category.id;
             return (

@@ -13,61 +13,69 @@ export const metadata = {
 /**
  * 404.
  *
- * Dark espresso page so it matches the arrival state of every other route, and
- * it offers real navigation rather than an apology.
+ * Light, typographic and useful: the missing address is the artwork, and the
+ * real navigation is offered immediately rather than after an apology.
  */
 export default function NotFound() {
   return (
     <Section
       spacing="flush"
-      tone="deeper"
-      className="flex min-h-[86svh] items-center bg-ink-950"
+      tone="bright"
+      className="grain relative flex min-h-svh items-center overflow-hidden pb-20 pt-28 sm:pt-32"
     >
-      <Container className="py-32 text-center">
-        <Eyebrow tone="light" className="justify-center">
-          Error 404
-        </Eyebrow>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -right-[6vw] top-1/2 -z-behind hidden -translate-y-1/2 select-none font-display text-[34vw] leading-none tracking-[-0.06em] text-ink-900/[0.035] lg:block"
+      >
+        404
+      </span>
 
-        {/* Ornamental stamp: a pseudo-element so the numerals stay out of the
-            accessibility tree and never register as low-contrast text. */}
-        <span
-          aria-hidden
-          data-stamp="404"
-          className="stamp-text mt-8 block text-display-lg leading-none display-type text-cream-100/[0.16]"
-        />
+      <Container className="relative">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <Eyebrow>Error 404</Eyebrow>
+            <p
+              aria-hidden
+              className="mt-6 font-display text-display-xl leading-[0.8] tracking-[-0.05em] text-copper-500"
+            >
+              404
+            </p>
+            <h1 className="mt-4 max-w-[16ch] text-display-sm text-ink-900">
+              This page has been drunk and forgotten.
+            </h1>
+          </div>
 
-        <h1 className="mx-auto mt-2 max-w-[20ch] text-display-2xs text-cream-100">
-          This page has been drunk and forgotten
-        </h1>
+          <div className="lg:col-span-4 lg:col-start-9">
+            <p className="max-w-[40ch] text-body-md leading-relaxed text-text-body">
+              The link you followed does not exist any more. The coffee, the
+              menu and the roastery are all still exactly where you left them.
+            </p>
 
-        <p className="mx-auto mt-6 max-w-[52ch] text-lede text-cream-100/65">
-          The link you followed does not exist any more. Here is the way back to
-          something warm.
-        </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <ButtonLink href="/" size="lg" arrow>
+                Back to the bar
+              </ButtonLink>
+              <ButtonLink href="/menu" size="lg" variant="outline">
+                See the menu
+              </ButtonLink>
+            </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <ButtonLink href="/" size="lg" arrow>
-            Back to the bar
-          </ButtonLink>
-          <ButtonLink href="/menu" size="lg" variant="inverse">
-            See the menu
-          </ButtonLink>
+            <nav aria-label="Site sections" className="mt-10 border-t border-line-light pt-5">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                {primaryNav.slice(1).map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="font-mono text-[0.625rem] uppercase tracking-[0.14em] text-text-muted transition-colors duration-300 hover:text-ink-900"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
         </div>
-
-        <nav aria-label="Site sections" className="mt-16 border-t border-cream-100/12 pt-8">
-          <ul className="flex flex-wrap justify-center gap-x-7 gap-y-3">
-            {primaryNav.slice(1).map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-meta uppercase tracking-[0.18em] text-cream-100/55 transition-colors duration-400 hover:text-cream-100"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </Container>
     </Section>
   );

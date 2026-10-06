@@ -1,55 +1,73 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useCallback, useEffect, useState } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { SeparatorMark } from "@/components/brand/separator-mark";
+import { Media } from "@/components/ui/media";
+import { hero } from "@/config/home";
 import { heroSlides } from "@/config/images";
 import { cn } from "@/lib/cn";
 import { duration, ease, tween } from "@/lib/motion";
 
-const AUTOPLAY_MS = 7000;
+const AUTOPLAY_MS = 6800;
+
+/** Masked line that rises from beneath its own baseline on mount. */
+function RiseLine({
+  children,
+  delay,
+  className,
+}: {
+  children: React.ReactNode;
+  delay: number;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+
+  return (
+    <span className={cn("block overflow-hidden pb-[0.08em]", className)}>
+      <motion.span
+        className="block"
+        initial={reduce ? undefined : { y: "112%" }}
+        animate={{ y: 0 }}
+        transition={tween(1.15, ease.out, delay)}
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+}
 
 /**
- * Home hero slider.
+ * Home hero.
  * ---------------------------------------------------------------------------
- * The reference opens on a fullscreen Revolution Slider: a large photograph
- * per slide, an uppercase display heading, a short line, a call to action,
- * and previous/next arrows in the lower corners with a bullet index.
+ * An editorial opening rather than a fullscreen slider: the argument on the
+ * left, a living photograph on the right, and a numbered index that lets the
+ * visitor move through the three frames without leaving the page.
  *
- * What is kept is the structure and the feel — full-bleed frames, centred
- * display type, slow crossfade, arrows and bullets — rebuilt with Motion
- * rather than a slider plugin, so it costs one small client component instead
- * of a library.
+ * Motion is deliberately layered:
+ *   1. The headline rises line by line, masked, on arrival.
+ *   2. The photograph lifts behind a curtain while settling from a slight
+ *      overscale.
+ *   3. Slide changes are a slow crossfade with a gentle scale, never a slide.
+ *   4. The seal rotates continuously — the only looping motion on the page.
  *
- * Behaviour notes:
- *  - Autoplay pauses on hover, on focus and while the tab is hidden, so a
- *    reading visitor never has a slide change under them mid-sentence.
- *  - The section is `aria-roledescription="carousel"`, each slide is a labelled
- *    group, and the region is `aria-live="polite"` so a manual change is
- *    announced without an automatic one being made disruptive.
- *  - Under reduced motion the crossfade and the scale settle are dropped and
- *    the slides swap instantly.
+ * Autoplay pauses on hover, on focus and while the tab is hidden, so a reading
+ * visitor never has a frame change under them mid-sentence. Reduced motion
+ * removes the loop entirely and swaps frames instantly.
  */
 export function HeroSlider() {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const total = heroSlides.length;
-  const region = useRef<HTMLElement>(null);
 
   const go = useCallback(
-    (next: number) => {
-      setIndex(((next % total) + total) % total);
-    },
+    (next: number) => setIndex(((next % total) + total) % total),
     [total],
   );
 
-  const next = useCallback(() => go(index + 1), [go, index]);
-  const prev = useCallback(() => go(index - 1), [go, index]);
-
-  /* Autoplay, suspended whenever the visitor is engaged or away. */
   useEffect(() => {
     if (reduce || paused || total < 2) return;
 
@@ -62,172 +80,229 @@ export function HeroSlider() {
     return () => window.clearInterval(id);
   }, [reduce, paused, total]);
 
-  /* Arrow keys, since the region is focusable and this is a carousel. */
-  const onKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      next();
-    }
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      prev();
-    }
-  };
-
   const slide = heroSlides[index];
 
   return (
     <section
-      ref={region}
       aria-roledescription="carousel"
       aria-label="Featured"
-      data-tone="dark"
-      tabIndex={-1}
-      onKeyDown={onKeyDown}
+      data-tone="light"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
-      className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden bg-espresso-950 text-cream-100"
+      className="grain relative isolate overflow-hidden bg-paper-50 pb-14 pt-24 sm:pb-16 sm:pt-28 lg:pb-20 lg:pt-32"
     >
-      {/* Frames. Kept mounted so a crossfade has something to fade between. */}
-      {heroSlides.map((entry, i) => (
-        <div
-          key={entry.id}
-          aria-hidden={i !== index}
-          className="absolute inset-0"
-          style={{ zIndex: i === index ? 0 : -1 }}
-        >
-          <motion.div
-            className="absolute inset-0"
-            initial={false}
-            animate={{ opacity: i === index ? 1 : 0 }}
-            transition={
-              reduce ? { duration: 0 } : tween(duration.reveal, ease.inOut)
-            }
-          >
-            <motion.img
-              src={entry.image.src}
-              alt={i === index ? entry.image.alt : ""}
-              className="size-full object-cover"
-              style={{ objectPosition: entry.image.focus ?? "50% 50%" }}
-              initial={false}
-              animate={
-                reduce ? undefined : { scale: i === index ? 1 : 1.06 }
-              }
-              transition={tween(2.4, ease.out)}
-            />
-          </motion.div>
-        </div>
-      ))}
+      <Container className="relative">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* Copy */}
+          <div className="flex flex-col lg:col-span-7">
+            <motion.p
+              initial={reduce ? undefined : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={tween(duration.base, ease.out)}
+              className="label flex items-center gap-3 text-copper-600"
+            >
+              <span aria-hidden className="h-px w-8 bg-copper-500" />
+              {hero.eyebrow}
+            </motion.p>
 
-      {/* Scrim. The reference darkens its slides enough for white type to hold. */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-behind bg-espresso-950/55"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-behind bg-gradient-to-t from-espresso-950 via-espresso-950/25 to-espresso-950/45"
-      />
-
-      {/* Copy */}
-      <Container className="relative flex flex-1 flex-col items-center justify-center py-32 text-center">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={slide.id}
-            className="flex max-w-[54rem] flex-col items-center"
-            initial={reduce ? undefined : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? undefined : { opacity: 0, y: -16 }}
-            transition={tween(duration.base, ease.out)}
-          >
-            <SeparatorMark tone="light" className="mb-8" />
-
-            <h1 className="display-type text-display-lg text-cream-100">
-              {slide.title}
+            <h1 className="mt-7 text-display-sm text-ink-900">
+              <RiseLine delay={0.08}>
+                Roasted <em className="text-copper-600">slowly.</em>
+              </RiseLine>
+              <RiseLine delay={0.2}>Served precisely.</RiseLine>
             </h1>
 
-            <p className="mt-8 max-w-[46ch] text-body-lg leading-[1.75] text-cream-100/85">
-              {slide.description}
-            </p>
-
-            <ButtonLink
-              href={slide.cta.href}
-              variant="inverse"
-              size="lg"
-              className="mt-11"
+            <motion.p
+              initial={reduce ? undefined : { opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={tween(duration.slow, ease.out, 0.42)}
+              className="mt-8 max-w-[44ch] text-body-md leading-relaxed text-text-body"
             >
-              {slide.cta.label}
-            </ButtonLink>
-          </motion.div>
-        </AnimatePresence>
+              {hero.body}
+            </motion.p>
+
+            <motion.div
+              initial={reduce ? undefined : { opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={tween(duration.slow, ease.out, 0.54)}
+              className="mt-9 flex flex-wrap items-center gap-3"
+            >
+              <ButtonLink href={hero.primaryCta.href} size="lg" arrow>
+                {hero.primaryCta.label}
+              </ButtonLink>
+              <ButtonLink href={hero.secondaryCta.href} variant="outline" size="lg">
+                {hero.secondaryCta.label}
+              </ButtonLink>
+            </motion.div>
+
+            <motion.dl
+              initial={reduce ? undefined : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={tween(duration.slow, ease.out, 0.7)}
+              className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-line-light pt-5 sm:mt-16"
+            >
+              {hero.rail.map((item) => (
+                <div key={item.label}>
+                  <dt className="label text-text-muted">{item.label}</dt>
+                  <dd className="mt-2 font-display text-title-xs leading-tight text-ink-900">
+                    {item.value}
+                  </dd>
+                </div>
+              ))}
+            </motion.dl>
+          </div>
+
+          {/* Living photograph */}
+          <div className="relative lg:col-span-5">
+            <motion.div
+              initial={reduce ? undefined : { clipPath: "inset(100% 0% 0% 0%)" }}
+              animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+              transition={tween(1.25, ease.inOut, 0.16)}
+              className="relative aspect-[4/5] w-full overflow-hidden bg-espresso-900 sm:aspect-[5/6] lg:aspect-[4/5]"
+            >
+              {heroSlides.map((entry, i) => (
+                <motion.div
+                  key={entry.id}
+                  aria-hidden={i !== index}
+                  className="absolute inset-0"
+                  initial={false}
+                  animate={{ opacity: i === index ? 1 : 0 }}
+                  transition={tween(reduce ? 0 : 1.2, ease.inOut)}
+                >
+                  <motion.div
+                    className="size-full"
+                    initial={false}
+                    animate={reduce ? undefined : { scale: i === index ? 1 : 1.07 }}
+                    transition={tween(2.6, ease.out)}
+                  >
+                    <Media
+                      image={entry.image}
+                      fill
+                      priority={i === 0}
+                      sizes="(min-width: 1024px) 40vw, 92vw"
+                      quality={82}
+                      className="size-full"
+                    />
+                  </motion.div>
+                </motion.div>
+              ))}
+
+              {/* Frame lines + top progress */}
+              <span aria-hidden className="pointer-events-none absolute inset-0 border border-cream-100/15" />
+              <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-cream-100/20">
+                <motion.span
+                  key={`bar-${index}`}
+                  className="block h-px origin-left bg-copper-400"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: paused || reduce ? 0.35 : 1 }}
+                  transition={
+                    paused || reduce
+                      ? tween(duration.base, ease.out)
+                      : { duration: AUTOPLAY_MS / 1000, ease: "linear" }
+                  }
+                />
+              </div>
+
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso-950/85 via-espresso-950/20 to-transparent p-5 pt-16 text-cream-100">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={slide.id}
+                    initial={reduce ? undefined : { opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={reduce ? undefined : { opacity: 0, y: -6 }}
+                    transition={tween(duration.base, ease.out)}
+                  >
+                    <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-copper-300">
+                      On the bar
+                    </p>
+                    <p className="mt-1.5 font-display text-title-sm leading-tight text-cream-100">
+                      {slide.title}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+
+            {/* Rotating seal */}
+            <motion.div
+              initial={reduce ? undefined : { opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={tween(duration.slow, ease.out, 0.9)}
+              aria-hidden
+              className="absolute -left-5 top-8 hidden size-28 place-items-center rounded-full bg-paper-50 text-ink-900 shadow-lift sm:grid lg:-left-10 lg:size-32"
+            >
+              <svg
+                viewBox="0 0 100 100"
+                className="absolute inset-0 size-full [animation:spin-slow_30s_linear_infinite] motion-reduce:animate-none"
+              >
+                <defs>
+                  <path
+                    id="hero-seal-path"
+                    d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"
+                  />
+                </defs>
+                <text
+                  fill="currentColor"
+                  fontSize="7"
+                  letterSpacing="1.55"
+                  style={{ fontFamily: "var(--font-mono)" }}
+                >
+                  <textPath href="#hero-seal-path">
+                    SMALL BATCH · ROASTED ON THE QUAY · EST. 2016 ·
+                  </textPath>
+                </text>
+              </svg>
+              <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth={1.2}>
+                <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4" strokeLinecap="round" />
+              </svg>
+            </motion.div>
+
+            {/* Slide index */}
+            <div className="mt-5 flex items-center justify-between gap-4">
+              <ul className="flex items-center gap-1.5" aria-label="Hero frames">
+                {heroSlides.map((entry, i) => (
+                  <li key={entry.id}>
+                    <button
+                      type="button"
+                      onClick={() => go(i)}
+                      aria-label={`Show frame ${i + 1}: ${entry.title}`}
+                      aria-current={i === index ? "true" : undefined}
+                      className="group/idx inline-flex h-8 items-center gap-2 px-2"
+                    >
+                      <span
+                        className={cn(
+                          "font-mono text-[0.625rem] tabular-nums tracking-[0.08em] transition-colors duration-300",
+                          i === index ? "text-ink-900" : "text-text-muted/60 group-hover/idx:text-ink-900",
+                        )}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span
+                        className={cn(
+                          "block h-px transition-all duration-500 ease-out-expo",
+                          i === index ? "w-8 bg-copper-500" : "w-4 bg-ink-900/20 group-hover/idx:w-6",
+                        )}
+                      />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+
+              <span className="label hidden text-text-muted sm:block">
+                Scroll to explore
+                <span aria-hidden className="ml-2 inline-block h-3 w-px translate-y-1 overflow-hidden bg-ink-900/25">
+                  <span className="block h-full w-full bg-copper-500 [animation:scrollcue_2.4s_ease-in-out_infinite]" />
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
       </Container>
 
-      {/* Controls */}
-      <div className="relative pb-12">
-        <Container className="flex items-center justify-center gap-8">
-          <button
-            type="button"
-            onClick={prev}
-            aria-label="Previous slide"
-            className="group inline-flex size-12 items-center justify-center rounded-pill border border-cream-100/35 text-cream-100 transition-colors duration-300 ease-out-expo hover:border-cream-100 hover:bg-cream-100 hover:text-ink-900"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.4}
-              className="size-5 transition-transform duration-500 ease-out-expo group-hover:-translate-x-0.5"
-            >
-              <path d="M20 12H5M11 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-
-          <ul className="flex items-center gap-3">
-            {heroSlides.map((entry, i) => (
-              <li key={entry.id}>
-                <button
-                  type="button"
-                  onClick={() => go(i)}
-                  aria-label={`Go to slide ${i + 1}: ${entry.title}`}
-                  aria-current={i === index ? "true" : undefined}
-                  className="group inline-flex h-10 w-6 items-center justify-center"
-                >
-                  <span
-                    className={cn(
-                      "block h-px transition-all duration-500 ease-out-expo",
-                      i === index
-                        ? "w-8 bg-cream-100"
-                        : "w-4 bg-cream-100/45 group-hover:bg-cream-100/80",
-                    )}
-                  />
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          <button
-            type="button"
-            onClick={next}
-            aria-label="Next slide"
-            className="group inline-flex size-12 items-center justify-center rounded-pill border border-cream-100/35 text-cream-100 transition-colors duration-300 ease-out-expo hover:border-cream-100 hover:bg-cream-100 hover:text-ink-900"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.4}
-              className="size-5 transition-transform duration-500 ease-out-expo group-hover:translate-x-0.5"
-            >
-              <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </Container>
-      </div>
-
       <p aria-live="polite" className="sr-only">
-        Slide {index + 1} of {total}: {slide.title}
+        Frame {index + 1} of {total}: {slide.title}
       </p>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useMemo, useState } from "react";
 import { BlogCard } from "@/components/cards/blog-card";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -53,7 +54,7 @@ export function BlogArchive() {
       <div
         role="group"
         aria-label="Filter articles by category"
-        className="hide-scrollbar rail gap-2 border-b border-line-light pb-6"
+        className="hide-scrollbar rail min-w-0 gap-2 border-b border-line-light pb-6"
       >
         {filters.map((option) => {
           const isActive = filter === option.id;

@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useCart } from "@/components/shop/cart-provider";

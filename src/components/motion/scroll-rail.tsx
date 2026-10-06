@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
@@ -39,7 +40,11 @@ export function ScrollRail({
   children,
   className,
   trackClassName,
-  gutter = "px-6 sm:px-10 lg:px-[max(2.5rem,calc((100vw-90rem)/2+2.5rem))]",
+  /* Pinned to the same 1/12 gutter as the site grid, so a pinned rail's
+     items line up with the content in the sections above and below it.
+     calc() is used rather than a token because the margin is a fraction of
+     the viewport, which is what lets the edges agree at every width. */
+  gutter = "gutter-x",
   lengthFactor = 0.85,
   progress = false,
   progressClassName,

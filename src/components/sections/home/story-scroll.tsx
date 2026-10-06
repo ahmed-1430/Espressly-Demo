@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useEffect, useRef, useState } from "react";
 import { ParallaxImage } from "@/components/motion/parallax-image";
 import { Container, Section } from "@/components/ui/container";
@@ -33,8 +34,6 @@ export function StoryScroll() {
           if (index >= 0) setActive(index);
         }
       },
-      // Bias to the upper-middle so a chapter becomes current as its heading
-      // clears the sticky header.
       { rootMargin: "-30% 0px -45% 0px", threshold: 0 },
     );
 
@@ -43,8 +42,6 @@ export function StoryScroll() {
   }, []);
 
   return (
-    // No `overflow-hidden` here: it would turn this section into a scroll
-    // container and break the sticky chapter rail. Each image clips itself.
     <Section tone="bright">
       <Container>
         <div className="grid gap-x-12 gap-y-4 lg:grid-cols-12">
@@ -52,15 +49,15 @@ export function StoryScroll() {
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-[7.5rem]">
               <Eyebrow>How the cup happens</Eyebrow>
-              <h2 className="mt-6 text-display-2xs text-ink-900">
+              <h2 className="mt-5 text-display-2xs text-ink-900">
                 Three stages, one continuous piece of work
               </h2>
 
-              <ol className="mt-10 hidden flex-col gap-1 lg:flex">
+              <ol className="mt-10 hidden flex-col border-t border-line-light lg:flex">
                 {storyChapters.map((chapter, index) => {
                   const isActive = index === active;
                   return (
-                    <li key={chapter.id}>
+                    <li key={chapter.id} className="border-b border-line-light">
                       <button
                         type="button"
                         onClick={() =>
@@ -70,26 +67,36 @@ export function StoryScroll() {
                           })
                         }
                         aria-current={isActive ? "true" : undefined}
-                        className="group flex w-full items-center gap-4 py-3 text-left"
+                        className="group/chapter flex w-full items-center gap-4 py-4 text-left"
                       >
-                        <span className="relative flex h-px w-14 shrink-0 items-center">
+                        <span className="relative flex h-px w-10 shrink-0 items-center">
                           {isActive ? (
                             <motion.span
                               layoutId="story-rail"
-                              className="h-px w-full bg-copper-600"
+                              className="h-px w-full bg-copper-500"
                               transition={tween(duration.base, ease.out)}
                             />
                           ) : (
-                            <span className="h-px w-7 bg-ink-900/20 transition-[width] duration-700 ease-out-expo group-hover:w-10" />
+                            <span className="h-px w-5 bg-ink-900/20 transition-[width] duration-500 ease-out-expo group-hover/chapter:w-8" />
                           )}
                         </span>
                         <span
                           className={cn(
-                            "text-caption uppercase tracking-[0.2em] transition-colors duration-500",
-                            isActive ? "text-copper-700" : "text-text-muted",
+                            "font-mono text-[0.625rem] tabular-nums tracking-[0.1em] transition-colors duration-300",
+                            isActive ? "text-copper-600" : "text-text-muted",
                           )}
                         >
-                          {chapter.chapter} — {chapter.kicker}
+                          {chapter.chapter}
+                        </span>
+                        <span
+                          className={cn(
+                            "font-display text-title-xs transition-colors duration-300",
+                            isActive
+                              ? "text-ink-900"
+                              : "text-text-muted group-hover/chapter:text-ink-900",
+                          )}
+                        >
+                          {chapter.kicker}
                         </span>
                       </button>
                     </li>
@@ -97,7 +104,7 @@ export function StoryScroll() {
                 })}
               </ol>
 
-              <p className="mt-8 hidden max-w-[34ch] text-body-sm leading-relaxed text-text-muted lg:block">
+              <p className="mt-7 hidden max-w-[32ch] text-body-sm leading-relaxed text-text-muted lg:block">
                 Scrolling is the only interaction this section needs. Select a
                 stage above to jump straight to it.
               </p>
@@ -112,13 +119,21 @@ export function StoryScroll() {
                 ref={(node) => {
                   chapterRefs.current[index] = node;
                 }}
-                className="flex min-h-[74vh] flex-col justify-center gap-6 border-t border-line-light py-14 first:border-t-0 first:pt-0 lg:py-20"
+                className="relative flex min-h-[72vh] flex-col justify-center gap-6 border-t border-line-light py-14 first:border-t-0 first:pt-0 lg:py-20"
               >
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -top-6 right-0 select-none font-display text-[7rem] leading-none tracking-[-0.04em] text-ink-900/[0.045] sm:text-[9rem]"
+                >
+                  {chapter.chapter}
+                </span>
+
                 <div className="flex items-baseline gap-4">
-                  <span className="text-caption tabular-nums tracking-[0.2em] text-copper-700">
+                  <span className="font-mono text-[0.625rem] tabular-nums tracking-[0.12em] text-copper-600">
                     {chapter.chapter}
                   </span>
                   <span aria-hidden className="h-px flex-1 bg-line-light" />
+                  <span className="label text-text-muted">{chapter.kicker}</span>
                 </div>
 
                 <ParallaxImage
@@ -132,7 +147,7 @@ export function StoryScroll() {
                   quality={78}
                 />
 
-                <div className="flex flex-col gap-4 lg:max-w-[54ch]">
+                <div className="flex flex-col gap-4 lg:max-w-[52ch]">
                   <h3 className="text-display-2xs text-ink-900">{chapter.title}</h3>
                   <p className="text-body leading-relaxed text-text-body sm:text-body-md">
                     {chapter.copy}

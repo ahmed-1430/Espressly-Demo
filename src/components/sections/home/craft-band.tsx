@@ -8,42 +8,53 @@ import { craft } from "@/config/home";
 /**
  * Craft band.
  *
- * A dark, full-bleed editorial band: numbered roast process on one side,
+ * A dark, full-bleed editorial band: the roast timeline on one side,
  * parallaxed photography and two hard numbers on the other. No icons, no
- * illustration — the process list and the numbers do the work.
+ * illustration — the process and the numbers do the work.
  */
 export function CraftBand() {
   return (
     <Section
       spacing="flush"
       tone="deeper"
-      className="relative isolate overflow-hidden bg-ink-950"
+      className="grain relative isolate overflow-hidden bg-ink-950"
     >
-      <Container className="py-20 sm:py-28 lg:py-36">
-        <div className="grid gap-x-12 gap-y-14 lg:grid-cols-12 lg:items-center">
+      <span
+        aria-hidden
+        className="text-stroke pointer-events-none absolute -bottom-[5vw] -left-[4vw] select-none font-display text-[22vw] leading-none tracking-[-0.05em]"
+      >
+        12h
+      </span>
+
+      <Container className="relative py-20 sm:py-28 lg:py-32">
+        <div className="grid gap-x-12 gap-y-14 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-6">
             <SectionHeading
               eyebrow={craft.eyebrow}
-              title={craft.headline}
+              title={
+                <>
+                  Twelve hours from green to <em className="text-copper-400">cup</em>
+                </>
+              }
               body={craft.body}
               tone="light"
             />
 
-            <Stagger as="ol" className="mt-12 flex flex-col" step={0.07}>
+            <Stagger as="ol" className="mt-12 flex flex-col border-t border-cream-100/12" step={0.07}>
               {craft.steps.map((step) => (
                 <StaggerItem
                   key={step.index}
                   as="li"
-                  className="flex items-start gap-6 border-t border-cream-100/12 py-5"
+                  className="group/step grid grid-cols-[2.5rem_1fr] gap-x-5 border-b border-cream-100/12 py-5"
                 >
-                  <span className="w-8 shrink-0 pt-1 font-sans text-eyebrow tabular-nums tracking-[0.2em] text-copper-400">
+                  <span className="pt-0.5 font-mono text-[0.625rem] tabular-nums tracking-[0.1em] text-copper-400">
                     {step.index}
                   </span>
                   <div className="min-w-0">
-                    <h3 className="text-body-lg display-type text-cream-100">
+                    <h3 className="font-display text-title-xs text-cream-100 transition-colors duration-300 group-hover/step:text-copper-300">
                       {step.title}
                     </h3>
-                    <p className="mt-1.5 max-w-[46ch] text-body-sm leading-relaxed text-cream-100/60">
+                    <p className="mt-1.5 max-w-[44ch] text-body-sm leading-relaxed text-cream-100/50">
                       {step.copy}
                     </p>
                   </div>
@@ -59,22 +70,22 @@ export function CraftBand() {
               travel={64}
               reveal
               revealFrom="right"
-              sizes="(min-width: 1024px) 42vw, 92vw"
+              sizes="(min-width: 1024px) 40vw, 92vw"
               className="w-full"
-              quality={78}
+              quality={80}
             />
 
             <Reveal delay={0.1}>
-              <dl className="mt-6 grid grid-cols-2 gap-6">
-                <div className="border-t border-cream-100/15 pt-5">
-                  <dt className="eyebrow text-copper-400">Development</dt>
-                  <dd className="mt-3 text-title-xl display-type tabular-nums text-cream-100">
+              <dl className="mt-6 grid grid-cols-2 gap-6 border-t border-cream-100/12 pt-6">
+                <div>
+                  <dt className="label text-copper-400">Development</dt>
+                  <dd className="mt-2 font-display text-title-xl tabular-nums text-cream-100">
                     <CountUp value={12} suffix="%" />
                   </dd>
                 </div>
-                <div className="border-t border-cream-100/15 pt-5">
-                  <dt className="eyebrow text-copper-400">Cuppings per batch</dt>
-                  <dd className="mt-3 text-title-xl display-type tabular-nums text-cream-100">
+                <div>
+                  <dt className="label text-copper-400">Cuppings per batch</dt>
+                  <dd className="mt-2 font-display text-title-xl tabular-nums text-cream-100">
                     <CountUp value={2} />
                   </dd>
                 </div>

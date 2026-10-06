@@ -5,7 +5,7 @@ import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { featuredProducts } from "@/config/products";
 
-/** Editorial product preview: one lead card plus a stacked pair. */
+/** Editorial product preview: one lead card plus a stacked trio. */
 export function FeaturedProducts() {
   const [lead, ...rest] = featuredProducts;
 
@@ -15,31 +15,37 @@ export function FeaturedProducts() {
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
             eyebrow="Take it home"
-            title="The four things most people order twice"
+            title={
+              <>
+                The four things most people order <em className="text-copper-600">twice</em>
+              </>
+            }
             body="Roasted the week it is ordered, ground to your brewer at no cost, and shipped in plastic-free packaging."
-            className="sm:max-w-[54ch]"
+            className="sm:max-w-[58ch]"
           />
           <ButtonLink href="/shop" variant="outline" className="shrink-0" arrow>
             All ten products
           </ButtonLink>
         </div>
 
-        <div className="mt-12 grid gap-x-7 gap-y-14 lg:mt-16 lg:grid-cols-3">
+        <div className="mt-12 grid gap-x-6 gap-y-14 lg:mt-16 lg:grid-cols-3">
           {lead ? (
             <Reveal className="lg:col-span-3">
               <ProductCard
                 product={lead}
                 variant="feature"
+                index={1}
                 sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 55vw, 92vw"
                 className="gap-8"
               />
             </Reveal>
           ) : null}
 
-          {rest.slice(0, 3).map((product) => (
+          {rest.slice(0, 3).map((product, index) => (
             <ProductCard
               key={product.slug}
               product={product}
+              index={index + 2}
               sizes="(min-width: 1024px) 30vw, 92vw"
             />
           ))}

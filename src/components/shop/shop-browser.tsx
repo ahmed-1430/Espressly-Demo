@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/cards/product-card";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -69,9 +70,11 @@ export function ShopBrowser() {
         className="mb-8 max-w-[40ch]"
       />
 
-      {/* Controls */}
-      <div className="flex flex-col gap-6 border-b border-line-light pb-8 lg:flex-row lg:items-center lg:justify-between">
-        <div className="hide-scrollbar rail gap-2">
+      {/* Controls. `min-w-0` matters: as a flex child the chip rail would
+          otherwise take its content width and push the row past the viewport,
+          since the rail scrolls but the row does not. */}
+      <div className="flex min-w-0 flex-col gap-6 border-b border-line-light pb-8 lg:flex-row lg:items-center lg:justify-between">
+        <div className="hide-scrollbar rail min-w-0 gap-2">
           {filters.map((option) => {
             const isActive = filter === option.id;
             return (

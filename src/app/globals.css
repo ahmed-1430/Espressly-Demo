@@ -1,14 +1,13 @@
 /**
  * Espressly — application design system
  * ---------------------------------------------------------------------------
- * Every colour, type ramp, spacing rhythm, easing curve and breakpoint used by
- * the site is declared here once. Components consume Tailwind utilities that
- * resolve to these tokens, so a brand change is a single-file edit.
+ * One source of truth for colour, type, spacing, easing and layering.
  *
- * Measured against the reference layout specification:
- *   grid 1100px · section padding 130px · body 15/26 weight 300
- *   h2 45px/2px uppercase · h3 35px/1.75px · lede 16px/1px
- *   nav 15px uppercase in a 100px bar · buttons 12px/.15em
+ * Visual direction: "The Roast Room". The language of a working roastery —
+ * warm bone paper, near-black roast ink, one hot ember accent, hairline rules,
+ * instrument-panel labels, and a high-contrast editorial serif carrying the
+ * voice. Layouts are asymmetric and typographic rather than centred and
+ * template-like.
  */
 
 @import "tailwindcss";
@@ -17,75 +16,68 @@
    1. Palette
    ======================================================================== */
 @theme {
-  /* — Roasted neutrals: the backbone of every surface — */
-  --color-ink-950: #0d0907;
-  --color-ink-900: #16100c;
-  --color-ink-800: #20160f;
-  --color-ink-700: #2f2018;
+  /* — Roast neutrals — */
+  --color-ink-950: #100e0b;
+  --color-ink-900: #1a1612;
+  --color-ink-800: #2a231c;
+  --color-ink-700: #3b3229;
 
-  /* — Espresso / roast: the dark band surfaces — */
-  --color-espresso-950: #121212;
-  --color-espresso-900: #181818;
-  --color-espresso-800: #242424;
-  --color-espresso-700: #333333;
+  /* — Espresso: dark band surfaces — */
+  --color-espresso-950: #14110d;
+  --color-espresso-900: #1b1713;
+  --color-espresso-800: #272119;
+  --color-espresso-700: #352d23;
 
-  /* — Copper: the single accent.
-     The reference sets its accent at #be9c79; the ramp is kept a shade darker
-     at the low end so small text still clears AA on the light band. */
-  --color-copper-700: #8a6f52;
-  --color-copper-600: #a3815f;
-  --color-copper-500: #be9c79;
-  --color-copper-400: #d0b494;
-  --color-copper-300: #e0cab0;
+  /* — Ember: the single accent. Burnt orange, not template copper. — */
+  --color-copper-700: #8f3d20;
+  --color-copper-600: #a9492a;
+  --color-copper-500: #c2552b;
+  --color-copper-400: #e08a5f;
+  --color-copper-300: #f0b79a;
 
-  /* — Crema → paper: the light band surfaces — */
-  --color-crema-300: #dcc09b;
-  --color-crema-200: #e9d8bd;
-  --color-sand-200: #e8e2da;
-  --color-sand-100: #f2efea;
-  --color-cream-100: #f6f4f1;
-  --color-paper-50: #faf9f7;
-  --color-paper-25: #ffffff;
+  /* — Crema → paper: light surfaces — */
+  --color-crema-300: #d8b98f;
+  --color-crema-200: #e8d5b8;
+  --color-sand-200: #e5ddcf;
+  --color-sand-100: #eee7da;
+  --color-cream-100: #f6f1e7;
+  --color-paper-50: #faf6ee;
+  --color-paper-25: #fffdf8;
 
-  /* — Supporting hues — */
-  --color-clay-500: #b06a3a;
+  /* — Supporting — */
+  --color-clay-500: #b4552d;
+  --color-moss-600: #5f6a4c;
 
-  /* — Semantic aliases consumed by utilities such as `bg-surface-dark` — */
+  /* — Semantic surfaces — */
   --color-surface-dark: var(--color-espresso-900);
   --color-surface-light: var(--color-cream-100);
   --color-surface-bright: var(--color-paper-50);
 
   /* — Text —
-     The reference body colour is #656565 on white. On this slightly warmer
-     white it measures 5.7:1, and headings at #262626 measure 12.6:1, so both
-     clear AA comfortably. */
-  --color-text-strong: #262626;
-  --color-text-body: #656565;
-  --color-text-muted: #808080;
-  --color-text-inverse: #ffffff;
-  --color-text-inverse-muted: #b9b3ac;
+     Ink on bone measures 14.8:1; body copy 7.1:1; muted 4.6:1. */
+  --color-text-strong: #1a1612;
+  --color-text-body: #554d42;
+  --color-text-muted: #837a6c;
+  --color-text-inverse: #fffdf8;
+  --color-text-inverse-muted: #b9b1a4;
 
   /* — Lines — */
-  --color-line-light: color-mix(in oklab, #262626 12%, transparent);
-  --color-line-dark: color-mix(in oklab, #ffffff 18%, transparent);
+  --color-line-light: color-mix(in oklab, #1a1612 13%, transparent);
+  --color-line-dark: color-mix(in oklab, #fffdf8 16%, transparent);
 
-  /* — Focus —
-     One ring, two tones. `--color-focus` must clear 3:1 against every light
-     surface in the palette; `--color-focus-dark` is the step-up used inside
-     `[data-tone="dark"]`. */
-  --color-focus: #8a6f52;
-  --color-focus-dark: var(--color-copper-300);
+  /* — Focus — */
+  --color-focus: #a9492a;
+  --color-focus-dark: #f0b79a;
 
   /* — Typography —
-     Marcellus is the reference display face and Open Sans its body face.
-     Both are open-licensed Google fonts, self-hosted through `next/font`, so
-     there is no third-party request and no flash of unstyled text. */
-  --font-display: var(--font-marcellus), "Trajan Pro", Georgia, serif;
-  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+     Instrument Serif: high-contrast editorial display, used sentence-case.
+     Manrope: geometric humanist sans for body and interface.
+     IBM Plex Mono: instrument labels, indices and metadata. */
+  --font-display: var(--font-instrument), "Times New Roman", serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
-  /* Type scale, named by role. The reference is a small scale: 15px body,
-     16px lede, 20px subheads, 35px h3, 45px h2 — with generous letter-spacing
-     on the display sizes and uppercase throughout the heading set. */
+  /* — Type scale, named by role — */
   --text-*: initial;
 
   --text-micro: 0.6875rem;
@@ -93,102 +85,66 @@
   --text-caption: 0.75rem;
   --text-meta: 0.8125rem;
   --text-body-sm: 0.875rem;
-  --text-body: 0.9375rem;
-  --text-body-md: 1rem;
-  --text-body-lg: 1.0625rem;
+  --text-body: 1rem;
+  --text-body-md: 1.0625rem;
+  --text-body-lg: 1.1875rem;
 
-  --text-title-xs: 1.125rem;
-  --text-title-sm: 1.25rem;
-  --text-title-md: 1.5rem;
-  --text-title-lg: 1.875rem;
-  --text-title-xl: 2.1875rem;
+  --text-title-xs: 1.25rem;
+  --text-title-sm: 1.5rem;
+  --text-title-md: 1.75rem;
+  --text-title-lg: 2.125rem;
+  --text-title-xl: 2.5rem;
 
-  /* h3 — 35px / 1.75px tracking, per the reference */
-  --text-display-2xs: 2.1875rem;
-  --text-display-2xs--line-height: 1.28;
-  --text-display-2xs--letter-spacing: 0.109em;
+  --text-display-2xs: clamp(1.75rem, 1.15rem + 2.1vw, 2.6rem);
+  --text-display-2xs--line-height: 1.04;
+  --text-display-2xs--letter-spacing: -0.015em;
 
-  /* h2 — 45px / 2px tracking, per the reference */
-  --text-display-xs: 2.8125rem;
-  --text-display-xs--line-height: 1.22;
-  --text-display-xs--letter-spacing: 0.044em;
+  --text-display-xs: clamp(2.25rem, 1.35rem + 3.4vw, 3.9rem);
+  --text-display-xs--line-height: 1;
+  --text-display-xs--letter-spacing: -0.02em;
 
-  /* Hero display. Held to the h2 ratio so the hero and the section titles read
-     as one scale rather than two unrelated ones. */
-  --text-display-sm: clamp(2.5rem, 1.4rem + 4.6vw, 4.5rem);
-  --text-display-sm--line-height: 1.1;
-  --text-display-sm--letter-spacing: 0.05em;
+  --text-display-sm: clamp(2.75rem, 1.45rem + 5vw, 5.4rem);
+  --text-display-sm--line-height: 0.96;
+  --text-display-sm--letter-spacing: -0.025em;
 
-  --text-display-lg: clamp(2.75rem, 1.2rem + 6.6vw, 6.5rem);
-  --text-display-lg--line-height: 1.06;
-  --text-display-lg--letter-spacing: 0.055em;
+  --text-display-lg: clamp(3.5rem, 1.5rem + 7.8vw, 8.25rem);
+  --text-display-lg--line-height: 0.92;
+  --text-display-lg--letter-spacing: -0.03em;
 
-  /* Lede — the reference sets its intro line at 16px / 1px, uppercase. */
-  --text-lede: 1rem;
-  --text-lede--line-height: 1.55;
-  --text-lede--letter-spacing: 0.0625em;
+  --text-display-xl: clamp(4.25rem, 0.8rem + 13.2vw, 14rem);
+  --text-display-xl--line-height: 0.86;
+  --text-display-xl--letter-spacing: -0.035em;
 
-  /* — Radii: Espressly stays architectural, corners are barely softened — */
+  --text-lede: 1.125rem;
+  --text-lede--line-height: 1.6;
+  --text-lede--letter-spacing: -0.005em;
+
+  /* — Radii: architectural, barely softened — */
   --radius-card: 2px;
   --radius-pill: 999px;
 
   /* — Elevation — */
-  --shadow-lift: 0 30px 70px -34px color-mix(in oklab, #262626 62%, transparent);
+  --shadow-lift: 0 34px 80px -38px color-mix(in oklab, #1a1612 55%, transparent);
 
   /* — Motion —
-     Every transition in the site uses one easing, `ease-out-expo`, so motion
-     decelerates the same way everywhere and no interaction reads as imported
-     from elsewhere. Durations form a deliberate ladder:
-
-       300ms  colour and opacity changes on text, icons and small controls
-       400ms  borders, and the header's underline, which is deliberately the
-              same rate as the label colour it sits under so the active-page
-              indicator reads as one gesture rather than two
-       500ms  card-level transforms
-       700ms  large surfaces: the header condensing, drawers, and the wipe
-              behind a primary button
-       1000ms photography — a card image scaling on hover, and the crossfade
-              beneath it at 700ms so it leads rather than trails
-
-     Scripted entrances use the matching scale in `src/lib/motion.ts`, which
-     works in seconds for Motion's API. */
+     One decelerating curve everywhere, with a deliberate duration ladder:
+       240ms  colour / opacity on text and icons
+       420ms  borders, underlines, small controls
+       700ms  card and surface transforms
+       1100ms photography and mask reveals
+     Scripted entrances use the matching scale in `src/lib/motion.ts`. */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
   --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  /* — Layout —
-     The reference runs a 1100px content grid inside a wider frame. Both are
-     kept so section edges align and the grid can be reproduced exactly. */
-  --container-page: 1300px;
-  --container-grid: 1100px;
-  --container-copy: 44rem;
+  /* — Layout — */
+  --container-copy: 42rem;
 
-  /* — Spacing —
-     Section rhythm is the reference's own: 130px top and bottom, with the
-     intermediate steps used by tighter bands. */
-  --spacing-section: 130px;
-  --spacing-section-tight: 85px;
+  /* — Spacing — */
+  --spacing-section: 128px;
+  --spacing-section-tight: 88px;
 
-  /* — Layering —
-     One ladder for the whole site. A component picks a rung by intent and
-     never needs to know what else happens to be on the page, so nothing
-     reaches for an arbitrary number.
-
-       under    full-bleed photography, behind its section's content
-       behind   paints behind sibling content: dimming gradients, chip fills
-       base     ordinary flow
-       raised   cards, chips and labels sitting over a sibling's surface
-       nav      sticky sub-navigation, deliberately tucked under the header
-       header   the site header
-       overlay  mobile menu and cart drawer
-       top      skip link — has to beat everything, since it is the first
-                thing a keyboard user reaches
-
-     Tailwind's z-index is a fixed list of numbers rather than a theme
-     namespace, so the utilities that expose these rungs are declared as
-     `@utility` in section 3 rather than generated. The two halves must both
-     exist: without these values the utilities resolve to an empty var and
-     every fixed element silently loses its stacking order. */
+  /* — Layering — */
   --z-under: -20;
   --z-behind: -10;
   --z-base: 0;
@@ -216,25 +172,26 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
-    /* Sticky header height + breathing room for in-page anchors. */
-    scroll-padding-top: 6.5rem;
+    scroll-padding-top: 6rem;
+    scrollbar-color: color-mix(in oklab, #1a1612 28%, transparent) transparent;
+    scrollbar-width: thin;
   }
 
   body {
     background-color: var(--color-paper-50);
     color: var(--color-text-body);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    line-height: 26px;
-    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.65;
+    font-weight: 400;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    /* Guarantees decorative scroll tracks never widen the document. */
     overflow-x: clip;
   }
 
-  /* The reference sets every heading in one serif, weight 400, uppercase. */
+  /* Sentence-case editorial display. The old template shouted in all caps;
+     the new voice is set, not shouted. */
   h1,
   h2,
   h3,
@@ -244,40 +201,24 @@
     font-family: var(--font-display);
     color: var(--color-text-strong);
     font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.044em;
-    line-height: 1.22;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    text-wrap: balance;
   }
 
   p {
     text-wrap: pretty;
   }
 
-  /* Visible, on-brand focus ring for every interactive element.
-     The outline is left to follow each element's own border-radius so a pill
-     button keeps a pill ring instead of snapping square while focused. */
   :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 3px;
+    transition-property: color, background-color, border-color, fill, stroke !important;
   }
 
-  /* On the dark band the same copper falls below 3:1, so the ring steps up to
-     copper-300. Tone is declared once by <Section> and by the header, so this
-     adapts with no per-component knowledge and no inline styles. */
   [data-tone="dark"] :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible,
   [data-tone="deeper"] :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
     outline-color: var(--color-focus-dark);
-  }
-
-  /* A focus ring has to be there the instant focus arrives. Tailwind's
-     `transition-colors` also transitions `outline-color`, so the ring would
-     otherwise fade in over the control's own duration — 400 ms on the header
-     icons — and a keyboard user tabs on before the indicator is legible.
-     Focus is transient, so suppressing the tween for as long as the element is
-     focused costs nothing. Marked important because a utility sits above the
-     base layer and would otherwise win. */
-  :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
-    transition-property: color, background-color, border-color, fill, stroke !important;
   }
 
   ::selection {
@@ -285,12 +226,6 @@
     color: var(--color-paper-25);
   }
 
-  /* Parallax travel is a desktop luxury. On a phone the viewport is short and
-     the scroll distance small, while the effect still costs a scroll listener
-     and a spring per instance. Below `lg` the travel collapses to zero, which
-     also collapses the over-scan layer back to exactly the frame, so the crop
-     stays correct instead of merely slowing down. Driven by a media query
-     rather than a JS breakpoint so there is no hydration branch to reconcile. */
   .parallax-frame {
     --parallax-travel: 0px;
   }
@@ -318,9 +253,6 @@
 /* ===========================================================================
    3. Utilities
    ======================================================================== */
-/* The layering ladder (see `--z-*` in section 1). Declared as utilities
-   because Tailwind's z-index is a fixed list of numbers, not a theme
-   namespace. They take variants like any other — `lg:z-nav` works. */
 @utility z-under {
   z-index: var(--z-under);
 }
@@ -353,18 +285,37 @@
   z-index: var(--z-top);
 }
 
-@utility eyebrow {
-  font-family: var(--font-sans);
+/* Instrument-panel label: mono, uppercase, wide tracking. Used for eyebrows,
+   indices, metadata and navigation. */
+@utility label {
+  font-family: var(--font-mono);
   font-size: var(--text-eyebrow);
   line-height: 1;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 400;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
 @utility display-type {
   font-family: var(--font-display);
   font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Outlined display type for oversized watermarks. */
+@utility text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1px
+    var(--stroke-color, color-mix(in oklab, #f6f1e7 18%, transparent));
 }
 
 /* Link underline that wipes in from the left. */
@@ -376,7 +327,7 @@
     content: "";
     position: absolute;
     inset-inline: 0;
-    bottom: -0.12em;
+    bottom: -0.14em;
     height: 1px;
     background-color: currentColor;
     transform: scaleX(0);
@@ -399,8 +350,8 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.055;
-    mix-blend-mode: overlay;
+    opacity: 0.05;
+    mix-blend-mode: soft-light;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
@@ -408,6 +359,7 @@
 /* Edge-to-edge horizontal rail that never causes document overflow. */
 @utility rail {
   display: flex;
+  min-width: 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
@@ -418,11 +370,6 @@
   }
 }
 
-/**
- * Large decorative numerals drawn from a pseudo-element.
- * Keeps pure ornament out of the accessibility tree and out of text-contrast
- * checks, while still using real CSS type (an image would not scale as well).
- */
 @utility stamp-text {
   &::before {
     content: attr(data-stamp);
@@ -434,6 +381,35 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/* Matches the site container's gutter, including its centred cap. Used by
+   full-bleed rails that must still align with the content grid. */
+@utility gutter-x {
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: max(3rem, calc((100vw - 1440px) / 2 + 3rem));
+  }
+}
+
+/* Hairline rule with a slight ember tick at the left. */
+@utility rule-ember {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    height: 1px;
+    width: 2.5rem;
+    background-color: var(--color-copper-500);
   }
 }
 
@@ -449,6 +425,36 @@
   }
   100% {
     transform: translateY(150%);
+  }
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

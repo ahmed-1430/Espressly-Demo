@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef } from "react";
@@ -17,14 +18,12 @@ type MobileMenuProps = {
   onClose: () => void;
 };
 
-const ITEM_STEP = 0.055;
-
 /**
  * Full-screen navigation for viewports below `lg`.
  *
- * Recomposed rather than shrunken: the primary links become a tall list with
- * index numbers and per-route descriptors, and secondary routes move into a
- * separate block at the bottom.
+ * Recomposed rather than shrunken: a numbered editorial index in the site's
+ * display face, with the route descriptor set underneath and the utilities
+ * anchored to the bottom of the sheet.
  */
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
   const pathname = usePathname();
@@ -84,19 +83,9 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
     };
   }, [open, onClose, focusables]);
 
-  // Close on route change so a tap never leaves the sheet covering the new page.
   useEffect(() => {
     onClose();
   }, [pathname, onClose]);
-
-  const variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : 18 },
-    visible: (index: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: tween(duration.base, ease.out, 0.08 + index * ITEM_STEP),
-    }),
-  };
 
   return (
     <AnimatePresence>
@@ -107,62 +96,67 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
-          className="fixed inset-0 z-overlay flex flex-col bg-espresso-950 lg:hidden"
+          className="fixed inset-0 z-overlay flex flex-col overflow-y-auto bg-espresso-950 text-cream-100 lg:hidden"
           data-tone="dark"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={tween(duration.fast)}
+          initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
+          animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+          exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
+          transition={tween(reduce ? 0 : duration.base, ease.inOut)}
         >
-          <div className="flex items-center justify-between px-6 py-5">
-            <Logo tone="light" height={34} priority />
+          <div className="flex items-center justify-between px-5 py-4 sm:px-8">
+            <Logo tone="light" height={28} priority />
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex size-11 items-center justify-center rounded-pill border border-cream-100/25 text-cream-100"
+              className="group/close inline-flex h-10 items-center gap-2 rounded-pill border border-cream-100/25 px-4 text-cream-100 transition-colors duration-300 hover:border-cream-100 hover:bg-cream-100 hover:text-ink-950"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="size-5">
+              <span className="font-mono text-eyebrow uppercase tracking-[0.14em]">Close</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="size-3.5">
                 <path d="m6 6 12 12M18 6 6 18" strokeLinecap="round" />
               </svg>
-              <span className="sr-only">Close menu</span>
             </button>
           </div>
 
-          <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-6 pb-4">
+          <nav aria-label="Mobile" className="flex-1 px-5 pt-6 sm:px-8">
             <ul className="flex flex-col">
               {primaryNav.map((item, index) => {
                 const active = pathname === item.href;
                 return (
                   <motion.li
                     key={item.href}
-                    custom={index}
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    variants={variants}
-                    className="border-b border-cream-100/10 last:border-b-0"
+                    initial={reduce ? undefined : { opacity: 0, y: 26 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={tween(duration.base, ease.out, 0.1 + index * 0.045)}
+                    className="border-b border-cream-100/10"
                   >
                     <Link
                       ref={index === 0 ? firstLinkRef : undefined}
                       href={item.href}
                       onClick={onClose}
                       aria-current={active ? "page" : undefined}
-                      className="group flex items-baseline gap-4 py-4"
+                      className="group/link grid grid-cols-[2.25rem_1fr_auto] items-baseline gap-3 py-4"
                     >
-                      <span className="w-6 shrink-0 text-eyebrow tabular-nums text-copper-400/70">
+                      <span
+                        className={cn(
+                          "font-mono text-[0.625rem] tabular-nums tracking-[0.1em]",
+                          active ? "text-copper-400" : "text-cream-100/35",
+                        )}
+                      >
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <span className="flex-1">
+                      <span className="min-w-0">
                         <span
                           className={cn(
-                            "block text-title-lg leading-tight display-type transition-colors duration-300",
-                            active ? "text-copper-300" : "text-cream-100",
+                            "block text-title-lg leading-none transition-colors duration-300",
+                            active
+                              ? "text-copper-300"
+                              : "text-cream-100 group-hover/link:text-copper-300",
                           )}
                         >
                           {item.label}
                         </span>
                         {item.description ? (
-                          <span className="mt-1 block max-w-[28ch] text-meta leading-relaxed text-cream-100/55">
+                          <span className="mt-1.5 block max-w-[30ch] text-body-sm leading-snug text-cream-100/45">
                             {item.description}
                           </span>
                         ) : null}
@@ -173,9 +167,9 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth={1.3}
-                        className="size-4 shrink-0 self-center text-cream-100/40 transition-transform duration-500 ease-out-expo group-hover:translate-x-1"
+                        className="size-4 self-center text-cream-100/30 transition-transform duration-500 ease-out-expo group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
                       >
-                        <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M7 17 17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </Link>
                   </motion.li>
@@ -185,13 +179,12 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </nav>
 
           <motion.div
-            initial={{ opacity: 0, y: reduce ? 0 : 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={tween(duration.slow, ease.out, 0.32)}
-            className="mt-auto space-y-5 border-t border-cream-100/10 px-6 py-6"
+            initial={reduce ? undefined : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={tween(duration.slow, ease.out, 0.42)}
+            className="mt-8 space-y-5 border-t border-cream-100/10 px-5 py-6 sm:px-8"
           >
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-meta text-cream-100/70">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-body-sm text-cream-100/70">
               <a href={`tel:${contact.phoneHref}`} className="link-wipe">
                 {contact.phone}
               </a>

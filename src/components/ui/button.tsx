@@ -10,32 +10,28 @@ type CommonProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   className?: string;
-  /** Renders a rule that wipes in from the left on hover. */
+  /** Fills the button from the bottom on hover. */
   wipe?: boolean;
   fullWidth?: boolean;
 };
 
-/* Reference button: 12px, .15em tracking, weight 600, uppercase, padding
-   19px 35px, transitioning colour and background over .3s. Corners are square
-   rather than pill, which is most of what separates the reference's buttons
-   from a modern SaaS pill. */
 const base =
-  "group/btn relative inline-flex select-none items-center justify-center gap-3 rounded-none font-sans text-[12px] font-semibold uppercase leading-[1.15] tracking-[0.15em] transition-[color,background-color,border-color,opacity] duration-300 ease-out-expo disabled:pointer-events-none disabled:opacity-50";
+  "group/btn relative isolate inline-flex select-none items-center justify-center gap-2.5 overflow-hidden rounded-pill font-mono text-eyebrow uppercase leading-none tracking-[0.14em] transition-[color,border-color,background-color] duration-300 ease-out-expo disabled:pointer-events-none disabled:opacity-50";
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-[46px] px-[26px]",
-  md: "h-[52px] px-[35px]",
-  lg: "h-[58px] px-[40px]",
+  sm: "h-10 px-5",
+  md: "h-12 px-6",
+  lg: "h-14 px-8",
 };
 
 const variants: Record<ButtonVariant, string> = {
   solid:
-    "bg-copper-500 text-white hover:bg-copper-600 focus-visible:outline-offset-4",
+    "border border-ink-900 bg-ink-900 text-paper-25 hover:border-copper-500 hover:bg-copper-500 hover:text-paper-25",
   outline:
-    "border border-ink-900/30 text-ink-900 hover:border-copper-500 hover:bg-copper-500 hover:text-white",
-  ghost: "text-ink-900 hover:bg-ink-900/[0.05]",
+    "border border-ink-900/30 text-ink-900 hover:border-ink-900 hover:bg-ink-900 hover:text-paper-25",
+  ghost: "border border-transparent text-ink-900 hover:border-ink-900/20",
   inverse:
-    "border border-cream-100/40 text-cream-100 hover:border-copper-500 hover:bg-copper-500 hover:text-white",
+    "border border-cream-100/35 text-cream-100 hover:border-copper-400 hover:bg-copper-500 hover:text-paper-25",
   link: "h-auto rounded-none px-0 text-ink-900",
 };
 
@@ -44,14 +40,14 @@ function Wipe({ className }: { className?: string }) {
     <span
       aria-hidden
       className={cn(
-        "absolute inset-0 z-base origin-bottom scale-y-0 bg-ink-900 transition-transform duration-700 ease-out-expo group-hover/btn:scale-y-100",
+        "absolute inset-0 -z-behind origin-bottom scale-y-0 bg-copper-500 transition-transform duration-700 ease-out-expo group-hover/btn:scale-y-100",
         className,
       )}
     />
   );
 }
 
-/** Trailing arrow that nudges forward on hover — the only "lively" button cue. */
+/** Trailing arrow that steps forward and up on hover. */
 function Arrow({ className }: { className?: string }) {
   return (
     <svg
@@ -59,13 +55,13 @@ function Arrow({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.4}
+      strokeWidth={1.5}
       className={cn(
-        "h-[0.9em] w-[0.9em] transition-transform duration-500 ease-out-expo group-hover/btn:translate-x-1",
+        "size-3.5 shrink-0 transition-transform duration-500 ease-out-expo group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5",
         className,
       )}
     >
-      <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M7 17 17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -104,8 +100,9 @@ export function ButtonLink({
       {wipe && variant !== "link" ? <Wipe /> : null}
       <span
         className={cn(
-          "relative z-raised inline-flex items-center gap-3",
-          wipe && variant === "outline" && "group-hover/btn:text-cream-100",
+          "relative z-raised inline-flex items-center gap-2.5",
+          wipe && variant === "outline" && "group-hover/btn:text-paper-25",
+          wipe && variant === "ghost" && "group-hover/btn:text-paper-25",
         )}
       >
         {children}
@@ -147,8 +144,9 @@ export function Button({
       {wipe && variant !== "link" ? <Wipe /> : null}
       <span
         className={cn(
-          "relative z-raised inline-flex items-center gap-3",
-          wipe && variant === "outline" && "group-hover/btn:text-cream-100",
+          "relative z-raised inline-flex items-center gap-2.5",
+          wipe && variant === "outline" && "group-hover/btn:text-paper-25",
+          wipe && variant === "ghost" && "group-hover/btn:text-paper-25",
         )}
       >
         {children}
